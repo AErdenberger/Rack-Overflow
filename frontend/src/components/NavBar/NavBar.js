@@ -16,9 +16,9 @@ function NavBar () {
     if (loggedIn) {
       return (
         <div className="links-nav">
-          <Link to={'/tweets'}>All Tweets</Link>
+          <Link to={'/posts'}>All Posts</Link>
           <Link to={'/profile'}>Profile</Link>
-          <Link to={'/tweets/new'}>Write a Tweet</Link>
+          <Link to={'/posts/new'}>Write a Post</Link>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );

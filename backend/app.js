@@ -6,7 +6,7 @@ const csurf = require('csurf');
 const debug = require('debug');
 const { isProduction } = require('./config/keys');
 require('./models/User');
-require('./models/Tweet'); 
+require('./models/Post'); 
 require('./config/passport');
 const passport = require('passport'); 
 
@@ -42,9 +42,9 @@ if (!isProduction) {
 // Attach Express routers
 
 const usersRouter = require("./routes/api/users"); // update the import file path
-const tweetsRouter = require("./routes/api/tweets");
+const postsRouter = require("./routes/api/posts");
 const csrfRouter = require('./routes/api/csrf');
-app.use('/api/tweets', tweetsRouter);
+app.use('/api/posts', postsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 

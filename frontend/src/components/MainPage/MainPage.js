@@ -1,7 +1,7 @@
 function MainPage() {
     return (
       <>
-        <p>A Twitter Clone</p>
+        <p>Rack Over Flow</p>
         <footer>
           Copyright &copy; 2022 Chirper
         </footer>
