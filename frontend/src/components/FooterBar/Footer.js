@@ -23,7 +23,7 @@ function FooterBar() {
             <div id="DevBox">
                 <h2>David Gudeman</h2>
                 <h3>Backend Developer</h3>
-                <a href="https://www.linkedin.com/in/alex-erdenberger-36274b88/" target="blank">
+                <a href="https://www.linkedin.com/in/davidmgudeman/" target="blank">
                     <img src="https://rack-overflow.s3.us-west-1.amazonaws.com/LinkedIn_logo_initials.png" id="linkedin" />
                 </a>
                 <a href="https://github.com/dmgudeman" target="blank">
@@ -33,7 +33,7 @@ function FooterBar() {
             <div id="DevBox">
                 <h2>David Lai</h2>
                 <h3>Backend Developer</h3>
-                <a href="https://www.linkedin.com/in/alex-erdenberger-36274b88/" target="blank">
+                <a href="https://www.linkedin.com/in/david-lai-506779206/" target="blank">
                     <img src="https://rack-overflow.s3.us-west-1.amazonaws.com/LinkedIn_logo_initials.png" id="linkedin" />
                 </a>
                 <a href="https://github.com/Dali-ilaD" target="blank">
@@ -43,7 +43,7 @@ function FooterBar() {
             <div id="DevBox">
                 <h2>Josh van Eyken</h2>
                 <h3>Frontend Developer</h3>
-                <a href="https://www.linkedin.com/in/alex-erdenberger-36274b88/" target="blank">
+                <a href="https://www.linkedin.com/in/josh-van-eyken-0a427888/" target="blank">
                     <img src="https://rack-overflow.s3.us-west-1.amazonaws.com/LinkedIn_logo_initials.png" id="linkedin" />
                 </a>
                 <a href="https://github.com/jvaneyken" target="blank">
@@ -53,7 +53,7 @@ function FooterBar() {
             <div id="DevBox">
                 <h2>Steven Zabala</h2>
                 <h3>Frontend Developer</h3>
-                <a href="https://www.linkedin.com/in/alex-erdenberger-36274b88/" target="blank">
+                <a href="https://www.linkedin.com/in/steven-zabala-4b149b267/" target="blank">
                     <img src="https://rack-overflow.s3.us-west-1.amazonaws.com/LinkedIn_logo_initials.png" id="linkedin" />
                 </a>
                 <a href="https://github.com/Zabala9" target="blank">
