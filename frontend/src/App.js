@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from './components/Routes';
 import NavBar from './components/NavBar/NavBar';
+import FooterBar from './components/FooterBar/Footer';
 
 import MainPage from './components/MainPage/MainPage';
 // import LoginForm from './components/SessionForms/LoginForm';
@@ -31,6 +32,7 @@ function App() {
         <ProtectedRoute exact path="/posts/new" component={PostCompose} />
 
       </Switch>
+      <FooterBar />
     </>
   );
 }
