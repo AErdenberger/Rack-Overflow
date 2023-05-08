@@ -21,6 +21,8 @@ function PostCompose () {
     setText('');
   };
 
+
+
   const update = e => setText(e.currentTarget.value);
 
   return (

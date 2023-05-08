@@ -57,6 +57,20 @@ export const fetchPosts = () => async dispatch => {
       }
     }
   };
+  export const fetchTagsPosts = tag => async dispatch => {
+    try {
+      const res = await jwtFetch(`/api/posts?tag=${tag}`);
+      const posts = await res.json();
+      dispatch(receiveUserPosts(posts));
+    } catch(err) {
+      const resBody = await err.json();
+      if (resBody.statusCode === 400) {
+        return dispatch(receiveErrors(resBody.errors));
+      }
+    }
+
+  }
+
   
   export const composePost = data => async dispatch => {
     try {
