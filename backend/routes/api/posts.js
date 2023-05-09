@@ -93,7 +93,7 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
 
 
 router.get('/', async (req, res) => {
-  console.log('IIIIIIIIIIII')
+
   try {
     const posts = await Post.find()
                               .populate("author", "_id username")
