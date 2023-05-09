@@ -8,7 +8,9 @@ const { isProduction } = require('./config/keys');
 require('./models/User');
 require('./models/Post'); 
 require('./models/Answer');
+require('./models/Tag');
 require('./config/passport');
+
 
 const passport = require('passport'); 
 
@@ -46,12 +48,15 @@ if (!isProduction) {
 const usersRouter = require("./routes/api/users"); // update the import file path
 const postsRouter = require("./routes/api/posts");
 const csrfRouter = require('./routes/api/csrf');
-const answersRouter = require('./routes/api/answers')
+const answersRouter = require('./routes/api/answers');
+const tagsRouter = require('./routes/api/tags');
 
 app.use('/api/posts', postsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
+app.use('/api/tags', tagsRouter);
 app.use('/api/posts/:postId/answers', answersRouter);
+
 
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.
