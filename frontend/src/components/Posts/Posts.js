@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, fetchPosts } from '../../store/posts';
 import PostBox from './PostBox/PostBox.js';
+import PostsSidebar from './PostsSidebar/PostsSidebar';
+import './Posts.css'
 
 function Posts () {
   const dispatch = useDispatch();
@@ -16,10 +18,17 @@ function Posts () {
   
   return (
     <>
-      <h2>All Posts</h2>
-      {posts.map(post => (
-        <PostBox key={post._id} post={post} />
-      ))}
+      <div className='posts-container'>
+        <div className='posts-sidebar'>
+          <PostsSidebar /> 
+        </div>
+        <div className='posts-index'>
+          <h2>All Posts</h2>
+          {posts.map(post => (
+            <PostBox key={post._id} post={post} />
+          ))}
+        </div>
+      </div>
     </>
   );
 }
