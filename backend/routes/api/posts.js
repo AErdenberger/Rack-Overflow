@@ -5,7 +5,7 @@ const User = mongoose.model('User');
 const Post = mongoose.model('Post');
 const { requireUser } = require('../../config/passport');
 const validatePostInput = require('../../validations/posts');
-
+const tags =[ "tag1", "tag2"]
 
 
   // In development, allow developers to access the CSRF token to test the
@@ -17,15 +17,21 @@ const validatePostInput = require('../../validations/posts');
     });
   });
 
-  router.get('/', async (req, res) => {
+  router.get('/posts', async (req, res) => {
+   
+    const tag = req.query.tags;
+    console.log('tag', tag)
+  
     try {
-      const posts = await Post.find()
-                                .populate("author", "_id username")
-                                .sort({ createdAt: -1 });
-      return res.json(posts);
-    }
-    catch(err) {
-      return res.json([]);
+      // const posts = await Post.find({ tags: { $in: [tag] } });
+      const posts = await Post.find({ tags:tag});
+    
+      res.json(posts);
+
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
     }
   });
   
@@ -72,7 +78,8 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
   try {
     const newPost = new Post({
       text: req.body.text,
-      author: req.user._id
+      author: req.user._id,
+      tags: req.body.tags
     });
 
     let post = await newPost.save();
@@ -83,6 +90,22 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
     next(err);
   }
 });
+
+
+router.get('/', async (req, res) => {
+  console.log('IIIIIIIIIIII')
+  try {
+    const posts = await Post.find()
+                              .populate("author", "_id username")
+                              .sort({ createdAt: -1 });
+    return res.json(posts);
+  }
+  catch(err) {
+    return res.json([]);
+  }
+});
+
+
 
 
 
