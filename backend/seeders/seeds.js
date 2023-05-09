@@ -19,6 +19,13 @@ users.push(
     hashedPassword: bcrypt.hashSync('starwars', 10)
   })
 )
+users.push(
+  new User ({
+    username: 'ggg',
+    email: 'g@g.com',
+    hashedPassword: bcrypt.hashSync('gggggg', 10)
+  })
+)
 
 for (let i = 1; i < NUM_SEED_USERS; i++) {
   const firstName = faker.name.firstName();

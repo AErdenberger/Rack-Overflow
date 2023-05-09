@@ -17,15 +17,21 @@ const tags =[ "tag1", "tag2"]
     });
   });
 
-  router.get('/', async (req, res) => {
+  router.get('/posts', async (req, res) => {
+   
+    const tag = req.query.tags;
+    console.log('tag', tag)
+  
     try {
-      const posts = await Post.find()
-                                .populate("author", "_id username")
-                                .sort({ createdAt: -1 });
-      return res.json(posts);
-    }
-    catch(err) {
-      return res.json([]);
+      // const posts = await Post.find({ tags: { $in: [tag] } });
+      const posts = await Post.find({ tags:tag});
+    
+      res.json(posts);
+
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
     }
   });
   
@@ -84,17 +90,22 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
     next(err);
   }
 });
-router.get('/posts', async (req, res) => {
-  const tag = req.query.tag;
 
+
+router.get('/', async (req, res) => {
+  console.log('IIIIIIIIIIII')
   try {
-    const posts = await Post.find({ tags: { $in: [tag] } });
-    res.json(posts);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    const posts = await Post.find()
+                              .populate("author", "_id username")
+                              .sort({ createdAt: -1 });
+    return res.json(posts);
+  }
+  catch(err) {
+    return res.json([]);
   }
 });
+
+
 
 
 
