@@ -92,5 +92,18 @@ router.post('/login', validateLoginInput,async (req, res, next) => {
 });
 
 
+router.get('/posts', async (req, res) => {
+  const tag = req.query.tag;
+
+  try {
+    const posts = await Post.find({ tags: { $in: [tag] } });
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 module.exports = router;
