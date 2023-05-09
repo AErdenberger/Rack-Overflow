@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './SessionForm.css';
 import { signup, clearSessionErrors } from '../../store/session';
+import './SignupForm.css';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
@@ -52,51 +52,55 @@ function SignupForm () {
   }
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Sign Up Form</h2>
+    <form className="session-form-signup" onSubmit={handleSubmit}>
+      <label id='signup-title'>Sign Up</label>
+      <div id='container-text-info'>
+          <label id='text-info'>By continuing, you are setting up a
+            Rack Overflow
+            account and agree to our User Agreement.
+          </label>
+      </div>
       <div className="errors">{errors?.email}</div>
-      <label>
-        <span>Email</span>
-        <input type="text"
+      <div id='container-email-signup'>
+        <input type="text" id='email-signup'
           value={email}
           onChange={update('email')}
           placeholder="Email"
         />
-      </label>
+      </div>
       <div className="errors">{errors?.username}</div>
-      <label>
-        <span>Username</span>
-        <input type="text"
+      <div id='container-username-signup'>
+        <input type="text" id='username'
           value={username}
           onChange={update('username')}
           placeholder="Username"
         />
-      </label>
+      </div>
       <div className="errors">{errors?.password}</div>
-      <label>
-        <span>Password</span>
-        <input type="password"
+      <div id='container-password-signup'>
+        <input type="password" id='password-signup'
           value={password}
           onChange={update('password')}
           placeholder="Password"
         />
-      </label>
+      </div>
       <div className="errors">
         {password !== password2 && 'Confirm Password field must match'}
       </div>
-      <label>
-        <span>Confirm Password</span>
-        <input type="password"
+      <div id='container-confirm-pass'>
+        <input type="password" id='confirm-password'
           value={password2}
           onChange={update('password2')}
           placeholder="Confirm Password"
         />
-      </label>
-      <input
-        type="submit"
-        value="Sign Up"
-        disabled={!email || !username || !password || password !== password2}
-      />
+      </div>
+      <div id='container-submit-signup'>
+        <input
+          type="submit" id='submit-signup'
+          value="Sign Up"
+          disabled={!email || !username || !password || password !== password2}
+        />
+      </div>
     </form>
   );
 }
