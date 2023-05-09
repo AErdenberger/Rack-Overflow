@@ -59,7 +59,7 @@ const tags =[ "tag1", "tag2"]
   router.get('/:id', async (req, res, next) => {
     try {
       const post = await Post.findById(req.params.id)
-                             .populate("author", "_id username");
+                            .populate("author", "_id username");
       return res.json(post);
     }
     catch(err) {
@@ -77,6 +77,7 @@ const tags =[ "tag1", "tag2"]
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
   try {
     const newPost = new Post({
+      title: req.body.title,
       text: req.body.text,
       author: req.user._id,
       tags: req.body.tags
@@ -84,6 +85,31 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
 
     let post = await newPost.save();
     post = await post.populate('author', '_id username');
+    return res.json(post);
+  }
+  catch(err) {
+    next(err);
+  }
+});
+
+router.patch('/:id', requireUser, validatePostInput, async (req, res, next) => {
+  try {
+    const postId = req.params.id;
+    const { text, title, voteCount, tags } = req.body;
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    if (!post.author.equals(req.user._id)) {
+      return res.status(403).json({ message: 'You are not authorized to edit this post' });
+    }
+    post.text = text;
+    post.title = title;
+    post.voteCount = voteCount;
+    post.tags = tags;
+    await post.save();
+    // await post.populate('author', '_id username').execPopulate();
     return res.json(post);
   }
   catch(err) {
