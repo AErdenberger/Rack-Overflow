@@ -59,7 +59,7 @@ const tags =[ "tag1", "tag2"]
   router.get('/:id', async (req, res, next) => {
     try {
       const post = await Post.findById(req.params.id)
-                               .populate("author", "_id username");
+                             .populate("author", "_id username");
       return res.json(post);
     }
     catch(err) {

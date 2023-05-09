@@ -19,7 +19,8 @@ const answerSchema = new Schema({
         type: String
     },
     voteCount: {
-        type: Number
+        type: Number,
+        default: 0
     },
   }, {
     timestamps: true

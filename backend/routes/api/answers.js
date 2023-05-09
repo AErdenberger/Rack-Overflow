@@ -33,9 +33,24 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
-   
-});
+router.post('/', requireUser, validateAnswerInput, async (req, res, next) => {
+    const id = req.params.postId;
+    try {
+      const newAnswer = new Answer({
+        text: req.body.text,
+        author: req.user._id,
+        parentPost: req.params.postId,
+        voteCount: req.body.voteCount
+      });
+  
+      let post = await newPost.save();
+      post = await post.populate('author', '_id username');
+      return res.json(post);
+    }
+    catch(err) {
+      next(err);
+    }
+  });
 
 
 module.exports = router;
