@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const Answer = mongoose.model('Answer');
 // const User = mongoose.model('User');
 // const Post = mongoose.model('Post');
-// const { requireUser } = require('../../config/passport');
+const { requireUser } = require('../../config/passport');
 // const validatePostInput = require('../../validations/posts');
+const validateAnswerInput = require('../../validations/posts');
  
 
 // In development, allow developers to access the CSRF token to test the
@@ -34,6 +35,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', requireUser, validateAnswerInput, async (req, res, next) => {
+// router.post('/', requireUser, async (req, res, next) => {
     const id = req.params.postId;
     try {
       const newAnswer = new Answer({
@@ -43,9 +45,9 @@ router.post('/', requireUser, validateAnswerInput, async (req, res, next) => {
         voteCount: req.body.voteCount
       });
   
-      let post = await newPost.save();
-      post = await post.populate('author', '_id username');
-      return res.json(post);
+      let answer = await newAnswer.save();
+      answer = await answer.populate('author', '_id username');
+      return res.json(answer);
     }
     catch(err) {
       next(err);
