@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './SessionForm.css';
+import { Link } from 'react-router-dom';
+import SignupForm from './SignupForm';
+import './LoginForm.css';
 
 import { login, clearSessionErrors } from '../../store/session';
+import Modal from '../../modal/Modal';
 
 function LoginForm () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
+
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -27,32 +32,43 @@ function LoginForm () {
   }
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Log In Form</h2>
-      <div className="errors">{errors?.email}</div>
-      <label>
-        <span>Email</span>
-        <input type="text"
-          value={email}
-          onChange={update('email')}
-          placeholder="Email"
-        />
-      </label>
-      <div className="errors">{errors?.password}</div>
-      <label>
-        <span>Password</span>
-        <input type="password"
-          value={password}
-          onChange={update('password')}
-          placeholder="Password"
-        />
-      </label>
-      <input
-        type="submit"
-        value="Log In"
-        disabled={!email || !password}
-      />
-    </form>
+    <>
+      {showModal && (
+        <Modal closeModal={() => setShowModal(false)} component={<SignupForm />} />
+      )}
+      <form className="session-form" onSubmit={handleSubmit}>
+        <label id='login-title'>Log In</label>
+        <div id='container-text-info'>
+          <label id='text-info'>By continuing, you are setting up a
+            Rack Overflow
+            account and agree to our User Agreement.
+          </label>
+        </div>
+        <label className="errors">{errors?.email}</label>
+        <div id='container-email'>
+          <input type="text" id='email'
+            value={email}
+            onChange={update('email')}
+            placeholder="Email"
+          />
+        </div>
+        <div className="errors">{errors?.password}</div>
+        <div id='container-password'>
+          <input type="password" id='password'
+            value={password}
+            onChange={update('password')}
+            placeholder="Password"
+          />
+        </div>
+        <div id='container-submit'>
+          <input
+            type="submit" id='submit-button'
+            value="Log In"
+            disabled={!email || !password}
+          />
+        </div>
+      </form>
+    </>
   );
 }
 
