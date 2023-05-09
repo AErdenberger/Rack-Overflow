@@ -1,0 +1,22 @@
+.posts-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    height: 600px;
+}
+
+.posts-sidebar-container button {
+    border-style: none;
+    border-radius: 50px;
+    margin-bottom: 50px;
+    background-color: #F56B00;
+    color: white;
+    width: 90%;
+    line-height: 2em;
+    font-weight: 600;
+    font-size: 15px;
+}
