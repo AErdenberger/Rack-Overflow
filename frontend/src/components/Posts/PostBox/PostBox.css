@@ -1,11 +1,86 @@
-
-p, h3 {
-    margin-left: 5px;
-  }
+body {
+  background-color: #f5f5f5;
+  font-family:  "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
   
-  .post {
-    border: 2px solid blue;
-    border-radius: 10px;
-    margin-bottom: 5px;
+}
+
+button {
+  border-style: none;
+  border: 1px solid black;
+  background-color: white;
+
+}
+
+.post {
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    margin-bottom: 10px;
     min-height: 57px;
-  }
+    background-color: white;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 50%;
+}
+
+.post h1 {
+  font-size: 24px;
+  color: #2408A8;
+}
+
+.post-box-body {
+  font-size: 10;
+  font-weight: 200;
+}
+
+.post p {
+  color: grey;
+}
+
+.post button {
+  background-color: white;
+  border: none;
+  border-radius: 3px;
+  border: none;
+  color: grey;
+}
+
+.post button:hover {
+  background-color: lightgrey;
+}
+
+.post-box-tags-div {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.post-box-tags-div span {
+  border-radius: 3px;
+  color: grey;
+  font-size: 13px;
+  padding: 1px 5px;
+  font-weight: 100;
+}
+
+.post-box-tags-div span:hover {
+  background-color: lightgrey;
+}
+
+.post-box-ratings-comments-username {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.post-box-ratings-comments {
+  display: flex;
+}
+
+.post-box-username {
+  margin-right: 50px;
+}
+
+.post-box-username span {
+  color: #F56B00;
+}
+
