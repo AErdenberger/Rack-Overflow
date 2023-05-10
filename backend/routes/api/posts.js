@@ -24,7 +24,6 @@ router.get("/posts", async (req, res) => {
     try {
         // const posts = await Post.find({ tags: { $in: [tag] } });
         const posts = await Post.find({ tags: tag });
-
         res.json(posts);
     } catch (error) {
         console.error(error);
