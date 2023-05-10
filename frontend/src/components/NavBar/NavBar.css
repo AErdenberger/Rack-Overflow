@@ -1,5 +1,6 @@
 #nav-bar{
     background-color: #F56B00 ;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -40,11 +41,17 @@
     font-size: 25px;
 }
 
+#icon-search:hover{
+    cursor: pointer;
+}
+
 #search-bar{
     border: 1.4px solid black;
     border-radius: 5px;
+    margin-left: 10px;
     font-size: 25px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    text-indent: 6px;
 }
 
 #conteiner-buttons{
@@ -52,7 +59,7 @@
 }
 
 #link-logout{
-    background-color: #ddd;
+    background-color: white;
     border: 1px solid black;
     border-radius: 7px;
     height: 20px;
@@ -60,10 +67,52 @@
     font-size: 25px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
     text-decoration: none;
+    transition: 0.5s;
+}
+
+#link-logout:hover{
+    font-size: 28px;
+    cursor: pointer;
+    background-color: #ddd;
+    transition: 0.5s;
+}
+
+#conteiner-profile{
+    margin-left: 10px;
+}
+
+#button-profile{
+    margin-top: 9px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 35px;
+    height: 25px;
+    transition: 0.5s;
+}
+
+#button-profile:hover{
+    background-color: #ddd;
+    cursor: pointer;
+    width: 45px;
+    height: 33px;
+    margin-top: 3px;
+    transition: 0.5s;
+}
+
+#container-profile-logo{
+    font-size: 30px;
+    margin-top: -5px;
+    margin-left: -6px;
+    transition: 0.5s;
+}
+
+#container-profile-logo:hover{
+    font-size: 40px;
+    transition: 0.5s;
 }
 
 #link-login{
-    background-color: #ddd;
+    background-color: white;
     border: 1px solid black;
     border-radius: 7px;
     height: 45px;
@@ -71,15 +120,19 @@
     font-size: 25px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
     text-decoration: none;
+    transition: 0.5s;
 }
 
 #link-login:hover{
+    font-size: 28px;
+    background-color: #ddd;
     cursor: pointer;
+    transition: 0.5s;
 }
 
 #link-signup{
     margin-left: 10px;
-    background-color: #ddd;
+    background-color: white;
     border: 1px solid black;
     border-radius: 7px;
     height: 45px;
@@ -87,10 +140,14 @@
     font-size: 25px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
     text-decoration: none;
+    transition: 0.5s;
 }
 
 #link-signup:hover{
+    font-size: 28px;
+    background-color: #ddd;
     cursor: pointer;
+    transition: 0.5s;
 }
 
 #img-main{
@@ -114,11 +171,22 @@
 
 #dropdown{
     margin-left: 10px;
+    margin-top: 5px;
 }
 
 #dropbtn{
-    /* background-color: */
-    /* color: ; */
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+#container-info-logo{
+    margin-top: -4px;
+    margin-left: -4px;
+}
+
+#dropbtn{
     margin-top: 7px;
     padding: 3px;
     font-size: 20px;
@@ -136,6 +204,7 @@
     min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    transition: 0.5s;
 }
 
 #link-about{
@@ -150,6 +219,7 @@
 
 #link-about:hover{
     background-color: #ddd;
+    transition: 0.5s;
 }
 
 #dropdown:hover #dropdown-content{
