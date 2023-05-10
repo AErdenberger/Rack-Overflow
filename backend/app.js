@@ -14,7 +14,6 @@ require('./config/passport');
 
 const passport = require('passport'); 
 
-
 const app = express();
 
 app.use(logger("dev")); // log request components (URL/method) to terminal
