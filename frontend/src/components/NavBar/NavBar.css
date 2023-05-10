@@ -1,0 +1,157 @@
+#nav-bar{
+    background-color: #F56B00 ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#container-links-main{
+    margin-left: 35px;
+}
+
+#conteiner-buttons{
+    display: flex;
+}
+
+#link-main{
+    display: flex;
+    justify-content: center;
+    font-size: 27px;
+    text-decoration: none;
+}
+
+#link-main:visited{
+    color: black;
+}
+
+#name-webpage{
+    color: black;
+    margin-top: 11px;
+    margin-left: 13px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#name-webpage:hover{
+    cursor: pointer;
+}
+
+#container-search{
+    margin-left: -13px;
+    font-size: 25px;
+}
+
+#search-bar{
+    border: 1.4px solid black;
+    border-radius: 5px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#conteiner-buttons{
+    margin-right: 40px;
+}
+
+#link-logout{
+    background-color: #ddd;
+    border: 1px solid black;
+    border-radius: 7px;
+    height: 20px;
+    padding: 5px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    text-decoration: none;
+}
+
+#link-login{
+    background-color: #ddd;
+    border: 1px solid black;
+    border-radius: 7px;
+    height: 45px;
+    padding: 5px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    text-decoration: none;
+}
+
+#link-login:hover{
+    cursor: pointer;
+}
+
+#link-signup{
+    margin-left: 10px;
+    background-color: #ddd;
+    border: 1px solid black;
+    border-radius: 7px;
+    height: 45px;
+    padding: 5px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    text-decoration: none;
+}
+
+#link-signup:hover{
+    cursor: pointer;
+}
+
+#img-main{
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#container-logout{
+    margin-top: 5px;
+}
+
+#link-logout{
+    color: black;
+}
+
+#link-logout:visited{
+    color: black;
+}
+
+#dropdown{
+    margin-left: 10px;
+}
+
+#dropbtn{
+    /* background-color: */
+    /* color: ; */
+    margin-top: 7px;
+    padding: 3px;
+    font-size: 20px;
+}
+
+#dropdown{
+    position: relative;
+    display: inline-block;
+}
+
+#dropdown-content{
+    display: none;
+    position: absolute;
+    right: 0;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+#link-about{
+    color: black;
+    background-color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 17px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#link-about:hover{
+    background-color: #ddd;
+}
+
+#dropdown:hover #dropdown-content{
+    display: block;
+}

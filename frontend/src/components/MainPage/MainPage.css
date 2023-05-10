@@ -1,0 +1,42 @@
+.SplashPage {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    gap: 100px;
+    justify-content: space-around;
+}
+
+.LogoandIntro {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.AboutUs {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.AboutUs p {
+    display: flex;
+    text-align: center;
+    font-size: larger;
+}
+
+.PostsArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px 20px 20px;
+}

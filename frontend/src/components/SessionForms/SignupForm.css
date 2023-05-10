@@ -1,0 +1,55 @@
+.session-form-signup{
+    margin-left: 9.5%;
+    margin-top: 9%;
+}
+
+#signup-title{
+    font-size: 35px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#container-email-signup{
+    margin-top: 10px;
+}
+
+#email-signup{
+    border: 0.5px solid black;
+    border-radius: 20px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#username{
+    border: 0.5px solid black;
+    border-radius: 20px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#password-signup{
+    border: 0.5px solid black;
+    border-radius: 20px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#confirm-password{
+    border: 0.5px solid black;
+    border-radius: 20px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#container-submit-signup{
+    margin-top: 35px;
+    margin-left: 80px;
+}
+
+#submit-signup{
+    border: 1px solid #F56B00;
+    border-radius: 10px;
+    background-color: #F56B00;
+    color: white;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
