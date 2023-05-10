@@ -22,8 +22,15 @@ app.use(cookieParser()); // parse cookies as an object on req.cookies
 
 app.use(passport.initialize());
 
+const usersRouter = require("./routes/api/users"); // update the import file path
+const postsRouter = require("./routes/api/posts");
+const csrfRouter = require('./routes/api/csrf');
+app.use('/api/posts', postsRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/csrf', csrfRouter);
+
 // Security Middleware
-if (!isProduction) {
+if (isProduction) {
   const path = require('path');
   // Serve the frontend's index.html file at the root route
   app.get('/', (req, res) => {
@@ -57,12 +64,6 @@ if (!isProduction) {
 
 // Attach Express routers
 
-const usersRouter = require("./routes/api/users"); // update the import file path
-const postsRouter = require("./routes/api/posts");
-const csrfRouter = require('./routes/api/csrf');
-app.use('/api/posts', postsRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/csrf', csrfRouter);
 
 // Express custom middleware for catching all unmatched requests and formatting
 // a 404 error to be sent as the response.
