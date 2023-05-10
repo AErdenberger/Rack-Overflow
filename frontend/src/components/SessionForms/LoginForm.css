@@ -28,11 +28,10 @@
 }
 
 #email{
-    border: 1px solid black;
+    border: 0.5px solid black;
     border-radius: 20px;
     font-size: 25px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
-    text-indent: 11px;
 }
 
 #container-password{
@@ -44,7 +43,6 @@
     border-radius: 20px;
     font-size: 25px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
-    text-indent: 11px;
 }
 
 #container-submit{
@@ -53,15 +51,10 @@
 }
 
 #submit-button{
-    border: 1px solid black;
+    border: 1px solid #F56B00;
     border-radius: 10px;
     background-color: #F56B00;
     color: white;
     font-size: 25px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
-    transition: 0.5s;
-}
-
-#submit-button:hover{
-    font-size: 28px;
 }
