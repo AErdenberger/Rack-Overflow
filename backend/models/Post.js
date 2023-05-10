@@ -19,9 +19,12 @@ const postSchema = new Schema(
             type: Number,
             default: 0,
         },
-        tags: {
-            type: Array,
-        },
+        tags: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Tag",
+            },
+        ],
     },
     {
         timestamps: true,

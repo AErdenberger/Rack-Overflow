@@ -20,15 +20,15 @@ router.post("/", requireUser, validateTagInput, async (req, res, next) => {
 });
 
 router.get("/", async (req, res) => {
-
-
     try {
-        const tag = await Tag.find({tag: req.query.tag});
-   
+        // const tag = await Tag.find({tag: req.query.tag});
+        const tag = await Tag.findOne({ tag: req.query.tag }).exec();
         if (tag) {
-            return res.json(tag);
+            return res.json({ _id: tag._id });
         } else {
-            return null;
+            tag = new Tag({ tag: req.query.tag });
+            await tag.save();
+            return res.json({ _id: tag._id });
         }
     } catch (error) {
         console.error(error);
