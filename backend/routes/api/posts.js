@@ -79,15 +79,19 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
             const tag = await Tag.find({ tag: el });
 
             if (tag) {
-                ans = ans.concat(tag);
+            
+                ans =  ans.concat(tag);
+                console.log('iiiiffffff', ans)
             } else {
                 tag = new Tag({ tag: el });
+                console.log('eeeellllsssee', el)
                 await tag.save();
                 ans = ans.concat(tag);
             }
         };
 
         await reqTags.forEach(async (el) => {
+       
             await tagProcess(el);
         });
 
@@ -105,7 +109,7 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
 
         post.tags = ans;
         post = await newPost.save();
-        return res.json(post);
+        return await res.json(post);
         // }
         // await waiting();
     } catch (err) {
@@ -118,6 +122,27 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
         const postId = req.params.id;
         const { text, title, voteCount, tags } = req.body;
         const post = await Post.findById(postId);
+        let ans = [];
+        // let reqTags = req.body.tags;
+
+        const tagProcess = async (el) => {
+            const tag = await Tag.find({ tag: el });
+
+            if (tag) {
+            
+                ans =  ans.concat(tag);
+                console.log('iiiiffffff', ans)
+            } else {
+                tag = new Tag({ tag: el });
+                console.log('eeeellllsssee', el)
+                await tag.save();
+                ans = ans.concat(tag);
+            }
+        };
+
+        await tags.forEach(async (el) => {
+            await tagProcess(el);
+        });
 
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
@@ -127,12 +152,14 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
                 .status(403)
                 .json({ message: "You are not authorized to edit this post" });
         }
+        await post.save()
         post.text = text;
         post.title = title;
         post.voteCount = voteCount;
-        post.tags = tags;
+        post.tags = ans;
         await post.save();
         // await post.populate('author', '_id username').execPopulate();
+        post.tags = ans;
         return res.json(post);
     } catch (err) {
         next(err);
