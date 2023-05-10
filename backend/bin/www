@@ -8,7 +8,6 @@ require('dotenv').config();
 const app = require('../app.js');
 const debug = require('debug');
 const http = require('http');
-require('dotenv').config();
 const mongoose = require('mongoose');
 const { mongoURI: db } = require('../config/keys.js');
 const seeds = require('../seeders/seeds')
