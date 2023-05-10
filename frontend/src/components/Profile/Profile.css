@@ -1,0 +1,105 @@
+#container-content-profile{
+    display: flex;
+    justify-content: center;
+}
+
+#user-info{
+    border: 1px solid black;
+    border-radius: 7px;
+    margin-right: 100px;
+    background-color: white;
+    height: 170px;
+    width: 200px;
+    transition: 0.5s;
+}
+
+#to-transform{
+    margin-right: 100px;
+    margin-top: 55px;
+    height: 170px;
+    width: 200px;
+}
+
+#to-transform:hover #user-info{
+    width: 230px;
+    height: 200px;
+    margin-top: -10px;
+    margin-left: -20px;
+    transition: 0.5s;
+}
+
+#to-transform::after #user-info{
+    margin-right: 100px;
+    margin-top: 55px;
+    height: 170px;
+    width: 200px;
+    transition: 0.5s;
+}
+
+#to-transform:hover #user-info #container-user-info #current-user-username{
+    font-size: 30px;
+    transition: 0.5s;
+}
+
+#to-transform:hover #user-info #container-user-info #current-user-email{
+    font-size: 30px;
+    transition: 0.5s;
+}
+
+#to-transform:hover #user-info #container-user-info #button-create-post{
+    font-size: 25px;
+    transition: 0.5s;
+}
+
+#container-user-info{
+    padding: 13px;
+}
+
+#container-user-name{
+    margin-bottom: 10px;
+}
+
+#current-user-username{
+    font-size: 20px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;
+}
+
+#current-user-email{
+    font-size: 20px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;
+}
+
+#container-button-create-post{
+    margin-top: 50px;
+}
+
+#button-create-post{
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #F56B00 ;
+    color: white;
+    font-size: 22px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;
+}
+
+#button-create-post:hover{
+    cursor: pointer;
+}
+
+#container-user-posts{
+    margin-top: 30px;
+    width: 50vw;
+}
+
+#container-post-text{
+    margin-bottom: 25px;
+    margin-left: 40%;
+}
+
+#all-posts-text{
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
