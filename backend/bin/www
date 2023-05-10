@@ -8,9 +8,9 @@ require('dotenv').config();
 const app = require('../app.js');
 const debug = require('debug');
 const http = require('http');
-require('dotenv').config();
 const mongoose = require('mongoose');
 const { mongoURI: db } = require('../config/keys.js');
+const seeds = require('../seeders/seeds')
 
 const serverLogger = debug('backend:server');
 const dbLogger = debug('backend:mongodb');
@@ -18,10 +18,10 @@ const port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 const server = http.createServer(app);
 
+
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    console.log("Im here in mongoose server bin file ")
     dbLogger('Connected to MongoDB successfully');
     server.listen(port);
   })

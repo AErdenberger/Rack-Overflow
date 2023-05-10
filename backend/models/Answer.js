@@ -1,21 +1,33 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const postAnswer = new Schema({
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-
-  text: {
-    type: String,
-    required: true
-  },
-  tags: {
-    type: String
-  }
-}, {
-  timestamps: true
+const answerSchema = new Schema({
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+    parentPost: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Post',
+      required: true
+    },
+    text: {
+        type: String,
+        required: true
+    },
+    tags: {
+        type: String
+    },
+    voteCount: {
+        type: Number,
+        default: 0
+    }
+  }, {
+    timestamps: true
 });
 
-module.exports = mongoose.model('Post', postSchema);
+const Answer = mongoose.model('Answer', answerSchema);
+
+// Export the model for use in other parts of the application
+module.exports = Answer;
+// module.exports = mongoose.model("Answer", answerSchema);
