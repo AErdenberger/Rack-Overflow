@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
+const NUM_TAGS = 10;
 const NUM_SEED_POSTS = 30;
 
 
