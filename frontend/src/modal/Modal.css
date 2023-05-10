@@ -9,12 +9,13 @@
 }
 
 .modal-foreground{
+    border: 1px solid black;
     border-radius: 20px;
     height: 500px;
     width: 350px;
     background-color: white;
     z-index: 3;
     position: absolute;
-    top: calc(50% - 250px);
+    top: calc(50% - 260px);
     left: calc(50% - 175px);
 }
