@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, composePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import './PostCompose.css';
+import ChatBot from '../../ChatBot/ChatBot';
 
 function PostCompose () {
   const [text, setText] = useState('');
@@ -39,9 +40,11 @@ function PostCompose () {
         <input type="submit" value="Submit" />
       </form>
       <div className="post-preview">
+      <ChatBot/>
         <h3>Post Preview</h3>
         {text ? <PostBox post={{text, author}} /> : undefined}
       </div>
+     
       <div className="previous-post">
         <h3>Previous Post</h3>
         {newPost ? <PostBox post={newPost} /> : undefined}
