@@ -47,8 +47,8 @@ const posts = [];
 
 for (let i = 0; i < NUM_SEED_POSTS; i++) {
   
-  let tags =  faker.lorem.words(5)
-  let tagsArray = tags.split(" ");
+  // let tags =  faker.lorem.words(5)
+  // let tagsArray = tags.split(" ");
 
  
   posts.push(
@@ -57,7 +57,7 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
       title: faker.hacker.phrase(10),
       voteCount: Math.floor(Math.random()*10),
-      tags:tagsArray
+      // tags:tagsArray
       
 
     })
