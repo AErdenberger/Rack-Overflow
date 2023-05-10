@@ -156,6 +156,8 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
     }
 });
 
+
+
 router.get("/", async (req, res) => {
     try {
         const posts = await Post.find()

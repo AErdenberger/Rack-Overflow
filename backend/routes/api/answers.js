@@ -78,6 +78,51 @@ router.post("/:id", requireUser, validateAnswerInput, async (req, res, next) => 
     }
 });
 
+router.patch("/:id", requireUser, validateAnswerInput, async (req, res, next) => {
+    try {
+        const answerId = req.params.id;
+        const { text, voteCount, tags } = req.body;
+        const answer = await Answer.findById(answerId);
+        let ans = [];
+        // let reqTags = req.body.tags;
+
+        const tagProcess = async (el) => {
+            const tag = await Tag.find({ tag: el });
+
+            if (tag) {
+                ans = ans.concat(tag);
+           
+            } else {
+                tag = new Tag({ tag: el });
+                await tag.save();
+                ans = ans.concat(tag);
+            }
+        };
+
+        await tags.forEach(async (el) => {
+            await tagProcess(el);
+        });
+
+        if (!answer) {
+            return res.status(404).json({ message: "Answer not found" });
+        }
+        if (!answer.author.equals(req.user._id)) {
+            return res
+                .status(403)
+                .json({ message: "You are not authorized to edit this answer" });
+        }
+        await answer.save();
+        answer.text = text;
+        answer.voteCount = voteCount;
+        answer.tags = ans;
+        await answer.save();
+        // await answer.populate('author', '_id username').execPopulate();
+        answer.tags = ans;
+        return res.json(answer);
+    } catch (err) {
+        next(err);
+    }
+});
 
 
 module.exports = router;
