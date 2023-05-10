@@ -73,6 +73,18 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
 //   )
 // }
 
+// Create answers
+const answers = [];
+for (let i = 0; i < NUM_SEED_ANSWERS; i++) {
+  answers.push(
+    new Answer ({
+      text: faker.hacker.phrase(),
+      parentPost: posts[Math.floor(Math.random() * NUM_SEED_POSTS)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    })
+  )
+}
+
 // Connect to database
 mongoose
   .connect(db, { useNewUrlParser: true })
