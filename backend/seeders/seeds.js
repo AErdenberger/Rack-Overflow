@@ -2,12 +2,15 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Post = require('../models/Post.js');
+const Answer = require('../models/Answer')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 const NUM_TAGS = 10;
 const NUM_SEED_POSTS = 30;
+const NUM_SEED_ANSWERS =10;
+
 
 
 // Create users
@@ -44,10 +47,20 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 const posts = [];
 
 for (let i = 0; i < NUM_SEED_POSTS; i++) {
+  
+  // let tags =  faker.lorem.words(5)
+  // let tagsArray = tags.split(" ");
+
+ 
   posts.push(
     new Post ({
       text: faker.hacker.phrase(),
-      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      title: faker.hacker.phrase(10),
+      voteCount: Math.floor(Math.random()*10),
+      // tags:tagsArray
+      
+
     })
   )
 }
@@ -59,6 +72,7 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
 //     })
 //   )
 // }
+
 // Connect to database
 mongoose
   .connect(db, { useNewUrlParser: true })
@@ -78,6 +92,7 @@ mongoose
                    .then(() => Post.collection.drop())
                    .then(() => User.insertMany(users))
                    .then(() => Post.insertMany(posts))
+                   .then(() => Answer.insertMany(answers))
                    .then(() => {
                      console.log("Done!");
                      mongoose.disconnect();

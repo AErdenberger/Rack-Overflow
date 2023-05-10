@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, composePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import './PostCompose.css';
+import ChatBot from '../../ChatBot/ChatBot';
 
 function PostCompose () {
   const [text, setText] = useState('');
@@ -35,6 +36,7 @@ function PostCompose () {
           placeholder="Write your post..."
           required
         />
+        <ChatBot/>
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" />
       </form>

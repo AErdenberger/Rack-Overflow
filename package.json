@@ -6,6 +6,7 @@
   "engines": {
     "node": "16.x"
   },
+
   "scripts": {
     "backend-install": "npm install --prefix backend",
     "backend": "npm run dev --prefix backend",
