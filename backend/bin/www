@@ -21,7 +21,6 @@ const server = http.createServer(app);
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    console.log("Im here in mongoose server bin file ")
     dbLogger('Connected to MongoDB successfully');
     server.listen(port);
   })
