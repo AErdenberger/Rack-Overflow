@@ -52,13 +52,13 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
   )
 }
 
-for (let i = 0; i < NUM_TAGS; i++) {
-  posts.push(
-    new Tag ({
-      text: faker.hacker.phrase(),   
-    })
-  )
-}
+// for (let i = 0; i < NUM_TAGS; i++) {
+//   posts.push(
+//     new Tag ({
+//       text: faker.hacker.phrase(),   
+//     })
+//   )
+// }
 // Connect to database
 mongoose
   .connect(db, { useNewUrlParser: true })
