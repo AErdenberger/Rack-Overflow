@@ -9,6 +9,7 @@ const app = require('../app.js');
 const debug = require('debug');
 const http = require('http');
 const mongoose = require('mongoose');
+require('dotenv').config();
 const { mongoURI: db } = require('../config/keys.js');
 const seeds = require('../seeders/seeds')
 
