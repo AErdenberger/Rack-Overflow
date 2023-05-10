@@ -13,7 +13,6 @@ button {
     background-color: white;
     padding-left: 5%;
     padding-right: 5%;
-    /* width: 40%; */
 }
 
 .post h1 {
@@ -52,7 +51,9 @@ button {
   border-radius: 3px;
   color: grey;
   font-size: 13px;
-  padding: 1px 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 1px;
   font-weight: 100;
 }
 
@@ -71,7 +72,10 @@ button {
 }
 
 .post-box-username {
+  /* display: flex;
+  justify-content: end; */
   margin-right: 50px;
+  width: 50px;
 }
 
 .post-box-username span {

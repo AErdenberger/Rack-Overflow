@@ -1,14 +1,14 @@
 import "./PostBox.css"
 
-function PostBox ({ post: { text, author }}) {
+function PostBox ({ post: { text, author, title }}) {
   const { username } = author;
   return (
     <div className="post">
       <div>
-        <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+        <h1>{title}</h1>
       </div>
       <div>
-        <p className="post-box-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+        <p className="post-box-body">{text}</p>
       </div>
       <div>
         <div className="post-box-tags-div">
