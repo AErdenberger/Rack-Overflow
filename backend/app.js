@@ -10,6 +10,12 @@ require('./models/Post');
 require('./models/Answer');
 require('./models/Tag');
 require('./config/passport');
+<<<<<<< HEAD
+=======
+require('./models/Tag');
+require('./config/passport');
+const passport = require('passport'); 
+>>>>>>> 13015b8 ( update models and routes and app.js from previous main)
 
 
 const passport = require('passport'); 
@@ -37,6 +43,7 @@ const usersRouter = require("./routes/api/users"); // update the import file pat
 const postsRouter = require("./routes/api/posts");
 const csrfRouter = require('./routes/api/csrf');
 const answersRouter = require('./routes/api/answers');
+<<<<<<< HEAD
 const tagsRouter = require('./routes/api/tags');
 
 app.use('/api/posts', postsRouter);
@@ -66,6 +73,12 @@ if (isProduction) {
     );
   });
 }
+=======
+app.use('/api/posts', postsRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/csrf', csrfRouter);
+app.use('/api/posts/:postId/answers', answersRouter);
+>>>>>>> 13015b8 ( update models and routes and app.js from previous main)
 
 // Security Middleware
 if (isProduction) {
