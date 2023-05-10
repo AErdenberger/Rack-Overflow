@@ -45,6 +45,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/tags', tagsRouter);
 app.use('/api/posts/:postId/answers', answersRouter);
+app.use('/api/answers', answersRouter);
 
 // Serve static React build files statically in production
 

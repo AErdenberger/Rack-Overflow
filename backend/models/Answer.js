@@ -8,9 +8,9 @@ const answerSchema = new Schema(
             ref: "User",
         },
         parentPost: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "Post",
-            required: true,
+            // required: true,
         },
         text: {
             type: String,

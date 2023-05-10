@@ -6,7 +6,7 @@ const Post = mongoose.model("Post");
 const Tag = mongoose.model("Tag");
 const { requireUser } = require("../../config/passport");
 const validatePostInput = require("../../validations/posts");
-const tags = ["tag1", "tag2"];
+
 
 // In development, allow developers to access the CSRF token to test the
 // server endpoints in Postman.
@@ -79,19 +79,15 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
             const tag = await Tag.find({ tag: el });
 
             if (tag) {
-            
-                ans =  ans.concat(tag);
-                console.log('iiiiffffff', ans)
+                ans = ans.concat(tag);
             } else {
                 tag = new Tag({ tag: el });
-                console.log('eeeellllsssee', el)
                 await tag.save();
                 ans = ans.concat(tag);
             }
         };
 
         await reqTags.forEach(async (el) => {
-       
             await tagProcess(el);
         });
 
@@ -101,17 +97,12 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
             author: req.user._id,
             tags: ans,
         });
-        console.log("AFTER NEWPOST", ans);
 
         let post = await newPost.save();
-        console.log("AFTER POSTSAVE", ans);
         post = await post.populate("author", "_id username");
-
         post.tags = ans;
         post = await newPost.save();
         return await res.json(post);
-        // }
-        // await waiting();
     } catch (err) {
         next(err);
     }
@@ -129,12 +120,11 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
             const tag = await Tag.find({ tag: el });
 
             if (tag) {
-            
-                ans =  ans.concat(tag);
-                console.log('iiiiffffff', ans)
+                ans = ans.concat(tag);
+                console.log("iiiiffffff", ans);
             } else {
                 tag = new Tag({ tag: el });
-                console.log('eeeellllsssee', el)
+                console.log("eeeellllsssee", el);
                 await tag.save();
                 ans = ans.concat(tag);
             }
@@ -152,7 +142,7 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
                 .status(403)
                 .json({ message: "You are not authorized to edit this post" });
         }
-        await post.save()
+        await post.save();
         post.text = text;
         post.title = title;
         post.voteCount = voteCount;
