@@ -7,7 +7,6 @@ const Tag = mongoose.model("Tag");
 const { requireUser } = require("../../config/passport");
 const validatePostInput = require("../../validations/posts");
 
-
 // In development, allow developers to access the CSRF token to test the
 // server endpoints in Postman.
 router.get("/restore", (req, res) => {
@@ -156,21 +155,17 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
     }
 });
 
-
-
 router.get("/", async (req, res) => {
     try {
         const posts = await Post.find()
             .populate("author", "_id username")
             .sort({ createdAt: -1 });
-        
+
         const postObj = {};
-        posts.forEach(post => {
+        posts.forEach((post) => {
             postObj[post._id] = post;
-        })
+        });
         return res.json(postObj);
-     
-       
     } catch (err) {
         return res.json([]);
     }
@@ -179,18 +174,10 @@ router.get("/", async (req, res) => {
 router.delete("/:id", requireUser, async (req, res, next) => {
     console.log(req.user, "request");
     try {
-        const post = await Post.deleteOne({_id:req.params.id });
-        console.log(post, "post");
+        const post = await Post.deleteOne({ _id: req.params.id });
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
         }
-        if (!post.author._id.equals(req.user._id)) {
-            return res
-                .status(403)
-                .json({ message: "You are not authorized to delete this post" });
-        }
-        // // await post.remove();
-        // await delete post;
         return res.status(204).json("Sussessfully deleted");
     } catch (err) {
         next(err);
