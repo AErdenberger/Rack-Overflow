@@ -169,8 +169,8 @@ router.get("/", async (req, res) => {
             postObj[post._id] = post;
         })
         return res.json(postObj);
-        // return res.json(posts);
-        return res.json(posts);
+     
+       
     } catch (err) {
         return res.json([]);
     }
