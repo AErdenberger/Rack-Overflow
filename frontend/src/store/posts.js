@@ -3,6 +3,7 @@ import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
 const RECEIVE_POST = "posts/RECEIVE_POST";
+const REMOVE_POST = "posts/REMOVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
@@ -16,6 +17,11 @@ const receivePosts = posts => ({
 const receivePost = post => ({
   type: RECEIVE_POST,
   post
+})
+
+const removePost = postId => ({
+  type: REMOVE_POST,
+  postId
 })
 
 const receiveUserPosts = posts => ({
@@ -106,6 +112,20 @@ export const fetchPosts = () => async dispatch => {
       }
     }
   };
+
+  export const deletePost = (postId) => async dispatch => {
+    try {
+      await jwtFetch(`/api/posts/${postId}`, {
+        method: 'DELETE'
+      });
+      dispatch(removePost(postId));
+    } catch (err) {
+      const resBody = await err.json();
+      if (resBody.statusCode === 400) {
+        dispatch(receiveErrors(resBody.errors));
+      }
+    }
+  }
 
   const nullErrors = null;
 
