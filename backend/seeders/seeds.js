@@ -102,13 +102,13 @@ const insertSeeds = () => {
 
     User.collection
         .drop()
-        .then(() => Post.collection.drop())
         .then(() => Tag.collection.drop())
+        .then(() => Post.collection.drop())
         .then(() => Answer.collection.drop())
         .then(() => User.insertMany(users))
-        .then(() => Post.insertMany(posts))
-        .then(() => Answer.insertMany(answers))
         .then(() => Tag.insertMany(tags))
+        .then(() => Post.insertMany(posts))
+        .then(() => Answer.insertMany(answers))    
         .then(() => {
             console.log("Done!");
             //  mongoose.disconnect();
