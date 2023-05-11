@@ -5,17 +5,21 @@ import { useEffect } from 'react';
 import { fetchPosts } from '../../store/posts';
 import PostsSidebar from '../Posts/PostsSidebar/PostsSidebar';
 // import PostBox from '../Posts/PostBox/PostBox';
+import Comments from '../Comments/Comments';
+import CommentCompose from '../Comments/CommentsCompose/CommentCompose';
 import './QuestionShow.css'
 
 const QuestionShow = () => {
     const { postId } = useParams();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
-    const { username } = post.author;
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchPosts());
     }, [dispatch])
+
+    if(!post) return null;
+    const { username } = post.author;
 
     return(
         <>
@@ -45,6 +49,12 @@ const QuestionShow = () => {
                                 <div><span>{String.fromCodePoint(0x2B24)}</span> {username}</div>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <Comments />
+                    </div>
+                    <div>
+                        <CommentCompose />
                     </div>
                 </div>
             </div>

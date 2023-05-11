@@ -12,4 +12,4 @@ const validateAnswerInput = [
   handleValidationErrors
 ];
 
-module.exports = validatePostInput;
+module.exports = validateAnswerInput;
