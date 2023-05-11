@@ -1,11 +1,21 @@
 import "./PostBox.css"
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../../store/posts";
+import { Link } from "react-router-dom";
 
-function PostBox ({ post: { text, author, title }}) {
+function PostBox ({ post: { _id, text, author, title }}) {
+  const dispatch = useDispatch();
   const { username } = author;
+  // console.log(_id);
+  
+
   return (
     <div className="post">
+
       <div>
+      <Link to={`posts/${_id}`}  className='posts-show-link'>
         <h1>{title}</h1>
+      </Link>
       </div>
       <div>
         <p className="post-box-body">{text}</p>
@@ -28,6 +38,7 @@ function PostBox ({ post: { text, author, title }}) {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

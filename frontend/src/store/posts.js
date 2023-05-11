@@ -3,6 +3,7 @@ import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
 const RECEIVE_POST = "posts/RECEIVE_POST";
+const REMOVE_POST = "posts/REMOVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
@@ -16,6 +17,11 @@ const receivePosts = posts => ({
 const receivePost = post => ({
   type: RECEIVE_POST,
   post
+})
+
+const removePost = postId => ({
+  type: REMOVE_POST,
+  postId
 })
 
 const receiveUserPosts = posts => ({
@@ -91,21 +97,35 @@ export const fetchPosts = () => async dispatch => {
   }
 
   
-  export const composePost = data => async dispatch => {
-    try {
-      const res = await jwtFetch('/api/posts/', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      });
-      const post = await res.json();
-      dispatch(receiveNewPost(post));
-    } catch(err) {
-      const resBody = await err.json();
-      if (resBody.statusCode === 400) {
-        return dispatch(receiveErrors(resBody.errors));
-      }
+export const composePost = data => async dispatch => {
+  try {
+    const res = await jwtFetch('/api/posts/', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    const post = await res.json();
+    dispatch(receiveNewPost(post));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
     }
-  };
+  }
+};
+
+export const deletePost = (postId) => async dispatch => {
+  try {
+    await jwtFetch(`/api/posts/${postId}`, {
+      method: 'DELETE'
+    });
+    dispatch(removePost(postId));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      dispatch(receiveErrors(resBody.errors));
+    }
+  }
+}
 
   const nullErrors = null;
 
@@ -128,6 +148,12 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       case RECEIVE_POST:
         return {
           ...state, all: [action.post._id] = action.post };
+      case REMOVE_POST:
+        let all;
+        const newState = { ...state};
+        // delete newState[all];
+        console.log(newState[all]);
+        return newState;
       case RECEIVE_USER_POSTS:
         return { ...state, user: action.posts, new: undefined};
       case RECEIVE_NEW_POST:
