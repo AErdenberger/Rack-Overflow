@@ -18,24 +18,25 @@ function Posts () {
   if (posts.length === 0) return <div>There are no Posts</div>;
   
   return (
-    <>
-      <div className='posts-container'>
-        <div className='posts-sidebar'>
-          <PostsSidebar /> 
-        </div>
-        <div className='posts-index'>
-          <h2>All Posts</h2>
-          {posts.map(post => (
-            // console.log(post)
-            <div key={post._id}>
-              
-                <PostBox  post={post} />
-              
-            </div>
-          ))}
-        </div>
+    <div className='posts-container'>
+      <div className='posts-sidebar'>
+        <PostsSidebar /> 
       </div>
-    </>
+      <div className='posts-index'>
+        <h2>All Posts</h2>
+        {posts.map(post => (
+          // console.log(post)
+          <div key={post._id}>
+            
+              <PostBox  post={post} />
+            
+          </div>
+        ))}
+      </div>
+      <div>
+
+      </div>
+    </div>
   );
 }
 

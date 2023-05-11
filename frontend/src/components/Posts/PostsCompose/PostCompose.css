@@ -1,9 +1,79 @@
 input[type=textarea] {
-    min-height: 30px;
-    min-width: 393px;
-    margin-top: 5px;
-  }
+  min-height: 30px;
+  min-width: 393px;
+  margin-top: 5px;
+}
+
+.container-create-post-form{
+  display: flex;
+}
   
-  .post-preview {
-    min-height: 150px;
-  }
+.post-preview {
+  min-height: 150px;
+}
+
+.compose-post{
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  width: 400px;
+  margin-top: 30px;
+  margin-left: 38%;
+}
+
+#title{
+  border: 1px solid black;
+  border-radius: 10px;
+  text-indent: 4px;
+  font-size: 24px;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#text-content{
+  border: 1px solid black;
+  border-radius: 10px;
+  text-indent: 4px;
+  font-size: 24px;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#button-submit{
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-left: 39%;
+  font-size: 24px;
+  background-color: #F56B00;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+  transition: 0.5s;
+}
+
+#button-submit:hover{
+  font-size: 28px;
+  transition: 0.5s;
+}
+
+#label-post-preview{
+  margin-left: 50px;
+  font-size: 24px;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#label-loading-post{
+  margin-left: 50px;
+  font-size: 14px;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+  transition: 0.5s;
+}
+
+#label-post-previous{
+  margin-left: 50px;
+  font-size: 24px;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#label-no-previous-post{
+  margin-left: 50px;
+  font-size: 14px;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
