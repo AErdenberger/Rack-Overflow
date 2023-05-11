@@ -149,10 +149,8 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
         return {
           ...state, all: [action.post._id] = action.post };
       case REMOVE_POST:
-        let all;
         const newState = { ...state};
         // delete newState[all];
-        console.log(newState[all]);
         return newState;
       case RECEIVE_USER_POSTS:
         return { ...state, user: action.posts, new: undefined};
