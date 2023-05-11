@@ -163,6 +163,12 @@ router.get("/", async (req, res) => {
         const posts = await Post.find()
             .populate("author", "_id username")
             .sort({ createdAt: -1 });
+        
+        const postObj = {};
+        posts.forEach(post => {
+            postObj[post._id] = post;
+        })
+        return res.json(postObj);
         // return res.json(posts);
         return res.json(posts);
     } catch (err) {
@@ -171,14 +177,14 @@ router.get("/", async (req, res) => {
 });
 
 router.delete("/:id", requireUser, async (req, res, next) => {
-    // console.log(req.params, "request");
+    console.log(req.user, "request");
     try {
         const post = await Post.findById(req.params.id);
         console.log(post, "post");
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
         }
-        if (!post.author.equals(req.user._id)) {
+        if (!post.author._id.equals(req.user._id)) {
             return res
                 .status(403)
                 .json({ message: "You are not authorized to delete this post" });
