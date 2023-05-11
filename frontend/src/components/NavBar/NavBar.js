@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,6 +26,12 @@ function NavBar () {
     history.push(path);
   }
 
+  const goToProfile = e => {
+    e.preventDefault();
+    let path = '/profile';
+    history.push(path);
+  };
+
   // This line below will be for the search
   const [valueSearch, setValueSearch] = useState("");
 
@@ -47,8 +54,19 @@ function NavBar () {
               <div id='container-logout'>
                 <Link onClick={logoutUser} id='link-logout'>Log out</Link>
               </div>
+              <div id='conteiner-profile'>
+                <button onClick={goToProfile} id='button-profile'>
+                  <div id='container-profile-logo'>
+                    <i className="fa-regular fa-address-card" id='profile-logo'></i>
+                  </div>
+                </button>
+              </div>
               <div id='dropdown'>
-                <button id='dropbtn'><i className="fa-solid fa-circle-info"></i></button>
+                <button id='dropbtn'>
+                  <div id='container-info-logo'>
+                    <i className="fa-solid fa-circle-info" id='info'></i>
+                  </div>
+                </button>
                 <div id='dropdown-content'>
                   <Link to={'/about'} id='link-about'>About Rack Overflow</Link>
                 </div>
@@ -85,7 +103,11 @@ function NavBar () {
                 <button onClick={() => setShowModalSignup(prev => !prev)} id='link-signup'>Sign up</button>
               </label>
               <div id='dropdown'>
-                <button id='dropbtn'><i className="fa-solid fa-circle-info"></i></button>
+                <button id='dropbtn'>
+                  <div id='container-info-logo'>
+                    <i className="fa-solid fa-circle-info" id='info'></i>
+                  </div>
+                </button>
                 <div id='dropdown-content'>
                   <Link to={'/about'} id='link-about'>About Rack Overflow</Link>
                 </div>
@@ -99,7 +121,6 @@ function NavBar () {
 
   return (
     <>
-      <h1>Rack Overflow</h1>
       { getLinks() }
     </>
   );

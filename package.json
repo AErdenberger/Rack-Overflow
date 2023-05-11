@@ -2,6 +2,11 @@
   "name": "rack-overflow",
   "version": "1.0.0",
   "description": "What if Stack Overflow was for individuals looking to work out?",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
+
   "scripts": {
     "backend-install": "npm install --prefix backend",
     "backend": "npm run dev --prefix backend",
@@ -12,16 +17,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmgudeman/Rack-Overflow.git"
-  },
-  "engines": {
-    "node": "16.x"
+    "url": "git+https://github.com/AErdenberger/Rack-Overflow.git"
   },
   "keywords": [],
-  "author": "David Gudeman, David Lai, Josh van Eyken, Steven Zabala, Alex Erdenberger",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dmgudeman/Rack-Overflow.git/issues"
+    "url": "https://github.com/AErdenberger/Rack-Overflow/issues"
   },
-  "homepage": "https://github.com/dmgudeman/Rack-Overflow.git#readme"
+  "homepage": "https://github.com/AErdenberger/Rack-Overflow#readme"
 }
