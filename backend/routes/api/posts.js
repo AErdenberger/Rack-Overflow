@@ -169,8 +169,8 @@ router.get("/", async (req, res) => {
             postObj[post._id] = post;
         })
         return res.json(postObj);
-        // return res.json(posts);
-        return res.json(posts);
+     
+       
     } catch (err) {
         return res.json([]);
     }
@@ -179,7 +179,7 @@ router.get("/", async (req, res) => {
 router.delete("/:id", requireUser, async (req, res, next) => {
     console.log(req.user, "request");
     try {
-        const post = await Post.findById(req.params.id);
+        const post = await Post.deleteOne({_id:req.params.id });
         console.log(post, "post");
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
@@ -189,9 +189,9 @@ router.delete("/:id", requireUser, async (req, res, next) => {
                 .status(403)
                 .json({ message: "You are not authorized to delete this post" });
         }
-        // await post.remove();
-        await delete post;
-        return res.status(204).json({});
+        // // await post.remove();
+        // await delete post;
+        return res.status(204).json("Sussessfully deleted");
     } catch (err) {
         next(err);
     }

@@ -62,7 +62,7 @@ export const composeComment = data => async dispatch => {
     console.log(data, 'data');
     console.log(JSON.stringify(data), 'json')
     try{
-        const res = await jwtFetch('/api/posts/:postId', {
+        const res = await jwtFetch('/api/answers/:postId', {
             method: 'POST',
             body: JSON.stringify(data)
         })
