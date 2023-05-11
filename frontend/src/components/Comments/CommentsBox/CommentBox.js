@@ -1,12 +1,12 @@
 import './CommentBox.css';
 
-function CommentBox ({ comment: { content, author }}){
+function CommentBox ({ comment: { text, author }}){
     const { username } = author;
 
     return(
         <div className='comment'>
             <div id='container-content-comment'>
-                <label>{content}</label>
+                <label>{text}</label>
             </div>
             <div id='container-author-comment'>
                 <label>{username}</label>
