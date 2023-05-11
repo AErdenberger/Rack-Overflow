@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 // import generate from "./generate1";
@@ -16,6 +17,7 @@ const ChatBot = ({}) => {
         setInputText(e.target.value);
     };
     const handleSubmit = async (e) => {
+        console.log('HHHHAAAANNDDLE')
         try {
             e.preventDefault();
             const data = { prompt: inputText};
@@ -42,7 +44,7 @@ const ChatBot = ({}) => {
                         onChange={onChangeHandler}
                     />
                 </label>
-                <button>SUBMIT</button>
+                <button >SUBMIT</button>
             </form>
            
         </>
