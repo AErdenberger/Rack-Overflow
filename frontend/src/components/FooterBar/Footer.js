@@ -61,6 +61,10 @@ function FooterBar() {
                 </a>
             </div>
         </div>
+        <div className="ImageCredits">
+            <p>Images provided by Vecteezy</p>
+            <a href="https://www.vecteezy.com/free-vector/exercise">Exercise Vectors by Vecteezy</a>
+        </div>
     </div>
     )
 }

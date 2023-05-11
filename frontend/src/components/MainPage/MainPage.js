@@ -20,6 +20,8 @@ function MainPage() {
 
 
     return (
+      <>
+      <img className='LogoBackground' src="https://rack-overflow.s3.us-west-1.amazonaws.com/vecteezy_summer-outdoor-leisure-activities-sport-exercises_13134007.jpg"></img>
       <div className="SplashPage">
         <div className="LogoandIntro">
           <img src="https://rack-overflow.s3.us-west-1.amazonaws.com/Rack-Overflow-Logo-Transparent.png"></img>
@@ -27,12 +29,13 @@ function MainPage() {
         </div>
         <div className="AboutUs">
           <h1>About Us:</h1>
-          <p>Rack Overflow is a crowd sourced information site where people can go to
-            get their questions answered about exercise. Whether you are training for an
+          <p>Rack Overflow is a crowd sourced information forum where people can go to
+            get their questions answered about exercising and fitness. Whether you are training for an
             event, looking to lose some weight, or need to get advice about how to workout
             based on your physical constraints Rack Overflow is for you!
           </p>
         </div>
+        <img className='JoggingImage' src='https://rack-overflow.s3.us-west-1.amazonaws.com/vecteezy_people-in-sportswear-jogging-run-marathon_16265286.jpg'></img>
         <div className="PostsArea">
           <h1>See What People Are Asking!</h1>
           <div className="RandomPosts">
@@ -41,10 +44,8 @@ function MainPage() {
             ))}
           </div>
         </div>
-        <footer>
-          Copyright &copy; 2022 RackOverFlow
-        </footer>
       </div>
+      </>
     );
   }
   
