@@ -15,17 +15,13 @@ const QuestionShow = () => {
     const { postId } = useParams();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
     const dispatch = useDispatch();
-    const history = useHistory();
+    
 
     useEffect(() => {
         dispatch(fetchPosts());
     }, [dispatch])
 
-    const remove = () => {
-        dispatch(deletePost(postId));
-        let path = '/posts';
-        history.push(path);
-    }
+   
 
 
     if(!post) return null;
@@ -60,9 +56,7 @@ const QuestionShow = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <button onClick={remove}>Delete Post</button>
-                    </div>
+                    
                     <div>
                         <Comments />
                     </div>

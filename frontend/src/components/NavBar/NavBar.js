@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../store/session';
+import { login, logout } from '../../store/session';
 import image from '../../assets/RackOverflowLogo.png';
 import LoginForm from '../SessionForms/LoginForm';
 import SignupForm from '../SessionForms/SignupForm';
@@ -24,6 +24,11 @@ function NavBar () {
     setShowModalSignup(false);
     let path = '/';
     history.push(path);
+  }
+
+  const loginDemo = e => {
+    e.preventDefault();
+    dispatch(login({ email: 'demo@user.com', password: 'password' }));
   }
 
   const goToProfile = e => {
@@ -96,6 +101,9 @@ function NavBar () {
               />
             </label>
             <div id='conteiner-buttons'>
+              <label>
+                <button onClick={loginDemo} id='button-demo-user'><i className="fa-solid fa-user-secret"></i> Demo User</button>
+              </label>
               <label>
                 <button onClick={() => setShowModal(prev => !prev)} id='link-login'>Login</button>
               </label>

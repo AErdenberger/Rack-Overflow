@@ -37,7 +37,7 @@
 }
 
 #container-search{
-    margin-left: -13px;
+    margin-left: 50px;
     font-size: 25px;
 }
 
@@ -111,10 +111,19 @@
     transition: 0.5s;
 }
 
+#button-demo-user{
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 44px;
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
 #link-login{
     background-color: white;
     border: 1px solid black;
     border-radius: 7px;
+    margin-left: 10px;
     height: 45px;
     padding: 5px;
     font-size: 25px;
