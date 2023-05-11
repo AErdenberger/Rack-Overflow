@@ -19,11 +19,7 @@ router.get("/restore", (req, res) => {
     });
 });
 
-<<<<<<< HEAD
 router.get("/:postId", async (req, res) => {
-=======
-router.get("/:id", async (req, res) => {
->>>>>>> 9a408c0207ab8a76e157324b9974f81326d00bab
     console.log("I'm in Answers routes", req.params);
     const id = req.params.postId;
     try {
