@@ -19,25 +19,30 @@ router.get("/restore", (req, res) => {
     });
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:postId", async (req, res) => {
     console.log("I'm in Answers routes", req.params);
     const id = req.params.postId;
     try {
         const answers = await Answer.find({ parentPost: id })
             .populate("parentPost", "id post")
             .sort({ createdAt: -1 });
-        return res.json(answers);
+        // return res.json(answers);
+        const answerObj = {};
+        answers.forEach(answer => {
+            answerObj[answer._id] = answer;
+        })
+        return res.json(answerObj);
     } catch (err) {
         return res.json([]);
     }
 });
+
 
 router.post("/", requireUser, validateAnswerInput, async (req, res, next) => {
 
     // const postId = req.params.id;
     const { parentPost, text, voteCount, tags } = req.body;
     const post = await Post.findById(parentPost);
- 
     try {
         let ans = [];
         let reqTags = req.body.tags;
@@ -123,5 +128,17 @@ router.patch("/:id", requireUser, validateAnswerInput, async (req, res, next) =>
     }
 });
 
+router.delete("/:id", requireUser, async (req, res, next) => {
+   
+    try {
+        const answer = await Answer.deleteOne({ _id: req.params.id });
+        if (!answer) {
+            return res.status(404).json({ message: "Answer not found" });
+        }
+        return res.status(204).json(" Answer successfully deleted");
+    } catch (err) {
+        next(err);
+    }
+});
 
 module.exports = router;
