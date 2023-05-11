@@ -7,6 +7,8 @@ import ChatBot from '../../ChatBot/ChatBot';
 
 function PostCompose () {
   const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
+  const [tags, setTags] = useState(["hello"]);
   const dispatch = useDispatch();
   const author = useSelector(state => state.session.user);
   const newPost = useSelector(state => state.posts.new);
@@ -18,21 +20,29 @@ function PostCompose () {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(composePost({ text })); 
+    dispatch(composePost({ title, text, tags })); 
     setText('');
+    setTitle('');
   };
 
 
 
-  const update = e => setText(e.currentTarget.value);
+  const updateTitle = e => setTitle(e.currentTarget.value);
+  const updateText = e => setText(e.currentTarget.value);
 
   return (
     <>
       <form className="compose-post" onSubmit={handleSubmit}>
+        <input type='textarea'
+          value={title}
+          onChange={updateTitle}
+          placeholder='Write a title...'
+          required 
+        />
         <input 
           type="textarea"
           value={text}
-          onChange={update}
+          onChange={updateText}
           placeholder="Write your post..."
           required
         />
