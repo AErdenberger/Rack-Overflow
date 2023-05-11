@@ -6,7 +6,7 @@ const Post = mongoose.model("Post");
 const Tag = mongoose.model("Tag");
 const { requireUser } = require("../../config/passport");
 const validatePostInput = require("../../validations/posts");
-const tags = ["tag1", "tag2"];
+
 
 // In development, allow developers to access the CSRF token to test the
 // server endpoints in Postman.
@@ -97,17 +97,12 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
             author: req.user._id,
             tags: ans,
         });
-        console.log("AFTER NEWPOST", ans);
 
         let post = await newPost.save();
-        console.log("AFTER POSTSAVE", ans);
         post = await post.populate("author", "_id username");
-
         post.tags = ans;
         post = await newPost.save();
-        return res.json(post);
-        // }
-        // await waiting();
+        return await res.json(post);
     } catch (err) {
         next(err);
     }
@@ -118,6 +113,26 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
         const postId = req.params.id;
         const { text, title, voteCount, tags } = req.body;
         const post = await Post.findById(postId);
+        let ans = [];
+        // let reqTags = req.body.tags;
+
+        const tagProcess = async (el) => {
+            const tag = await Tag.find({ tag: el });
+
+            if (tag) {
+                ans = ans.concat(tag);
+                console.log("iiiiffffff", ans);
+            } else {
+                tag = new Tag({ tag: el });
+                console.log("eeeellllsssee", el);
+                await tag.save();
+                ans = ans.concat(tag);
+            }
+        };
+
+        await tags.forEach(async (el) => {
+            await tagProcess(el);
+        });
 
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
@@ -127,17 +142,21 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
                 .status(403)
                 .json({ message: "You are not authorized to edit this post" });
         }
+        await post.save();
         post.text = text;
         post.title = title;
         post.voteCount = voteCount;
-        post.tags = tags;
+        post.tags = ans;
         await post.save();
         // await post.populate('author', '_id username').execPopulate();
+        post.tags = ans;
         return res.json(post);
     } catch (err) {
         next(err);
     }
 });
+
+
 
 router.get("/", async (req, res) => {
     try {

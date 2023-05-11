@@ -7,7 +7,6 @@ const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
-const NUM_TAGS = 10;
 const NUM_SEED_POSTS = 30;
 const NUM_SEED_ANSWERS =10;
 
@@ -84,6 +83,16 @@ for (let i = 0; i < NUM_SEED_ANSWERS; i++) {
     })
   )
 }
+
+// for (let i = 0; i < NUM_TAGS; i++) {
+//   posts.push(
+//     new Tag ({
+//       text: faker.hacker.phrase(),   
+//     })
+//   )
+// }
+
+
 
 // Connect to database
 mongoose
