@@ -41,11 +41,11 @@ const answersRouter = require('./routes/api/answers');
 const tagsRouter = require('./routes/api/tags');
 
 app.use('/api/posts', postsRouter);
-app.use('/api/posts/:id', postsRouter);
+// app.use('/api/posts/:id', postsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/tags', tagsRouter);
-// app.use('/api/posts/:postId', answersRouter);
+app.use('/api/posts/:postId', answersRouter);
 app.use('/api/answers', answersRouter);
 
 // Serve static React build files statically in production
