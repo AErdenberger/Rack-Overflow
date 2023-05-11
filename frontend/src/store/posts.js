@@ -97,35 +97,35 @@ export const fetchPosts = () => async dispatch => {
   }
 
   
-  export const composePost = data => async dispatch => {
-    try {
-      const res = await jwtFetch('/api/posts/', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      });
-      const post = await res.json();
-      dispatch(receiveNewPost(post));
-    } catch(err) {
-      const resBody = await err.json();
-      if (resBody.statusCode === 400) {
-        return dispatch(receiveErrors(resBody.errors));
-      }
-    }
-  };
-
-  export const deletePost = (postId) => async dispatch => {
-    try {
-      await jwtFetch(`/api/posts/${postId}`, {
-        method: 'DELETE'
-      });
-      dispatch(removePost(postId));
-    } catch (err) {
-      const resBody = await err.json();
-      if (resBody.statusCode === 400) {
-        dispatch(receiveErrors(resBody.errors));
-      }
+export const composePost = data => async dispatch => {
+  try {
+    const res = await jwtFetch('/api/posts/', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    const post = await res.json();
+    dispatch(receiveNewPost(post));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
     }
   }
+};
+
+export const deletePost = (postId) => async dispatch => {
+  try {
+    await jwtFetch(`/api/posts/${postId}`, {
+      method: 'DELETE'
+    });
+    dispatch(removePost(postId));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      dispatch(receiveErrors(resBody.errors));
+    }
+  }
+}
 
   const nullErrors = null;
 
@@ -148,6 +148,12 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       case RECEIVE_POST:
         return {
           ...state, all: [action.post._id] = action.post };
+      case REMOVE_POST:
+        let all;
+        const newState = { ...state};
+        // delete newState[all];
+        console.log(newState[all]);
+        return newState;
       case RECEIVE_USER_POSTS:
         return { ...state, user: action.posts, new: undefined};
       case RECEIVE_NEW_POST:

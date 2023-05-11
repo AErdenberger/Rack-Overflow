@@ -171,8 +171,10 @@ router.get("/", async (req, res) => {
 });
 
 router.delete("/:id", requireUser, async (req, res, next) => {
+    // console.log(req.params, "request");
     try {
         const post = await Post.findById(req.params.id);
+        console.log(post, "post");
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
         }
@@ -181,7 +183,8 @@ router.delete("/:id", requireUser, async (req, res, next) => {
                 .status(403)
                 .json({ message: "You are not authorized to delete this post" });
         }
-        await post.remove();
+        // await post.remove();
+        await delete post;
         return res.status(204).json({});
     } catch (err) {
         next(err);

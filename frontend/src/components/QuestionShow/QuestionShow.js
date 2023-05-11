@@ -1,22 +1,32 @@
 import './QuestionShow.css'
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchPosts } from '../../store/posts';
+import { fetchPosts, deletePost } from '../../store/posts';
 import PostsSidebar from '../Posts/PostsSidebar/PostsSidebar';
 // import PostBox from '../Posts/PostBox/PostBox';
 import Comments from '../Comments/Comments';
 import CommentCompose from '../Comments/CommentsCompose/CommentCompose';
-import './QuestionShow.css'
+import './QuestionShow.css';
+
+
 
 const QuestionShow = () => {
     const { postId } = useParams();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(fetchPosts());
     }, [dispatch])
+
+    const remove = () => {
+        dispatch(deletePost(postId));
+        let path = '/posts';
+        history.push(path);
+    }
+
 
     if(!post) return null;
     const { username } = post.author;
@@ -49,6 +59,9 @@ const QuestionShow = () => {
                                 <div><span>{String.fromCodePoint(0x2B24)}</span> {username}</div>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <button onClick={remove}>Delete Post</button>
                     </div>
                     <div>
                         <Comments />
