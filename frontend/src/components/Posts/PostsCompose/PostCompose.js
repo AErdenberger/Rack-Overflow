@@ -6,7 +6,9 @@ import './PostCompose.css';
 import ChatBot from '../../ChatBot/ChatBot';
 
 function PostCompose () {
-  const [text, setText] = useState('');
+  const [text, setText] = useState('test-text');
+  const [title, setTitle] = useState('test-title');
+  const [tags, setTags] = useState(["hello"]);
   const dispatch = useDispatch();
   const author = useSelector(state => state.session.user);
   const newPost = useSelector(state => state.posts.new);
@@ -18,7 +20,7 @@ function PostCompose () {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(composePost({ text })); 
+    dispatch(composePost({ title, text, tags })); 
     setText('');
   };
 
