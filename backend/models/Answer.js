@@ -33,8 +33,8 @@ const answerSchema = new Schema(
     }
 );
 
-const Answer = mongoose.model("Answer", answerSchema);
+// const Answer = mongoose.model("Answer", answerSchema);
 
 // Export the model for use in other parts of the application
-module.exports = Answer;
-// module.exports = mongoose.model("Answer", answerSchema);
+// module.exports = Answer;
+module.exports = mongoose.model("Answer", answerSchema);
