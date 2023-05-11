@@ -16,20 +16,31 @@ router.get("/restore", (req, res) => {
     });
 });
 
+// tag & title filtering endpoint
+// tags comes in as a comma separated string
 router.get("/posts", async (req, res) => {
-    const tag = req.query.tags;
-    console.log("tag", tag);
+    const tags = req.query.tags;
+    let searchResults = {};
+
 
     try {
+      const tagsArray = tags.split(',');
         // const posts = await Post.find({ tags: { $in: [tag] } });
-        const posts = await Post.find({ tags: tag });
+   // Build the query to find posts that contain all three tags
+   const query = { $and: tagsArray.map(tag => ({ tags: tag })) };
 
-        res.json(posts);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
+   const posts = await Post.find(query);
+   searchResults = posts;
+ 
+   const x = res.json(searchResults);
+   console.log('xxxxxxx', x)
+   return x;
+ } catch (error) {
+   console.error(error);
+   res.status(500).json({ message: 'Internal server error' });
+ }
+ });
+
 
 router.get("/user/:userId", async (req, res, next) => {
     let user;

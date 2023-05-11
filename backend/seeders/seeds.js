@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Post = require('../models/Post.js');
+const Tag = require('../models/Tag.js');
 const Answer = require('../models/Answer')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
@@ -9,6 +10,8 @@ const { faker } = require('@faker-js/faker');
 const NUM_SEED_USERS = 10;
 const NUM_SEED_POSTS = 30;
 const NUM_SEED_ANSWERS =10;
+const NUM_SEED_TAGS = 3;
+
 
 
 
@@ -49,6 +52,14 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
   
   // let tags =  faker.lorem.words(5)
   // let tagsArray = tags.split(" ");
+  const tags = [];
+  for (let i = 0; i < NUM_SEED_TAGS; i++) {
+    tags.push(
+      new Tag ({
+        tag: faker.hacker.phrase(),   
+      })
+    )
+  }
 
  
   posts.push(
@@ -57,20 +68,14 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
       title: faker.hacker.phrase(10),
       voteCount: Math.floor(Math.random()*10),
-      // tags:tagsArray
-      
-
+      tags
     })
+    
   )
+  
 }
 
-// for (let i = 0; i < NUM_TAGS; i++) {
-//   posts.push(
-//     new Tag ({
-//       text: faker.hacker.phrase(),   
-//     })
-//   )
-// }
+
 
 // Create answers
 const answers = [];
