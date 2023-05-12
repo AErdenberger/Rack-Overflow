@@ -178,7 +178,7 @@ router.delete("/:id", requireUser, async (req, res, next) => {
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
         }
-        return res.status(204).json("Sussessfully deleted");
+        return res.status(204).json("Post successfully deleted");
     } catch (err) {
         next(err);
     }

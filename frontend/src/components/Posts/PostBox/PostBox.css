@@ -6,23 +6,29 @@ button {
 }
 
 .post {
-    border: 1px solid lightgrey;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    min-height: 57px;
-    background-color: white;
-    padding-left: 5%;
-    padding-right: 5%;
+  border: 1px solid black;
+  /* border: 1px solid lightgrey; */
+  border-radius: 8px;
+  margin-bottom: 10px;
+  min-height: 57px;
+  background-color: white;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .post h1 {
-  font-size: 24px;
+  font-size: 22px;
   color: #2408A8;
+}
+
+.posts-show-link h1{
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
 .post-box-body {
   font-size: 10;
   font-weight: 200;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
 .post p {
@@ -55,6 +61,7 @@ button {
   padding-left: 5px;
   padding-bottom: 1px;
   font-weight: 100;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
 .post-box-tags-div span:hover {
@@ -71,11 +78,19 @@ button {
   display: flex;
 }
 
+.post-box-ratings-comments button{
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
 .post-box-username {
   /* display: flex;
   justify-content: end; */
   margin-right: 50px;
   width: 50px;
+}
+
+.post-box-username div{
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
 .post-box-username span {

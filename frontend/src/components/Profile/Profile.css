@@ -9,7 +9,7 @@
     margin-right: 100px;
     background-color: white;
     height: 170px;
-    width: 200px;
+    width: 230px;
     transition: 0.5s;
 }
 
@@ -21,7 +21,7 @@
 }
 
 #to-transform:hover #user-info{
-    width: 230px;
+    width: 250px;
     height: 200px;
     margin-top: -10px;
     margin-left: -20px;
@@ -42,12 +42,12 @@
 }
 
 #to-transform:hover #user-info #container-user-info #current-user-email{
-    font-size: 30px;
+    font-size: 28px;
     transition: 0.5s;
 }
 
 #to-transform:hover #user-info #container-user-info #button-create-post{
-    font-size: 25px;
+    font-size: 28px;
     transition: 0.5s;
 }
 
@@ -73,6 +73,7 @@
 
 #container-button-create-post{
     margin-top: 50px;
+    /* width: 210px; */
 }
 
 #button-create-post{
@@ -80,6 +81,7 @@
     border-radius: 20px;
     background-color: #F56B00 ;
     color: white;
+    /* width: 190px; */
     font-size: 22px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
     transition: 0.5s;
