@@ -65,6 +65,7 @@ function PostCompose () {
             required
           />
         </div>
+    
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" id='button-submit' />
       </form>
