@@ -14,9 +14,9 @@ function PostCompose () {
   const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
 
-  useEffect(() => {
-    return () => dispatch(clearPostErrors());
-  }, [dispatch]);
+    useEffect(() => {
+        return () => dispatch(clearPostErrors());
+    }, [dispatch]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -65,10 +65,11 @@ function PostCompose () {
             required
           />
         </div>
-        <ChatBot/>
+       
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" id='button-submit' />
       </form>
+      <ChatBot/>
       <div className="post-preview">
         <label id='label-post-preview'>Post Preview</label>
         <div>
