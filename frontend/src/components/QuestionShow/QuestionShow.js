@@ -28,41 +28,44 @@ const QuestionShow = () => {
     const { username } = post.author;
 
     return(
-        <div className='questions-container'>
-            <div className='questions-sidebar'>
-                <PostsSidebar /> 
-            </div>
-            <div className='question'>
-                <label id='label-title'>{post.title}</label>
-                <div>
-                    <p className="question-body">{post.text}</p>
+        <>
+            <div className='questions-container'>
+                <div className='questions-sidebar'>
+                    <PostsSidebar /> 
                 </div>
-                <div>
-                    <div className="question-tags-div">
-                        <span>tag 1</span><span>tag 2</span><span>tag 3</span><span>tag 4</span><span>tag 5</span><span>tag 6</span>
+                <div className='question'>
+                    <h1>{post.title}</h1>
+                    <div>
+                        <p className="question-body">{post.text}</p>
                     </div>
-                    <div className="questions-ratings-comments-username">
-                        <div className="questions-ratings-comments">
-                            <button id='button-comments'>
-                                Comments
-                            </button>
-                            <button id='button-ratings'>
-                                Ratings
-                            </button>
+                    <div>
+                        <div className="question-tags-div">
+                            <span>tag 1</span><span>tag 2</span><span>tag 3</span><span>tag 4</span><span>tag 5</span><span>tag 6</span>
                         </div>
-                        <div className="questions-username">
-                            <div><span>{String.fromCodePoint(0x2B24)}</span> {username}</div>
+                        <div className="questions-ratings-comments-username">
+                            <div className="questions-ratings-comments">
+                                <button>
+                                    Comments
+                                </button>
+                                <button>
+                                    Ratings
+                                </button>
+                            </div>
+                            <div className="questions-username">
+                                <div><span>{String.fromCodePoint(0x2B24)}</span> {username}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id='container-comments'>
-                    <Comments />
-                </div>
-                <div id='container-comment-compose'>
-                    <CommentCompose />
+                    
+                    <div>
+                        <Comments />
+                    </div>
+                    <div>
+                        <CommentCompose />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

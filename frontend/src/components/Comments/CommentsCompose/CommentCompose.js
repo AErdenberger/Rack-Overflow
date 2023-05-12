@@ -8,7 +8,7 @@ import CommentBox from '../CommentsBox/CommentBox';
 function CommentCompose(){
     const { postId } = useParams();
     const [text, setText] = useState('');
-    const [tags, setTags] = useState();
+    const [tags, setTags] = useState(['done']);
     const dispatch = useDispatch();
     const author = useSelector(state => state.session.user); //all user information
     const newComment = useSelector(state => state.comments.new);
@@ -32,8 +32,8 @@ function CommentCompose(){
 
     const changeColor = e => {
         const randomIndex = Math.floor(Math.random() * colors.length);
-        var color = colors[randomIndex];
-        var label = document.getElementById("label-loading-comment");
+        const color = colors[randomIndex];
+        const label = document.getElementById("label-loading-comment");
         if(label){
             label.style.color = color;
         }
@@ -41,7 +41,7 @@ function CommentCompose(){
 
     setInterval(function(){
         changeColor();
-    }, 1000);
+    }, 1500);
 
     const update = e => setText(e.currentTarget.value);
     const updateTags = e => setTags(e.currentTarget.value);
@@ -50,17 +50,15 @@ function CommentCompose(){
         <div id='container-create-comment-form'>
             <form className='compose-comment' onSubmit={handleSubmit}>
                 <input type='textarea' value={text}
-                    onChange={update} id='text-field'
+                    onChange={update}
                     placeholder='What are your recommendations?'
                     required
                 />
-                <div>
-                    <input type='text' value={tags}
-                        onChange={updateTags} id='tags-field'
-                        placeholder='Write your tags here'
-                        required
-                    />
-                </div>
+                <input type='text' value={tags}
+                    onChange={updateTags}
+                    placeholder='Write your tags here'
+                    required
+                />
                 <div className='errors'>{errors?.text}</div>
                 <input type='submit' value='Submit' id='submit-button-comment' />
             </form>

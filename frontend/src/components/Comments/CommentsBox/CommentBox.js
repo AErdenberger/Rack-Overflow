@@ -8,10 +8,10 @@ function CommentBox ({ comment: { text, author, parentPost, _id }}){
     return(
         <div className='comment'>
             <div id='container-content-comment'>
-                <label id='label-text'>{text}</label>
+                <label>{text}</label>
             </div>
             <div id='container-author-comment'>
-                <label id='label-username'>{username}</label>
+                <label>{username}</label>
             </div>
         </div>
     );

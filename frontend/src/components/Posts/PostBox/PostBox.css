@@ -16,20 +16,23 @@ button {
   padding-right: 5%;
 }
 
-.posts-show-link{
-  color: rgb(86, 86, 216);
-  font-size: 25px;
-  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+.post h1 {
+  font-size: 22px;
+  color: #2408A8;
 }
 
-.posts-show-link:visited{
-  color: rgb(86, 86, 216);
+.posts-show-link h1{
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
 .post-box-body {
   font-size: 10;
   font-weight: 200;
   font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.post p {
+  color: grey;
 }
 
 .post button {
@@ -92,10 +95,5 @@ button {
 
 .post-box-username span {
   color: #F56B00;
-}
-
-#container-bottons-functional{
-  display: flex;
-  margin-bottom: 8px;
 }
 
