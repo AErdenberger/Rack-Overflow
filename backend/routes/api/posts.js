@@ -187,11 +187,12 @@ router.get("/", async (req, res) => {
               
             const tagObjects = await Tag.find({ tag: { $in: tags } }); // Find tag objects based on the provided tags
               console.log(tagObjects)
-            const tagIds = tagObjects.map((tag) => tag._id); // Extract the tag IDs from the tag objects
-        
-            const posts = await Post.find({
-              tags: { $in: tagIds } // Search for posts that have any of the specified tag IDs
-            })
+            // const tagIds = tagObjects.map((tag) => tag._id); // Extract the tag IDs from the tag objects
+            const query = { $and: tagObjects.map(tag => ({ tags: tag })) };
+            // const posts = await Post.find({
+            //   tags: { $in: tagIds } // Search for posts that have any of the specified tag IDs
+            // })
+             const posts = await Post.find(query)
               .populate("author", "_id username")
               .sort({ createdAt: -1 });
         
