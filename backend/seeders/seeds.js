@@ -90,7 +90,7 @@ mongoose
     .connect(db, { useNewUrlParser: true })
     .then(() => {
         console.log("Connected to MongoDB successfully");
-        insertSeeds();
+        // insertSeeds();
     })
     .catch((err) => {
         console.error(err.stack);
