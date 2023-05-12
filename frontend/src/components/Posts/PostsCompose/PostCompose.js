@@ -25,8 +25,6 @@ function PostCompose () {
     setTitle('');
   };
 
-
-
   const updateTitle = e => setTitle(e.currentTarget.value);
   const updateText = e => setText(e.currentTarget.value);
 

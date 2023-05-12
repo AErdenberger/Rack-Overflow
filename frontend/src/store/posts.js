@@ -166,7 +166,7 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
         return { ...state, all: action.posts, new: undefined};
       case RECEIVE_POST:
         return {
-          ...state, all: [action.post._id] = action.post };
+          ...state, all: {...state.all, [action.post._id]: action.post} };
       case REMOVE_POST:
         const newState = { ...state};
         const filteredNewState = newState.user.filter(userPost => {
