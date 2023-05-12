@@ -65,7 +65,6 @@ function PostCompose () {
             required
           />
         </div>
-        <ChatBot/>
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" id='button-submit' />
       </form>
