@@ -82,6 +82,7 @@ export const fetchPosts = () => async dispatch => {
       }
     }
   };
+
   export const fetchTagsPosts = tag => async dispatch => {
     try {
       const res = await jwtFetch(`/api/posts?tag=${tag}`);
@@ -113,6 +114,22 @@ export const composePost = data => async dispatch => {
   }
 };
 
+export const updatePost = data => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/posts/${data._id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    });
+    const post = await res.json();
+    dispatch(receivePost(post));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
 export const deletePost = (postId) => async dispatch => {
   try {
     await jwtFetch(`/api/posts/${postId}`, {
@@ -126,6 +143,8 @@ export const deletePost = (postId) => async dispatch => {
     }
   }
 }
+
+
 
   const nullErrors = null;
 
@@ -147,7 +166,7 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
         return { ...state, all: action.posts, new: undefined};
       case RECEIVE_POST:
         return {
-          ...state, all: [action.post._id] = action.post };
+          ...state, all: {...state.all, [action.post._id]: action.post} };
       case REMOVE_POST:
         const newState = { ...state};
         const filteredNewState = newState.user.filter(userPost => {
