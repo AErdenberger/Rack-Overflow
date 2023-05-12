@@ -23,7 +23,7 @@ function Posts () {
         <PostsSidebar /> 
       </div>
       <div className='posts-index'>
-        <h2>All Posts</h2>
+        <label id='label-all-posts'>All Posts</label>
         {posts.map(post => (
           // console.log(post)
           <div key={post._id}>
