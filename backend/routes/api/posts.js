@@ -166,9 +166,10 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
 });
 
 router.get("/", async (req, res) => {
-    const tags = req.query.tags;
+  const queryString = req.query.tags;
+   
     try {
-        if (tags) {
+        if (queryString) {
             // let searchResults = {};
 
             // const tagsArray = tags.split(",");
@@ -183,9 +184,9 @@ router.get("/", async (req, res) => {
             // console.log("xxxxxxx", x);
             // return x;
             const tags = queryString.split(","); // Split the tags into an array
-
+              
             const tagObjects = await Tag.find({ tag: { $in: tags } }); // Find tag objects based on the provided tags
-        
+              console.log(tagObjects)
             const tagIds = tagObjects.map((tag) => tag._id); // Extract the tag IDs from the tag objects
         
             const posts = await Post.find({

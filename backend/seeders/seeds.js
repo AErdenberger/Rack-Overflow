@@ -91,7 +91,10 @@ mongoose
     .then(() => {
         console.log("Connected to MongoDB successfully");
         // insertSeeds();
+
     })
+
+
     .catch((err) => {
         console.error(err.stack);
         process.exit(1);
