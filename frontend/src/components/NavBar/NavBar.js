@@ -28,7 +28,7 @@ function NavBar () {
 
   const loginDemo = e => {
     e.preventDefault();
-    dispatch(login({ email: 'demo@user.com', password: 'password' }));
+    dispatch(login({ email: 'g@g.com', password: 'gggggg' }));
   }
 
   const goToProfile = e => {

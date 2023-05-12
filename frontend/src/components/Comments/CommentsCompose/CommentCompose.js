@@ -8,7 +8,7 @@ import CommentBox from '../CommentsBox/CommentBox';
 function CommentCompose(){
     const { postId } = useParams();
     const [text, setText] = useState('');
-    const [tags, setTags] = useState();
+    const [tags, setTags] = useState([]);
     const dispatch = useDispatch();
     const author = useSelector(state => state.session.user); //all user information
     const newComment = useSelector(state => state.comments.new);
