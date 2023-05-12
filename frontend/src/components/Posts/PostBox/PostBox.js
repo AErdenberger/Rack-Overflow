@@ -1,24 +1,28 @@
 import "./PostBox.css"
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../store/posts";
+import { deletePost, updatePost } from "../../../store/posts";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 
-function PostBox ({ post: { _id, text, author, title }}) {
+function PostBox ({ post: { _id, text, author, title, tags }}) {
   const dispatch = useDispatch();
   const { username } = author;
-  // console.log(_id);
   const history = useHistory();
+  // console.log(_id);
+  // const history = useHistory();
 
   const remove = () => {
     dispatch(deletePost(_id));
     // let path = '/posts';
     // history.push(path);
-  console.log(_id);
+  // console.log(_id);
+  }
 
-}
-  
+  const goUpdatePost = () => {
+    let path = `/posts/${_id}/update/`;
+    history.push(path);
+  }
 
   return (
     <div className="post">
@@ -51,6 +55,9 @@ function PostBox ({ post: { _id, text, author, title }}) {
       </div>
       <div>
          <button onClick={remove}>Delete Post</button>
+       </div>
+      <div>
+         <button onClick={goUpdatePost}>Update Post</button>
        </div>
     </div>
   );

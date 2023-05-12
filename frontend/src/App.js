@@ -13,6 +13,7 @@ import Profile from './components/Profile/Profile';
 import PostCompose from './components/Posts/PostsCompose/PostCompose';
 import { getCurrentUser } from './store/session';
 import QuestionShow from './components/QuestionShow/QuestionShow';
+import PostUpdate from './components/Posts/PostsUpdate/PostUpdate';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <ProtectedRoute exact path="/posts" component={Posts} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/posts/new" component={PostCompose} />
+        <ProtectedRoute exact path="/posts/:postId/update" component={PostUpdate} />
         <ProtectedRoute exact path="/posts/:postId" component={QuestionShow} />
       </Switch>
       <FooterBar />
