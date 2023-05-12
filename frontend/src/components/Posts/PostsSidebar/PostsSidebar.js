@@ -23,10 +23,9 @@ const PostsSidebar = () => {
                     <i className="fa-solid fa-house"></i> Home
                 </button>
                 <div id='container-popular-label'>
-                    {window.location.pathname === '/posts' ? <button id='label-popular'>
+                    <button id='label-popular'>
                         <i className="fa-solid fa-fire" id='popular-logo' ></i> Popular
-                    </button> : undefined }
-                    
+                    </button>
                 </div>
             </div>
             <button onClick={goCreatePost} id='create-post-button' >Create a post!</button>

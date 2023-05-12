@@ -26,12 +26,12 @@ function Comments () {
         return () => dispatch(clearCommentErrors());
     }, [dispatch]);
 
-    if(newComments.length === 0) return <label id='no-comments-label'>There are no Comments... yet.</label>
+    if(newComments.length === 0) return <label id='no-comments-label'>There are no Comments...</label>
 
     return(
         <div className='comments-container'>
             <div className='comments-index'>
-                <label id='label-all-comments'>All Comments</label>
+                <label>All Comments</label>
                 {newComments.map(comment => (
                     <div>
                         <CommentBox comment={comment} />

@@ -26,10 +26,11 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
 
   return (
     <div className="post">
-      <div id="container-link-show-page">
-        <Link to={`posts/${_id}`}  className='posts-show-link'>
-          {title}
-        </Link>
+
+      <div>
+      <Link to={`posts/${_id}`}  className='posts-show-link'>
+        <h1>{title}</h1>
+      </Link>
       </div>
       <div>
         <p className="post-box-body">{text}</p>
@@ -43,17 +44,21 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
             <button>
               Comments
             </button>
-            <button>Ratings</button>
+            <button>
+              Ratings
+            </button>
           </div>
           <div className="post-box-username">
             <div><span>{String.fromCodePoint(0x2B24)}</span> {username}</div>
           </div>
         </div>
       </div>
-      <div id="container-bottons-functional">
-        <button onClick={remove}>Delete Post</button>
-        <button onClick={goUpdatePost}>Update Post</button>
-      </div>
+      <div>
+         <button onClick={remove}>Delete Post</button>
+       </div>
+      <div>
+         <button onClick={goUpdatePost}>Update Post</button>
+       </div>
     </div>
   );
 }
