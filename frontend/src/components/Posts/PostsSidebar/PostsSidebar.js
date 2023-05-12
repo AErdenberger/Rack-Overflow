@@ -4,7 +4,14 @@ import './PostsSidebar.css'
 const PostsSidebar = () => {
     const history = useHistory();
 
+    const goHome = e => {
+        e.preventDefault();
+        let path = '/';
+        history.push(path);
+    };
+
     const goCreatePost = e => {
+        e.preventDefault();
         let path = '/posts/new';
         history.push(path);
     };
@@ -12,7 +19,7 @@ const PostsSidebar = () => {
     return(
         <div className='posts-sidebar-container'>
             <div id='container-options'>
-                <button id='label-home'>
+                <button id='label-home' onClick={goHome}>
                     <i className="fa-solid fa-house"></i> Home
                 </button>
                 <div id='container-popular-label'>

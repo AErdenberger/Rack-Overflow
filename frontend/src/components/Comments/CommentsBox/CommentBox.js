@@ -1,6 +1,8 @@
+// import { useParams } from 'react-router-dom';
 import './CommentBox.css';
 
-function CommentBox ({ comment: { text, author }}){
+function CommentBox ({ comment: { text, author, parentPost, _id }}){
+    // const { postId } = useParams();
     const { username } = author;
 
     return(
