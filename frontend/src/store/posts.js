@@ -1,11 +1,5 @@
 import jwtFetch from './jwt';
-import axios from 'axios';
 import { RECEIVE_USER_LOGOUT } from './session';
-import { Configuration, OpenAIApi } from "openai";
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
 const RECEIVE_POST = "posts/RECEIVE_POST";

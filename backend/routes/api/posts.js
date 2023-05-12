@@ -4,16 +4,8 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const Post = mongoose.model("Post");
 const Tag = mongoose.model("Tag");
-const keys = require("../../config/keys");
 const { requireUser } = require("../../config/passport");
 const validatePostInput = require("../../validations/posts");
-const tags = ["tag1", "tag2"];
-const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-    apiKey: keys.openAIKey,
-});
-const openai = new OpenAIApi(configuration);
 
 // In development, allow developers to access the CSRF token to test the
 // server endpoints in Postman.
@@ -91,7 +83,6 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
     try {
         let ans = [];
         let reqTags = req.body.tags;
-        
         const tagProcess = async (el) => {
             const tag = await Tag.find({ tag: el });
 
@@ -107,12 +98,6 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
         await reqTags.forEach(async (el) => {
             await tagProcess(el);
         });
-      //   const completion = await openai.createCompletion({
-      //     model: "text-davinci-003",
-      //     prompt: req.body.text,
-      //     temperature: 0.6,
-      // });
-      // console.log("COMPLETION", completion)
 
         const newPost = new Post({
             title: req.body.title,
@@ -126,34 +111,6 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
         post.tags = ans;
         post = await newPost.save();
         return await res.json(post);
-    } catch (err) {
-        next(err);
-    }
-});
-
-router.post("/open-ai", async (req, res, next) => {
-    try {
-        const { prompt } = req.body;
-        console.log("PROMPT", prompt);
-        // const response = await fetch("https://openai.com/v1/completions", {
-        //     method: "POST",
-        //     headers: {
-        //         Authorization:
-        //             "Bearer " + keys.openAIKey
-        //     },
-        //     body: {
-        //         model: "text-davinci-003",
-        //         prompt: "hi there",
-        //     },
-        // });
-
-        const completion = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: prompt,
-            temperature: 0.6,
-        });
-        res.status(200).json({ result: completion.data.choices[0].text });
-        //
     } catch (err) {
         next(err);
     }
