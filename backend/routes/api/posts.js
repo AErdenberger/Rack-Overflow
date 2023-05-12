@@ -16,15 +16,24 @@ router.get("/restore", (req, res) => {
     });
 });
 
+// tag & title filtering endpoint
+// tags comes in as a comma separated string
 router.get("/posts", async (req, res) => {
-    const tag = req.query.tags;
-    console.log("tag", tag);
+    const tags = req.query.tags;
+    let searchResults = {};
 
     try {
+        const tagsArray = tags.split(",");
         // const posts = await Post.find({ tags: { $in: [tag] } });
-        const posts = await Post.find({ tags: tag });
+        // Build the query to find posts that contain all three tags
+        const query = { $and: tagsArray.map((tag) => ({ tags: tag })) };
 
-        res.json(posts);
+        const posts = await Post.find(query);
+        searchResults = posts;
+
+        const x = res.json(searchResults);
+        console.log("xxxxxxx", x);
+        return x;
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal server error" });
@@ -112,6 +121,7 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
         const postId = req.params.id;
         const { text, title, voteCount, tags } = req.body;
         const post = await Post.findById(postId);
+        post = await post.populate("author", "_id username");
         let ans = [];
         // let reqTags = req.body.tags;
 
@@ -156,16 +166,52 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
 });
 
 router.get("/", async (req, res) => {
+  const queryString = req.query.tags;
+   
     try {
-        const posts = await Post.find()
-            .populate("author", "_id username")
-            .sort({ createdAt: -1 });
+        if (queryString) {
+            // let searchResults = {};
 
-        const postObj = {};
-        posts.forEach((post) => {
-            postObj[post._id] = post;
-        });
-        return res.json(postObj);
+            // const tagsArray = tags.split(",");
+            // // const posts = await Post.find({ tags: { $in: [tag] } });
+            // // Build the query to find posts that contain all three tags
+            // const query = { $and: tagsArray.map((tag) => ({ tags: tag })) };
+
+            // const posts = await Post.find(query);
+            // searchResults = posts;
+
+            // const x = res.json(searchResults);
+            // console.log("xxxxxxx", x);
+            // return x;
+            const tags = queryString.split(","); // Split the tags into an array
+              
+            const tagObjects = await Tag.find({ tag: { $in: tags } }); // Find tag objects based on the provided tags
+              console.log(tagObjects)
+            // const tagIds = tagObjects.map((tag) => tag._id); // Extract the tag IDs from the tag objects
+            const query = { $and: tagObjects.map(tag => ({ tags: tag })) };
+            // const posts = await Post.find({
+            //   tags: { $in: tagIds } // Search for posts that have any of the specified tag IDs
+            // })
+             const posts = await Post.find(query)
+              .populate("author", "_id username")
+              .sort({ createdAt: -1 });
+        
+            const postObj = {};
+            posts.forEach((post) => {
+              postObj[post._id] = post;
+            });
+            return res.json(postObj);
+        } else {
+            const posts = await Post.find()
+                .populate("author", "_id username")
+                .sort({ createdAt: -1 });
+
+            const postObj = {};
+            posts.forEach((post) => {
+                postObj[post._id] = post;
+            });
+            return res.json(postObj);
+        }
     } catch (err) {
         return res.json([]);
     }
