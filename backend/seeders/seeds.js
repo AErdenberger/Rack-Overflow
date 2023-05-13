@@ -116,7 +116,7 @@ mongoose
                    .then(() => Answer.insertMany(answers))
                    .then(() => {
                      console.log("Done!");
-                    //  mongoose.disconnect();
+                     mongoose.disconnect();
                    })
                    .catch(err => {
                      console.error(err.stack);
