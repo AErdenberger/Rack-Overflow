@@ -160,7 +160,7 @@ export const postErrorsReducer = (state = nullErrors, action) => {
   }
 };
 
-const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => {
     switch(action.type) {
       case RECEIVE_POSTS:
         return { ...state, all: action.posts, new: undefined};
