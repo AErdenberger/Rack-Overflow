@@ -177,7 +177,14 @@ router.get("/", async (req, res) => {
               const tagObjects = await Tag.find({ tag: { $in: tags } }); // Find tag objects based on the provided tags
             
               const tagIds = tagObjects.map((tag) => tag._id); // Extract the tag IDs from the tag objects
+
+              if(tags.length !== tagObjects.length){
+                console.log('There are no Posts with those combined tags')
+                // return res.status(404).send(`<h1>There are no Posts with those combined tags</h1>`);
+                return res.json([]);
+              }
               console.log('tagggssIIIDDSSSS', tagIds)
+              console.log('tagObjects', tagObjects)
             //   const query = { $and: tagIds.map(tag => { console.log('tttttaaaagggg', tag.toString()); return tag.toString() })} ;
               const query = {
                 tags: { $all: tagIds }

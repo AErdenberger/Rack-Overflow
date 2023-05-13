@@ -50,8 +50,12 @@ function NavBar () {
   
   const handleSearchClick = (e) => {
     e.preventDefault();
+
     let query = e.target.value
-    dispatch(fetchTagSearch(query));
+    dispatch(fetchTagSearch(query))
+    // .then(() => {
+    // history.push('/posts/search');
+      // });
   }
 
   const getLinks = () => {
