@@ -10,6 +10,7 @@ const { faker } = require('@faker-js/faker');
 const NUM_SEED_USERS = 10;
 const NUM_SEED_POSTS = 30;
 const NUM_SEED_ANSWERS =10;
+const NUM_SEED_TAGS = 3;
 
 
 
@@ -42,14 +43,52 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
     })
   )
 }
+
+const MEDICAL_TAGS = [
+  "Hemochromatosis",
+  "Diabetes Type II",
+  "Hypertension",
+  "Left Knee Injury",
+  "B-cell Leukemia",
+  "Schizophrenia",
+  "COPD",
+  "Obesity",
+  "Arteriosclerosis",
+  "Atherosclerosis",
+  "Major Depression",
+  "Heart Disease",
+  "Asthma",
+  "Arthritis",
+  "Glomerulonephritis",
+  "Cirrhosis",
+  "Autistic Spectrum",
+  "Lumbar Disc Disorder"
+]
   
+// Create Tags
+
+let medicalTagObjects =[];
+for (let i = 0; i < MEDICAL_TAGS.length; i++) {
+  medicalTagObjects.push(
+    new Tag ({
+      tag: MEDICAL_TAGS[i],   
+    })
+  )
+}
+
+console.log('medicalTagObjects', medicalTagObjects)
+
 // Create posts
 const posts = [];
 
 for (let i = 0; i < NUM_SEED_POSTS; i++) {
-  
+  const tags = [];
   // let tags =  faker.lorem.words(5)
   // let tagsArray = tags.split(" ");
+  for (let i = 0; i < NUM_SEED_TAGS; i++) {
+    tags.push(
+      medicalTagObjects[Math.floor(Math.random() * medicalTagObjects.length)]    );
+}
 
  
   posts.push(
@@ -58,20 +97,15 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
       title: faker.hacker.phrase(10),
       voteCount: Math.floor(Math.random()*10),
-      // tags:tagsArray
+      tags:tags
       
 
     })
   )
 }
 
-// for (let i = 0; i < NUM_TAGS; i++) {
-//   posts.push(
-//     new Tag ({
-//       text: faker.hacker.phrase(),   
-//     })
-//   )
-// }
+
+
 
 // Create answers
 const answers = [];
@@ -116,12 +150,12 @@ mongoose
         .then(() => Post.collection.drop())
         .then(() => Answer.collection.drop())
         .then(() => User.insertMany(users))
-        .then(() => Tag.insertMany(tags))
+        .then(() => Tag.insertMany(medicalTagObjects))
         .then(() => Post.insertMany(posts))
         .then(() => Answer.insertMany(answers))    
         .then(() => {
             console.log("Done!");
-            //  mongoose.disconnect();
+             mongoose.disconnect();
         })
         .catch((err) => {
             console.error(err.stack);
