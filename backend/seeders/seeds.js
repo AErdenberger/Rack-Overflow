@@ -112,8 +112,10 @@ mongoose
     User.collection.drop()
                    .then(() => Post.collection.drop())
                    .then(() => User.insertMany(users))
+                   .then(() => Tag.insertMany(tags))
                    .then(() => Post.insertMany(posts))
                    .then(() => Answer.insertMany(answers))
+
                    .then(() => {
                      console.log("Done!");
                      mongoose.disconnect();
