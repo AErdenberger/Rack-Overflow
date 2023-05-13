@@ -13,7 +13,7 @@ const tagSchema = new Schema(
     }
 );
 
-const Answer = mongoose.model("Tag", tagSchema);
+// const Tag = mongoose.model("Tag", tagSchema);
 
 // Export the model for use in other parts of the application
 // module.exports = Tag;

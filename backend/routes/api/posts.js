@@ -154,22 +154,77 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
         next(err);
     }
 });
-
 router.get("/", async (req, res) => {
-    try {
-        const posts = await Post.find()
-            .populate("author", "_id username")
-            .sort({ createdAt: -1 });
+    const queryString = req.query.tags;
+     
+      try {
+          if (queryString) {
+              // let searchResults = {};
+  
+              // const tagsArray = tags.split(",");
+              // // const posts = await Post.find({ tags: { $in: [tag] } });
+              // // Build the query to find posts that contain all three tags
+              // const query = { $and: tagsArray.map((tag) => ({ tags: tag })) };
+  
+              // const posts = await Post.find(query);
+              // searchResults = posts;
+  
+              // const x = res.json(searchResults);
+              // console.log("xxxxxxx", x);
+              // return x;
+              const tags = queryString.split(","); // Split the tags into an array
+            
+              const tagObjects = await Tag.find({ tag: { $in: tags } }); // Find tag objects based on the provided tags
+            
+              const tagIds = tagObjects.map((tag) => tag._id); // Extract the tag IDs from the tag objects
+              console.log('tagggssIIIDDSSSS', tagIds)
+            //   const query = { $and: tagIds.map(tag => { console.log('tttttaaaagggg', tag.toString()); return tag.toString() })} ;
+              const query = {
+                tags: { $all: tagIds }
+              };
+              console.log('queerrrry', query)
+              // const posts = await Post.find({
+              //   tags: { $in: tagIds } // Search for posts that have any of the specified tag IDs
+              // })
+               const posts = await Post.find(query)
+                .populate("author", "_id username")
+                .sort({ createdAt: -1 });
+              const postObj = {};
+              posts.forEach((post) => {
+                postObj[post._id] = post;
+              });
+              return res.json(postObj);
+          } else {
+              const posts = await Post.find()
+                  .populate("author", "_id username")
+                  .sort({ createdAt: -1 });
+  
+              const postObj = {};
+              posts.forEach((post) => {
+                  postObj[post._id] = post;
+              });
+              return res.json(postObj);
+          }
+      } catch (err) {
+          return res.json([]);
+      }
+  });
 
-        const postObj = {};
-        posts.forEach((post) => {
-            postObj[post._id] = post;
-        });
-        return res.json(postObj);
-    } catch (err) {
-        return res.json([]);
-    }
-});
+// router.get("/", async (req, res) => {
+//     try {
+//         const posts = await Post.find()
+//             .populate("author", "_id username")
+//             .sort({ createdAt: -1 });
+
+//         const postObj = {};
+//         posts.forEach((post) => {
+//             postObj[post._id] = post;
+//         });
+//         return res.json(postObj);
+//     } catch (err) {
+//         return res.json([]);
+//     }
+// });
 
 router.delete("/:id", requireUser, async (req, res, next) => {
     console.log(req.user, "request");
