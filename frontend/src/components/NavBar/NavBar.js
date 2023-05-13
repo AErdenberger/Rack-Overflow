@@ -3,7 +3,9 @@ import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, logout } from '../../store/session';
+import { fetchTagSearch } from '../../store/posts';
 import image from '../../assets/RackOverflowLogo.png';
+import SearchBar from '../SearchBar/SearchBar';
 import LoginForm from '../SessionForms/LoginForm';
 import SignupForm from '../SessionForms/SignupForm';
 import Modal from '../../modal/Modal';
@@ -16,6 +18,8 @@ function NavBar () {
 
   const [showModal, setShowModal] = useState(false);
   const [showModalSignup, setShowModalSignup] = useState(false);
+  // for searchBar
+  const [searchValue, setSearchValue] = useState("");
 
   const logoutUser = e => {
     e.preventDefault();
@@ -38,7 +42,17 @@ function NavBar () {
   };
 
   // This line below will be for the search
-  const [valueSearch, setValueSearch] = useState("");
+
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+    setSearchValue(e.target.value)
+  }
+  
+  const handleSearchClick = (e) => {
+    e.preventDefault();
+    let query = e.target.value
+    dispatch(fetchTagSearch(query));
+  }
 
   const getLinks = () => {
     if (loggedIn) {
@@ -50,11 +64,16 @@ function NavBar () {
                 <label id='name-webpage'>Rack Overflow</label>
               </Link>
             </div>
-            <label id='container-search'> <i className="fa-solid fa-magnifying-glass" id="icon-search"></i>
+            {/* <label id='container-search'> <i className="fa-solid fa-magnifying-glass" id="icon-search"></i>
               <input type='text' placeholder='Search Rack Overflow' id='search-bar'
                 onChange={(e) => setValueSearch(e.target.value)}
               />
-            </label>
+            </label> */}
+            <SearchBar
+              handleSearchChange={handleSearchChange}
+              handleSearchClick={handleSearchClick}
+              searchValue={searchValue}
+            />
             <div id='conteiner-buttons'>
               <div id='container-logout'>
                 <Link onClick={logoutUser} id='link-logout'>Log out</Link>
@@ -95,11 +114,16 @@ function NavBar () {
                 <label id='name-webpage'>Rack Overflow</label>
               </Link>
             </div>
-            <label id='container-search'> <i className="fa-solid fa-magnifying-glass" id="icon-search"></i>
+            {/* <label id='container-search'> <i className="fa-solid fa-magnifying-glass" id="icon-search"></i>
               <input type='text' placeholder='Search Rack Overflow' id='search-bar'
                 onChange={(e) => setValueSearch(e.target.value)}
               />
-            </label>
+            </label> */}
+             <SearchBar
+              handleSearchChange={handleSearchChange}
+              handleSearchClick={handleSearchClick}
+              searchValue={searchValue}
+            />
             <div id='conteiner-buttons'>
               <label>
                 <button onClick={loginDemo} id='button-demo-user'><i className="fa-solid fa-user-secret"></i> Demo User</button>
