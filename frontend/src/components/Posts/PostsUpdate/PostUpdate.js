@@ -50,7 +50,7 @@ const PostUpdate = () => {
     return(
         <>
             <form onSubmit={handleSubmit}>
-                <input type='texarea'
+                <input type='text'
                     value={title}
                     onChange={updateTitle}
                     placeholder='Change title...'
