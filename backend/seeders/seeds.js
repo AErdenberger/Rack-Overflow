@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Post = require('../models/Post.js');
-const Answer = require('../models/Answer')
+const Answer = require('../models/Answer');
+const Tag = require("../models/Tag.js")
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
@@ -108,20 +109,22 @@ mongoose
 
   const insertSeeds = () => {
     console.log("Resetting db and seeding users and posts...");
-  
-    User.collection.drop()
-                   .then(() => Post.collection.drop())
-                   .then(() => User.insertMany(users))
-                   .then(() => Tag.insertMany(tags))
-                   .then(() => Post.insertMany(posts))
-                   .then(() => Answer.insertMany(answers))
 
-                   .then(() => {
-                     console.log("Done!");
-                     mongoose.disconnect();
-                   })
-                   .catch(err => {
-                     console.error(err.stack);
-                     process.exit(1);
-                   });
-  }
+    User.collection
+        .drop()
+        .then(() => Tag.collection.drop())
+        .then(() => Post.collection.drop())
+        .then(() => Answer.collection.drop())
+        .then(() => User.insertMany(users))
+        .then(() => Tag.insertMany(tags))
+        .then(() => Post.insertMany(posts))
+        .then(() => Answer.insertMany(answers))    
+        .then(() => {
+            console.log("Done!");
+            //  mongoose.disconnect();
+        })
+        .catch((err) => {
+            console.error(err.stack);
+            process.exit(1);
+        });
+};
