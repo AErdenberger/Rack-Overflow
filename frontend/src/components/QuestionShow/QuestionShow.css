@@ -1,0 +1,102 @@
+.questions-container {
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    gap: 15px;
+}
+
+.questions-sidebar {
+    width: 15%;
+    margin-bottom: 15px;
+}
+
+.question {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 65px;
+    margin-bottom: 15px;
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+#label-title{
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.question-body {
+    font-size: 10;
+    font-weight: 200;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.question-tags-div {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+  
+.question-tags-div span {
+    border-radius: 3px;
+    color: grey;
+    font-size: 13px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 1px;
+    font-weight: 100;
+    transition: 0.5s;
+}
+  
+.question-tags-div span:hover {
+    background-color: lightgrey;
+    transition: 0.5s;
+}
+
+.questions-ratings-comments-username {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#button-comments{
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+    border: none;
+    color: grey;
+    font-size: 14px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#button-ratings{
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+    border: none;
+    color: grey;
+    font-size: 14px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;
+}
+
+#button-comments:hover{
+    background-color: lightgrey;
+    transition: 0.5s;
+}
+
+#button-ratings:hover{
+    background-color: lightgrey;
+    transition: 0.5s;
+}
+
+.questions-username {
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    margin-right: 50px;
+  }
+  
+.questions-username span {
+    color: #F56B00;
+}

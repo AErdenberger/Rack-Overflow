@@ -1,113 +1,242 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
-const Post = mongoose.model('Post');
-const { requireUser } = require('../../config/passport');
-const validatePostInput = require('../../validations/posts');
-const tags =[ "tag1", "tag2"]
+const mongoose = require("mongoose");
+const User = mongoose.model("User");
+const Post = mongoose.model("Post");
+const Tag = mongoose.model("Tag");
+const { requireUser } = require("../../config/passport");
+const validatePostInput = require("../../validations/posts");
 
-
-  // In development, allow developers to access the CSRF token to test the
-  // server endpoints in Postman.
-  router.get("/restore", (req, res) => {
+// In development, allow developers to access the CSRF token to test the
+// server endpoints in Postman.
+router.get("/restore", (req, res) => {
     const csrfToken = req.csrfToken();
     res.status(200).json({
-      'CSRF-Token': csrfToken
+        "CSRF-Token": csrfToken,
     });
-  });
+});
 
-  router.get('/posts', async (req, res) => {
-   
+router.get("/posts", async (req, res) => {
     const tag = req.query.tags;
-    console.log('tag', tag)
-  
+    console.log("tag", tag);
+
     try {
-      // const posts = await Post.find({ tags: { $in: [tag] } });
-      const posts = await Post.find({ tags:tag});
-    
-      res.json(posts);
+        // const posts = await Post.find({ tags: { $in: [tag] } });
+        const posts = await Post.find({ tags: tag });
 
-
+        res.json(posts);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
     }
-  });
-  
-  router.get('/user/:userId', async (req, res, next) => {
+});
+
+router.get("/user/:userId", async (req, res, next) => {
     let user;
     try {
-      user = await User.findById(req.params.userId);
-    } catch(err) {
-      const error = new Error('User not found');
-      error.statusCode = 404;
-      error.errors = { message: "No user found with that id" };
-      return next(error);
+        user = await User.findById(req.params.userId);
+    } catch (err) {
+        const error = new Error("User not found");
+        error.statusCode = 404;
+        error.errors = { message: "No user found with that id" };
+        return next(error);
     }
     try {
-      const posts = await Post.find({ author: user._id })
-                                .sort({ createdAt: -1 })
-                                .populate("author", "_id username");
-      return res.json(posts);
+        const posts = await Post.find({ author: user._id })
+            .sort({ createdAt: -1 })
+            .populate("author", "_id username");
+        return res.json(posts);
+    } catch (err) {
+        return res.json([]);
     }
-    catch(err) {
-      return res.json([]);
-    }
-  })
-  
-  router.get('/:id', async (req, res, next) => {
+});
+
+router.get("/:id", async (req, res, next) => {
     try {
-      const post = await Post.findById(req.params.id)
-                               .populate("author", "_id username");
-      return res.json(post);
+        const post = await Post.findById(req.params.id).populate(
+            "author",
+            "_id username"
+        );
+        return res.json(post);
+    } catch (err) {
+        const error = new Error("post not found");
+        error.statusCode = 404;
+        error.errors = { message: "No post found with that id" };
+        return next(error);
     }
-    catch(err) {
-      const error = new Error('post not found');
-      error.statusCode = 404;
-      error.errors = { message: "No post found with that id" };
-      return next(error);
-    }
-  });
+});
 
 // Attach requireUser as a middleware before the route handler to gain access
-// to req.user. (requireUser will return an error response if there is no 
-// current user.) Also attach validatepostInput as a middleware before the 
+// to req.user. (requireUser will return an error response if there is no
+// current user.) Also attach validatepostInput as a middleware before the
 // route handler.
-router.post('/', requireUser, validatePostInput, async (req, res, next) => {
-  try {
-    const newPost = new Post({
-      text: req.body.text,
-      author: req.user._id,
-      tags: req.body.tags
-    });
+router.post("/", requireUser, validatePostInput, async (req, res, next) => {
+    try {
+        let ans = [];
+        let reqTags = req.body.tags;
+        const tagProcess = async (el) => {
+            const tag = await Tag.find({ tag: el });
 
-    let post = await newPost.save();
-    post = await post.populate('author', '_id username');
-    return res.json(post);
-  }
-  catch(err) {
-    next(err);
-  }
+            if (tag) {
+                ans = ans.concat(tag);
+            } else {
+                tag = new Tag({ tag: el });
+                await tag.save();
+                ans = ans.concat(tag);
+            }
+        };
+
+        await reqTags.forEach(async (el) => {
+            await tagProcess(el);
+        });
+
+        const newPost = new Post({
+            title: req.body.title,
+            text: req.body.text,
+            author: req.user._id,
+            tags: ans,
+        });
+
+        let post = await newPost.save();
+        post = await post.populate("author", "_id username");
+        post.tags = ans;
+        post = await newPost.save();
+        return await res.json(post);
+    } catch (err) {
+        next(err);
+    }
 });
 
+router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
+    try {
+        const postId = req.params.id;
+        const { text, title, voteCount, tags } = req.body;
+        const post = await Post.findById(postId);
+        let ans = [];
+        // let reqTags = req.body.tags;
 
-router.get('/', async (req, res) => {
-  console.log('IIIIIIIIIIII')
-  try {
-    const posts = await Post.find()
-                              .populate("author", "_id username")
-                              .sort({ createdAt: -1 });
-    return res.json(posts);
-  }
-  catch(err) {
-    return res.json([]);
-  }
+        const tagProcess = async (el) => {
+            const tag = await Tag.find({ tag: el });
+
+            if (tag) {
+                ans = ans.concat(tag);
+                console.log("iiiiffffff", ans);
+            } else {
+                tag = new Tag({ tag: el });
+                console.log("eeeellllsssee", el);
+                await tag.save();
+                ans = ans.concat(tag);
+            }
+        };
+
+        await tags.forEach(async (el) => {
+            await tagProcess(el);
+        });
+
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+        if (!post.author.equals(req.user._id)) {
+            return res
+                .status(403)
+                .json({ message: "You are not authorized to edit this post" });
+        }
+        await post.save();
+        post.text = text;
+        post.title = title;
+        post.voteCount = voteCount;
+        post.tags = ans;
+        await post.save();
+        // await post.populate('author', '_id username').execPopulate();
+        post.tags = ans;
+        return res.json(post);
+    } catch (err) {
+        next(err);
+    }
 });
+router.get("/", async (req, res) => {
+    const queryString = req.query.tags;
+     
+      try {
+          if (queryString) {
+              // let searchResults = {};
+  
+              // const tagsArray = tags.split(",");
+              // // const posts = await Post.find({ tags: { $in: [tag] } });
+              // // Build the query to find posts that contain all three tags
+              // const query = { $and: tagsArray.map((tag) => ({ tags: tag })) };
+  
+              // const posts = await Post.find(query);
+              // searchResults = posts;
+  
+              // const x = res.json(searchResults);
+              // console.log("xxxxxxx", x);
+              // return x;
+              const tags = queryString.split(","); // Split the tags into an array
+            
+              const tagObjects = await Tag.find({ tag: { $in: tags } }); // Find tag objects based on the provided tags
+            
+              const tagIds = tagObjects.map((tag) => tag._id); // Extract the tag IDs from the tag objects
+              console.log('tagggssIIIDDSSSS', tagIds)
+            //   const query = { $and: tagIds.map(tag => { console.log('tttttaaaagggg', tag.toString()); return tag.toString() })} ;
+              const query = {
+                tags: { $all: tagIds }
+              };
+              console.log('queerrrry', query)
+              // const posts = await Post.find({
+              //   tags: { $in: tagIds } // Search for posts that have any of the specified tag IDs
+              // })
+               const posts = await Post.find(query)
+                .populate("author", "_id username")
+                .sort({ createdAt: -1 });
+              const postObj = {};
+              posts.forEach((post) => {
+                postObj[post._id] = post;
+              });
+              return res.json(postObj);
+          } else {
+              const posts = await Post.find()
+                  .populate("author", "_id username")
+                  .sort({ createdAt: -1 });
+  
+              const postObj = {};
+              posts.forEach((post) => {
+                  postObj[post._id] = post;
+              });
+              return res.json(postObj);
+          }
+      } catch (err) {
+          return res.json([]);
+      }
+  });
 
+// router.get("/", async (req, res) => {
+//     try {
+//         const posts = await Post.find()
+//             .populate("author", "_id username")
+//             .sort({ createdAt: -1 });
 
+//         const postObj = {};
+//         posts.forEach((post) => {
+//             postObj[post._id] = post;
+//         });
+//         return res.json(postObj);
+//     } catch (err) {
+//         return res.json([]);
+//     }
+// });
 
-
-
+router.delete("/:id", requireUser, async (req, res, next) => {
+    console.log(req.user, "request");
+    try {
+        const post = await Post.deleteOne({ _id: req.params.id });
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+        return res.status(204).json("Post successfully deleted");
+    } catch (err) {
+        next(err);
+    }
+});
 
 module.exports = router;

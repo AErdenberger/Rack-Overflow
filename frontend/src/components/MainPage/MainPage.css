@@ -1,0 +1,65 @@
+.SplashPage {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 425px;
+    padding-bottom: 15px;
+    gap: 100px;
+    justify-content: space-around;
+    background-color: white ;
+}
+
+.LogoandIntro {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.AboutUs {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: 5px 10px 8px lightgrey;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px lightgrey;
+    border-left-style: solid;
+    border-top-style: solid;
+    z-index: 1;
+}
+
+.AboutUs p {
+    display: flex;
+    text-align: center;
+    font-size: larger;
+}
+
+.PostsArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 240px 20px 20px 20px;
+}
+
+.LogoBackground {
+    display: block;
+    z-index: 0;
+    position: absolute;
+}
+
+.JoggingImage {
+    display: block;
+    position: absolute;
+    z-index: 0;
+}

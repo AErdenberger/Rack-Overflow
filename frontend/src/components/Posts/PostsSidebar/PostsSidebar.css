@@ -1,0 +1,81 @@
+.posts-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    height: 600px;
+    width: 230px;
+    margin-left: -50px;
+    margin-top: 66px;
+    margin-right: 30px;
+}
+
+#container-options{
+    margin-top: 30px;
+}
+
+#label-home{
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #ededed;
+    font-size: 20px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;
+}
+
+#label-home:hover{
+    background-color: #F56B00;
+    transition: 0.5s;
+}
+
+#container-popular-label{
+    margin-top: 10px;
+}
+
+#label-popular{
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #ededed;
+    font-size: 20px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;
+}
+
+#label-popular:hover{
+    background-color: #F56B00;
+    transition: 0.5s;
+}
+
+#label-popular:hover #popular-logo{
+    color: white;
+    transition: 0.5s;
+}
+
+#popular-logo{
+    color: #F56B00;
+    transition: 0.5s;
+}
+
+#create-post-button{
+    border-style: none;
+    border-radius: 50px;
+    margin-bottom: 50px;
+    background-color: #F56B00;
+    color: white;
+    width: 90%;
+    line-height: 2em;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;
+}
+
+#create-post-button:hover{
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.5s;
+}

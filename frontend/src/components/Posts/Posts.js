@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, fetchPosts } from '../../store/posts';
 import PostBox from './PostBox/PostBox.js';
+import PostsSidebar from './PostsSidebar/PostsSidebar';
+import './Posts.css'
+// import { Link } from 'react-router-dom';
 
 function Posts () {
   const dispatch = useDispatch();
@@ -15,12 +18,25 @@ function Posts () {
   if (posts.length === 0) return <div>There are no Posts</div>;
   
   return (
-    <>
-      <h2>All Posts</h2>
-      {posts.map(post => (
-        <PostBox key={post._id} post={post} />
-      ))}
-    </>
+    <div className='posts-container'>
+      <div className='posts-sidebar'>
+        <PostsSidebar /> 
+      </div>
+      <div className='posts-index'>
+        <h2>All Posts</h2>
+        {posts.map(post => (
+          // console.log(post)
+          <div key={post._id}>
+            
+              <PostBox  post={post} />
+            
+          </div>
+        ))}
+      </div>
+      <div>
+
+      </div>
+    </div>
   );
 }
 

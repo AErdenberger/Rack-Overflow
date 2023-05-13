@@ -1,0 +1,46 @@
+#linkedin {
+	width: 80px;
+	height: 80px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+#github{
+	width: 80px;
+	height: 80px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.BottomBar {
+    background-color: #F56B00;
+    display: flex;
+    flex-direction: column;
+}
+
+.BottomBar p {
+    display: flex;
+    justify-content: center;
+}
+
+.BottomBar a {
+    display: flex;
+    justify-content: center;
+}
+
+.MeetHeader {
+    display: flex;
+    justify-content: center;
+}
+
+.MeetTheDevs {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#DevBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

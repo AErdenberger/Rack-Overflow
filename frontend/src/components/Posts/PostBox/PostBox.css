@@ -1,11 +1,101 @@
+button {
+  border-style: none;
+  border: 1px solid black;
+  background-color: white;
 
-p, h3 {
-    margin-left: 5px;
-  }
-  
-  .post {
-    border: 2px solid blue;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    min-height: 57px;
-  }
+}
+
+.post {
+  border: 1px solid black;
+  /* border: 1px solid lightgrey; */
+  border-radius: 8px;
+  margin-bottom: 10px;
+  min-height: 57px;
+  background-color: white;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.posts-show-link{
+  color: rgb(86, 86, 216);
+  font-size: 25px;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.posts-show-link:visited{
+  color: rgb(86, 86, 216);
+}
+
+.post-box-body {
+  font-size: 10;
+  font-weight: 200;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.post button {
+  background-color: white;
+  border: none;
+  border-radius: 3px;
+  border: none;
+  color: grey;
+}
+
+.post button:hover {
+  background-color: lightgrey;
+}
+
+.post-box-tags-div {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.post-box-tags-div span {
+  border-radius: 3px;
+  color: grey;
+  font-size: 13px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 1px;
+  font-weight: 100;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.post-box-tags-div span:hover {
+  background-color: lightgrey;
+}
+
+.post-box-ratings-comments-username {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.post-box-ratings-comments {
+  display: flex;
+}
+
+.post-box-ratings-comments button{
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.post-box-username {
+  /* display: flex;
+  justify-content: end; */
+  margin-right: 50px;
+  width: 50px;
+}
+
+.post-box-username div{
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.post-box-username span {
+  color: #F56B00;
+}
+
+#container-bottons-functional{
+  display: flex;
+  margin-bottom: 8px;
+}
+
