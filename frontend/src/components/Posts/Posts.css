@@ -21,6 +21,13 @@
     width: 100%;
 }
 
+#label-all-posts{ /*change line 26 on Post.js to work */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
 .posts-show-link {
     text-decoration: none;
 }
