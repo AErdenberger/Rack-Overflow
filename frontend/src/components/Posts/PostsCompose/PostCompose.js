@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, composePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import './PostCompose.css';
-import ChatBot from '../../ChatBot/ChatBot';
+// import ChatBot from '../../ChatBot/ChatBot';
 
 function PostCompose () {
   const [text, setText] = useState('');

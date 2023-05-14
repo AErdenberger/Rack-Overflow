@@ -168,11 +168,10 @@ const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => 
         return {
           ...state, all: {...state.all, [action.post._id]: action.post} };
       case REMOVE_POST:
-        const newState = { ...state};
-        const filteredNewState = newState.user.filter(userPost => {
+        const filteredUserPosts = state.user.filter(userPost => {
           return userPost._id.toString() !== action.postId.toString();
         });
-        return {...newState, user: filteredNewState };
+        return {...state, user: filteredUserPosts, new: undefined };
       case RECEIVE_USER_POSTS:
         return { ...state, user: action.posts, new: undefined};
       case RECEIVE_NEW_POST:
