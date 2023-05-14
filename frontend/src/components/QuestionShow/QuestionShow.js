@@ -2,7 +2,7 @@ import './QuestionShow.css'
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { fetchPosts, deletePost } from '../../store/posts';
+import { fetchPosts, deletePost, fetchPost } from '../../store/posts';
 import PostsSidebar from '../Posts/PostsSidebar/PostsSidebar';
 import Comments from '../Comments/Comments';
 import CommentCompose from '../Comments/CommentsCompose/CommentCompose';
@@ -13,14 +13,13 @@ import './QuestionShow.css';
 const QuestionShow = () => {
     const { postId } = useParams();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
+    // const post = useSelector(state => state.posts.all.postId)
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const history = useHistory();
 
-    console.log(post);
-
     useEffect(() => {
-        dispatch(fetchPosts());
+        dispatch(fetchPost(postId));
     }, [dispatch])
 
     const remove = () => {
