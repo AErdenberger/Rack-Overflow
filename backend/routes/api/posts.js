@@ -246,4 +246,17 @@ router.delete("/:id", requireUser, async (req, res, next) => {
     }
 });
 
+router.delete("/:id", requireUser, async (req, res, next) => {
+    console.log(req.user, "request");
+    try {
+        const post = await Post.deleteOne({ _id: req.params.id });
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+        return res.status(204).json("Post successfully deleted");
+    } catch (err) {
+        next(err);
+    }
+});
+
 module.exports = router;

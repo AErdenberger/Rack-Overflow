@@ -14,15 +14,15 @@ const receivePosts = (posts) => ({
     posts,
 });
 
-const receivePost = (post) => ({
-    type: RECEIVE_POST,
-    post,
-});
+const receivePost = post => ({
+  type: RECEIVE_POST,
+  post
+})
 
-const removePost = (postId) => ({
-    type: REMOVE_POST,
-    postId,
-});
+const removePost = postId => ({
+  type: REMOVE_POST,
+  postId
+})
 
 const receiveUserPosts = (posts) => ({
     type: RECEIVE_USER_POSTS,
@@ -81,9 +81,9 @@ export const fetchUserPosts = (id) => async (dispatch) => {
             return dispatch(receiveErrors(resBody.errors));
         }
     }
-};
+  };
 
-export const fetchTagsPosts = (tag) => async (dispatch) => {
+  export const fetchTagsPosts = tag => async dispatch => {
     try {
         const res = await jwtFetch(`/api/posts?tag=${tag}`);
         const posts = await res.json();
@@ -104,68 +104,58 @@ export const fetchTagSearch = (tag) => async (dispatch) => {
     .map((word) => encodeURIComponent(word.trim())) // Encode spaces in each word
     .join(",");
   
-
+}
 // Perform the search
 // const posts = await Post.find({ tags: { $all: tags } });
 
   
-    try {
-        const res = await jwtFetch(`/api/posts?tags=${encodedTag}`);
-        const posts = await res.json();
-        dispatch(receivePosts(posts));
-    } catch (err) {
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-            return dispatch(receiveErrors(resBody.errors));
-        }
+export const composePost = data => async dispatch => {
+  try {
+    const res = await jwtFetch('/api/posts/', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    const post = await res.json();
+    dispatch(receiveNewPost(post));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
     }
+  }
 };
 
-export const composePost = (data) => async (dispatch) => {
-    try {
-        const res = await jwtFetch("/api/posts/", {
-            method: "POST",
-            body: JSON.stringify(data),
-        });
-        const post = await res.json();
-        dispatch(receiveNewPost(post));
-    } catch (err) {
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-            return dispatch(receiveErrors(resBody.errors));
-        }
+export const updatePost = data => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/posts/${data._id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    });
+    const post = await res.json();
+    dispatch(receivePost(post));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
     }
+  }
 };
 
-export const updatePost = (data) => async (dispatch) => {
-    try {
-        const res = await jwtFetch(`/api/posts/${data._id}`, {
-            method: "PATCH",
-            body: JSON.stringify(data),
-        });
-        const post = await res.json();
-        dispatch(receivePost(post));
-    } catch (err) {
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-            return dispatch(receiveErrors(resBody.errors));
-        }
+export const deletePost = (postId) => async dispatch => {
+  try {
+    await jwtFetch(`/api/posts/${postId}`, {
+      method: 'DELETE'
+    });
+    dispatch(removePost(postId));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      dispatch(receiveErrors(resBody.errors));
     }
-};
+  }
+}
 
-export const deletePost = (postId) => async (dispatch) => {
-    try {
-        await jwtFetch(`/api/posts/${postId}`, {
-            method: "DELETE",
-        });
-        dispatch(removePost(postId));
-    } catch (err) {
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-            dispatch(receiveErrors(resBody.errors));
-        }
-    }
-};
+
 
 const nullErrors = null;
 
@@ -181,32 +171,26 @@ export const postErrorsReducer = (state = nullErrors, action) => {
     }
 };
 
-const postsReducer = (
-    state = { all: {}, user: [], new: undefined },
-    action
-) => {
-    switch (action.type) {
-        case RECEIVE_POSTS:
-            return { ...state, all: action.posts, new: undefined };
-        case RECEIVE_POST:
-            return {
-                ...state,
-                all: { ...state.all, [action.post._id]: action.post },
-            };
-        case REMOVE_POST:
-            const newState = { ...state };
-            const filteredNewState = newState.user.filter((userPost) => {
-                return userPost._id.toString() !== action.postId.toString();
-            });
-            return { ...newState, user: filteredNewState };
-        case RECEIVE_USER_POSTS:
-            return { ...state, user: action.posts, new: undefined };
-        case RECEIVE_NEW_POST:
-            return { ...state, new: action.post };
-        case RECEIVE_USER_LOGOUT:
-            return { ...state, user: {}, new: undefined };
-        default:
-            return state;
+const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => {
+    switch(action.type) {
+      case RECEIVE_POSTS:
+        return { ...state, all: action.posts, new: undefined};
+      case RECEIVE_POST:
+        return {
+          ...state, all: {...state.all, [action.post._id]: action.post} };
+      case REMOVE_POST:
+        const filteredUserPosts = state.user.filter(userPost => {
+          return userPost._id.toString() !== action.postId.toString();
+        });
+        return {...state, user: filteredUserPosts, new: undefined };
+      case RECEIVE_USER_POSTS:
+        return { ...state, user: action.posts, new: undefined};
+      case RECEIVE_NEW_POST:
+        return { ...state, new: action.post};
+      case RECEIVE_USER_LOGOUT:
+        return { ...state, user: {}, new: undefined }
+      default:
+        return state;
     }
 };
 
