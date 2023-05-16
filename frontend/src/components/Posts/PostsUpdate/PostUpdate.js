@@ -9,14 +9,14 @@ const PostUpdate = () => {
     const dispatch = useDispatch();
     const { postId } = useParams();
     const history = useHistory();
-    const [text, setText] = useState(post[0].text);
-    const [title, setTitle] = useState(post[0].title);
-    const [tags, setTags] = useState(post[0].tags);
     
     const userPosts = useSelector(state => state.posts.user);
     const post = userPosts.filter(userPost => {
         return userPost._id === postId;
     })
+    const [text, setText] = useState(post[0].text);
+    const [title, setTitle] = useState(post[0].title);
+    const [tags, setTags] = useState(post[0].tags);
 
     if(post.length > 1){
         setText(post[0].text);
@@ -51,26 +51,28 @@ const PostUpdate = () => {
     
     return(
         <>
-            <form onSubmit={handleSubmit}>
-                <input type='text'
-                    value={title}
-                    onChange={updateTitle}
-                    placeholder='Change title...'
-                    required
-                />
-                <input 
-                    type="textarea"
-                    value={text}
-                    onChange={updateText}
-                    placeholder="Change post..."
-                    required
-                />
-                {/* <div className="errors">{errors?.text}</div> */}
-                <input type="submit" value="Submit" />  
-            </form>
-            <div>
-                <h3>Post Preview</h3>
-                {text ? <PostBox post={{text, author}} /> : undefined}
+            <div id="container-update-post-form">
+                <form className="update-post" onSubmit={handleSubmit}>
+                    <input type='text' id='update-title'
+                        value={title}
+                        onChange={updateTitle}
+                        placeholder='Change title...'
+                        required
+                    />
+                    <input id='update-text-content'
+                        type="textarea"
+                        value={text}
+                        onChange={updateText}
+                        placeholder="Change post..."
+                        required
+                    />
+                    {/* <div className="errors">{errors?.text}</div> */}
+                    <input type="submit" value="Submit" id='update-button-submit' />  
+                </form>
+                <div className='update-post-preview'>
+                    <h3 id='update-post-preview-header'>Post Preview</h3>
+                    {text ? <PostBox post={{text, author}} /> : undefined}
+                </div>
             </div>
         </>
     )
