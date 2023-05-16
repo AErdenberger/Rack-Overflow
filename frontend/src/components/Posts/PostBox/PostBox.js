@@ -1,6 +1,6 @@
 import "./PostBox.css"
 import { useDispatch } from "react-redux";
-import { deletePost, updatePost } from "../../../store/posts";
+import { deletePost } from "../../../store/posts";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
