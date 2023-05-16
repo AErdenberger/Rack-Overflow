@@ -179,6 +179,7 @@ export const postErrorsReducer = (state = nullErrors, action) => {
 };
 
 const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => {
+    let filteredUserPosts;
     switch(action.type) {
       case RECEIVE_POSTS:
         return { ...state, all: action.posts, new: undefined};
@@ -186,14 +187,19 @@ const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => 
         return {
           ...state, all: {...state.all, [action.post._id]: action.post} };
       case REMOVE_POST:
-        const filteredUserPosts = state.user.filter(userPost => {
+        filteredUserPosts = state.user.filter(userPost => {
           return userPost._id.toString() !== action.postId.toString();
         });
-        return {...state, user: filteredUserPosts, new: undefined };
+        const newState = {...state};
+        delete newState.all[action.postId]
+        return {...newState, user: filteredUserPosts, new: undefined };
       case RECEIVE_USER_POSTS:
         return { ...state, user: action.posts, new: undefined};
       case RECEIVE_NEW_POST:
-        return { ...state, new: action.post};
+        const mappedUserPosts = state.user.map(userPost => {
+          return userPost;
+        })
+        return { ...state, new: action.post, user: mappedUserPosts};
       case RECEIVE_USER_LOGOUT:
         return { ...state, user: {}, new: undefined }
       default:
