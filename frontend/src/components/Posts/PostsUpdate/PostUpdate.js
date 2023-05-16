@@ -4,41 +4,36 @@ import { clearPostErrors, updatePost, fetchPosts } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
-
+import { fetchUserPosts } from '../../../store/posts';
 
 const PostUpdate = () => {
     const dispatch = useDispatch();
     const { postId } = useParams();
-    // const errors = useSelector(state => state.errors.posts);
     const history = useHistory();
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
-    const [tags, setTags] = useState(["hello"]);
-    
+    const currentUser = useSelector(state => state.session.user);
     const userPosts = useSelector(state => state.posts.user);
+
     const post = userPosts.filter(userPost => {
         return userPost._id === postId;
     })
-    
-    // console.log(post[0].author, "post");
-    console.log(post, "postId");
 
-    if(post.length > 1){
+    const author = currentUser.username;
+
+    const [text, setText] = useState('');
+    const [title, setTitle] = useState('');
+    const [tags, setTags] = useState('');
+
+    if(post.lenght > 0){
         setText(post[0].text);
         setTitle(post[0].title);
-        setTags(["hello"]);
+        setTags(post[0].tags);
     }
-
 
     useEffect(() => {
         dispatch(fetchPosts());
+        dispatch(fetchUserPosts(currentUser._id));
         return () => dispatch(clearPostErrors());
-      }, [dispatch]);
-
-    // const update = () => {
-    //     dispatch(updatePost({_id, text, title, tags}))
-    // }
+    }, [dispatch]);
 
     const updateTitle = e => setTitle(e.currentTarget.value);
     const updateText = e => setText(e.currentTarget.value);
@@ -50,34 +45,31 @@ const PostUpdate = () => {
         let path = `/posts/${postId}`;
         history.push(path);
     }
-
-    let author;
-    if(post.length > 0){
-        author = post[0].author;
-    }
     
     return(
         <>
-            <form onSubmit={handleSubmit}>
-                <input type='text'
-                    value={title}
-                    onChange={updateTitle}
-                    placeholder='Change title...'
-                    required
-                />
-                <input 
-                    type="textarea"
-                    value={text}
-                    onChange={updateText}
-                    placeholder="Change post..."
-                    required
-                />
-                {/* <div className="errors">{errors?.text}</div> */}
-                <input type="submit" value="Submit" />  
-            </form>
-            <div>
-                <h3>Post Preview</h3>
-                {text ? <PostBox post={{text, author}} /> : undefined}
+            <div id="container-update-post-form">
+                <form className="update-post" onSubmit={handleSubmit}>
+                    <input type='text' id='update-title'
+                        value={title}
+                        onChange={updateTitle}
+                        placeholder='Change title...'
+                        required
+                    />
+                    <input id='update-text-content'
+                        type="textarea"
+                        value={text}
+                        onChange={updateText}
+                        placeholder="Change post..."
+                        required
+                    />
+                    {/* <div className="errors">{errors?.text}</div> */}
+                    <input type="submit" value="Submit" id='update-button-submit' />  
+                </form>
+                <div className='update-post-preview'>
+                    <h3 id='update-post-preview-header'>Post Preview</h3>
+                    {text ? <PostBox post={{text, author}} /> : undefined}
+                </div>
             </div>
         </>
     )
