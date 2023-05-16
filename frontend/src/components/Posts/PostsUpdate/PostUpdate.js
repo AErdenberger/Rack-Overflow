@@ -14,9 +14,9 @@ const PostUpdate = () => {
     const post = userPosts.filter(userPost => {
         return userPost._id === postId;
     })
-    const [text, setText] = useState('');
-    const [title, setTitle] = useState('');
-    const [tags, setTags] = useState(['']);
+    const [text, setText] = useState(post[0].text);
+    const [title, setTitle] = useState(post[0].title);
+    const [tags, setTags] = useState(post[0].tags);
 
     if(post.length > 1){
         setText(post[0].text);
