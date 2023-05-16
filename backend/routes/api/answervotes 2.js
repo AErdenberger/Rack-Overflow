@@ -34,5 +34,3 @@ router.post('/:id', requireUser, async (req, res, next) => {
     return res.json(ansVote)
     
 });
-
-module.exports = router;

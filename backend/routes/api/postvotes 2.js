@@ -8,25 +8,21 @@ const AnswerVote = mongoose.model("AnswerVote");
 const PostVote = mongoose.model("PostVote");
 
 
-router.get('/votecount/:postId', requireUser, async (req, res, next) => {
+router.get('/', requireUser, async (req, res, next) => {
 
     const {postId} = req.params
 
-
-    
 
 });
 
-router.post('/:postId', requireUser, async (req, res, next) => {
+router.post('/:id', requireUser, async (req, res, next) => {
 
     
     const {postId} = req.params
-    console.log(postId,'postIDDDD')
+    
 
-
-
-    const postVote = new PostVote({ 
-        vote: req.body.vote,
+    postVote = new PostVote({ 
+        vote: 1,
         authorId: req.user._id,
         postId: postId
     })
@@ -36,5 +32,3 @@ router.post('/:postId', requireUser, async (req, res, next) => {
     return res.json(postVote)
     
 });
-
-module.exports = router;
