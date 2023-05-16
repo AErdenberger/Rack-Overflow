@@ -4,34 +4,36 @@ import { clearPostErrors, updatePost, fetchPosts } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { fetchUserPosts } from '../../../store/posts';
 
 const PostUpdate = () => {
     const dispatch = useDispatch();
     const { postId } = useParams();
     const history = useHistory();
-    
+    const currentUser = useSelector(state => state.session.user);
     const userPosts = useSelector(state => state.posts.user);
+
     const post = userPosts.filter(userPost => {
         return userPost._id === postId;
     })
-    const [text, setText] = useState(post[0].text);
-    const [title, setTitle] = useState(post[0].title);
-    const [tags, setTags] = useState(post[0].tags);
 
-    if(post.length > 1){
+    const author = currentUser.username;
+
+    const [text, setText] = useState('');
+    const [title, setTitle] = useState('');
+    const [tags, setTags] = useState('');
+
+    if(post.lenght > 0){
         setText(post[0].text);
         setTitle(post[0].title);
-        setTags(["hello"]);
+        setTags(post[0].tags);
     }
 
     useEffect(() => {
         dispatch(fetchPosts());
+        dispatch(fetchUserPosts(currentUser._id));
         return () => dispatch(clearPostErrors());
     }, [dispatch]);
-
-    // const update = () => {
-    //     dispatch(updatePost({_id, text, title, tags}))
-    // }
 
     const updateTitle = e => setTitle(e.currentTarget.value);
     const updateText = e => setText(e.currentTarget.value);
@@ -42,11 +44,6 @@ const PostUpdate = () => {
         dispatch(updatePost(postToBeUpdated));
         let path = `/posts/${postId}`;
         history.push(path);
-    }
-
-    let author;
-    if(post.length > 0){
-        author = post[0].author;
     }
     
     return(

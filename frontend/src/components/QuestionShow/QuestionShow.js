@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchPosts, deletePost } from '../../store/posts';
 import PostsSidebar from '../Posts/PostsSidebar/PostsSidebar';
-// import PostBox from '../Posts/PostBox/PostBox';
 import Comments from '../Comments/Comments';
 import CommentCompose from '../Comments/CommentsCompose/CommentCompose';
 import './QuestionShow.css';
@@ -18,7 +17,7 @@ const QuestionShow = () => {
     const currentUser = useSelector(state => state.session.user);
     const history = useHistory();
 
-    
+    console.log(post);
 
     useEffect(() => {
         dispatch(fetchPosts());
@@ -38,13 +37,15 @@ const QuestionShow = () => {
 
     let returnButton;
     if(currentUser){
-      if(currentUser._id === post.author._id){
-        returnButton = (
-          <>
-            <button onClick={remove}>Delete Post</button>
-            <button onClick={goUpdatePost}>Update Post</button>
-          </>
-        )
+      if(post){
+        if(currentUser._id === post.author._id){
+            returnButton = (
+              <>
+                <button onClick={remove}>Delete Post</button>
+                <button onClick={goUpdatePost}>Update Post</button>
+              </>
+            )
+        }
       }
     } else {
       returnButton = (
