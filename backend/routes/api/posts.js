@@ -63,20 +63,20 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
         let ans = [];
         let reqTags = req.body.tags;
         const tagProcess = async (el) => {
-            let tag = await Tag.find({ tag: el.tag });
+            const tag = await Tag.findOne({ tag: 'Hypertension' });
 
             if (tag) {
                 ans = ans.concat(tag._id);
             } else {
-                tag = new Tag({ tag: el.tag });
-                await tag.save();
-                ans = ans.concat(tag._id);
+                const tagNew = new Tag({ tag: el.tag });
+                await tagNew.save();
+                ans = ans.concat(tagNew._id);
             }
         };
 
-        await reqTags.forEach(async (el) => {
+        for(let el = 0; el < reqTags.length; el++){
             await tagProcess(el);
-        });
+        };
 
         const newPost = new Post({
             title: req.body.title,
