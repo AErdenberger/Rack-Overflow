@@ -133,8 +133,9 @@ export const composePost = data => async dispatch => {
 };
 
 export const updatePost = data => async dispatch => {
+  console.log(data);
   try {
-    const res = await jwtFetch(`/api/posts/${data._id}`, {
+    const res = await jwtFetch(`/api/posts/${data.postId}`, {
       method: 'PATCH',
       body: JSON.stringify(data)
     });
