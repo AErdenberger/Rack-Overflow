@@ -19,11 +19,17 @@ const PostUpdate = () => {
         return userPost._id === postId;
     })
     // console.log(post[0].author, "post");
-    // console.log(postId, "postId");
+    console.log(post, "postId");
 
-    const [text, setText] = useState(post[0].text);
-    const [title, setTitle] = useState(post[0].title);
-    const [tags, setTags] = useState(["hello"]);
+    const [text, setText] = useState("");
+    const [title, setTitle] = useState("");
+    const [tags, setTags] = useState(["test"]);
+
+    if(post.length > 1){
+        setText(post[0].text);
+        setTitle(post[0].title);
+        setTags(["hello"]);
+    }
 
 
     useEffect(() => {
@@ -45,7 +51,10 @@ const PostUpdate = () => {
         history.push(path);
     }
 
-    const author = post[0].author;
+    let author;
+    if(post.length > 0){
+        author = post[0].author;
+    }
     
     return(
         <>
