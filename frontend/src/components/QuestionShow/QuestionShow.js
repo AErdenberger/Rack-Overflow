@@ -1,7 +1,7 @@
 import './QuestionShow.css'
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchPosts, deletePost } from '../../store/posts';
 import PostsSidebar from '../Posts/PostsSidebar/PostsSidebar';
 // import PostBox from '../Posts/PostBox/PostBox';
@@ -15,12 +15,42 @@ const QuestionShow = () => {
     const { postId } = useParams();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
     const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.session.user);
+    const history = useHistory();
+
     
 
     useEffect(() => {
         dispatch(fetchPosts());
     }, [dispatch])
 
+    const remove = () => {
+        dispatch(deletePost(postId));
+        let path = '/profile';
+        history.push(path);
+    }
+
+    const goUpdatePost = () => {
+        let path = `/posts/${postId}/update/`;
+        history.push(path);
+    }
+
+
+    let returnButton;
+    if(currentUser){
+      if(currentUser._id === post.author._id){
+        returnButton = (
+          <>
+            <button onClick={remove}>Delete Post</button>
+            <button onClick={goUpdatePost}>Update Post</button>
+          </>
+        )
+      }
+    } else {
+      returnButton = (
+        undefined
+      )
+    }
    
 
 
@@ -43,16 +73,20 @@ const QuestionShow = () => {
                     </div>
                     <div className="questions-ratings-comments-username">
                         <div className="questions-ratings-comments">
-                            <button id='button-comments'>
-                                Comments
+                            {/* <button id='button-comments'>
+                                Delete
                             </button>
                             <button id='button-ratings'>
-                                Ratings
-                            </button>
+                                Update
+                            </button> */}
+                            {returnButton}
                         </div>
                         <div className="questions-username">
                             <div><span>{String.fromCodePoint(0x2B24)}</span> {username}</div>
                         </div>
+                    </div>
+                    <div>
+                        
                     </div>
                 </div>
                 
