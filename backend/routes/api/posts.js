@@ -16,20 +16,6 @@ router.get("/restore", (req, res) => {
     });
 });
 
-router.get("/posts", async (req, res) => {
-    const tag = req.query.tags;
-    console.log("tag", tag);
-
-    try {
-        // const posts = await Post.find({ tags: { $in: [tag] } });
-        const posts = await Post.find({ tags: tag });
-
-        res.json(posts);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
 
 router.get("/user/:userId", async (req, res, next) => {
     let user;
@@ -44,7 +30,8 @@ router.get("/user/:userId", async (req, res, next) => {
     try {
         const posts = await Post.find({ author: user._id })
             .sort({ createdAt: -1 })
-            .populate("author", "_id username");
+            .populate("author", "_id username")
+            .populate("tags", "_id tag");
         return res.json(posts);
     } catch (err) {
         return res.json([]);
@@ -56,7 +43,8 @@ router.get("/:id", async (req, res, next) => {
         const post = await Post.findById(req.params.id).populate(
             "author",
             "_id username"
-        );
+        )
+        .populate("tags", "_id tag");
         return res.json(post);
     } catch (err) {
         const error = new Error("post not found");
@@ -75,14 +63,14 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
         let ans = [];
         let reqTags = req.body.tags;
         const tagProcess = async (el) => {
-            const tag = await Tag.find({ tag: el });
+            let tag = await Tag.find({ tag: el.tag });
 
             if (tag) {
-                ans = ans.concat(tag);
+                ans = ans.concat(tag._id);
             } else {
-                tag = new Tag({ tag: el });
+                tag = new Tag({ tag: el.tag });
                 await tag.save();
-                ans = ans.concat(tag);
+                ans = ans.concat(tag._id);
             }
         };
 
@@ -99,6 +87,7 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
 
         let post = await newPost.save();
         post = await post.populate("author", "_id username");
+        post = await post.populate("tags", "_id tag");
         post.tags = ans;
         post = await newPost.save();
         return await res.json(post);
@@ -111,27 +100,28 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
     try {
         const postId = req.params.id;
         const { text, title, voteCount, tags } = req.body;
-        const post = await Post.findById(postId);
+        let post = await Post.findById(postId);
         let ans = [];
         // let reqTags = req.body.tags;
 
         const tagProcess = async (el) => {
-            const tag = await Tag.find({ tag: el });
+            const tag = await Tag.findOne({ tag: el.tag });
 
             if (tag) {
-                ans = ans.concat(tag);
-                console.log("iiiiffffff", ans);
+                // console.log(tag, 'tag')
+                ans = ans.concat(tag._id);
+                // console.log("iiiiffffff", ans);
             } else {
-                tag = new Tag({ tag: el });
-                console.log("eeeellllsssee", el);
+                tag = new Tag({ tag: el.tag });
+                // console.log("eeeellllsssee", el);
                 await tag.save();
-                ans = ans.concat(tag);
+                ans = ans.concat(tag._id);
             }
         };
 
-        await tags.forEach(async (el) => {
-            await tagProcess(el);
-        });
+         for(let el = 0; el < tags.length; el++) {
+            await tagProcess(tags[el]);
+        };
 
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
@@ -141,14 +131,17 @@ router.patch("/:id", requireUser, validatePostInput, async (req, res, next) => {
                 .status(403)
                 .json({ message: "You are not authorized to edit this post" });
         }
-        await post.save();
+        // await post.save();
         post.text = text;
         post.title = title;
         post.voteCount = voteCount;
+        console.log(ans, 'ans')
         post.tags = ans;
-        await post.save();
+        
+        post = await post.save();
+        post = await post.populate("tags", "_id tag");
         // await post.populate('author', '_id username').execPopulate();
-        post.tags = ans;
+        // post.tags = ans;
         return res.json(post);
     } catch (err) {
         next(err);
@@ -195,6 +188,7 @@ router.get("/", async (req, res) => {
               // })
                const posts = await Post.find(query)
                 .populate("author", "_id username")
+                .populate("tags", "_id tag")
                 .sort({ createdAt: -1 });
               const postObj = {};
               posts.forEach((post) => {
@@ -204,6 +198,7 @@ router.get("/", async (req, res) => {
           } else {
               const posts = await Post.find()
                   .populate("author", "_id username")
+                  .populate("tags", "_id tag")
                   .sort({ createdAt: -1 });
   
               const postObj = {};

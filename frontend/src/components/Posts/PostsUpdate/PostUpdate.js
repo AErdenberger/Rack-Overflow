@@ -23,7 +23,7 @@ const PostUpdate = () => {
 
     const [text, setText] = useState(post[0].text);
     const [title, setTitle] = useState(post[0].title);
-    const [tags, setTags] = useState(["hello"]);
+    const [tags, setTags] = useState(post[0].tags);
 
 
     useEffect(() => {

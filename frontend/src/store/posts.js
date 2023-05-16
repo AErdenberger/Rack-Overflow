@@ -104,10 +104,17 @@ export const fetchTagSearch = (tag) => async (dispatch) => {
     .map((word) => encodeURIComponent(word.trim())) // Encode spaces in each word
     .join(",");
   
-}
-// Perform the search
-// const posts = await Post.find({ tags: { $all: tags } });
-
+    try {
+      const res = await jwtFetch(`/api/posts?tags=${encodedTag}`);
+      const posts = await res.json();
+      dispatch(receivePosts(posts));
+  } catch (err) {
+      const resBody = await err.json();
+      if (resBody.statusCode === 400) {
+          return dispatch(receiveErrors(resBody.errors));
+      }
+  }
+};
   
 export const composePost = data => async dispatch => {
   try {
