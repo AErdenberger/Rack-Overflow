@@ -9,9 +9,9 @@ const PostUpdate = () => {
     const dispatch = useDispatch();
     const { postId } = useParams();
     const history = useHistory();
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
-    const [tags, setTags] = useState(["hello"]);
+    const [text, setText] = useState(post[0].text);
+    const [title, setTitle] = useState(post[0].title);
+    const [tags, setTags] = useState(post[0].tags);
     
     const userPosts = useSelector(state => state.posts.user);
     const post = userPosts.filter(userPost => {
