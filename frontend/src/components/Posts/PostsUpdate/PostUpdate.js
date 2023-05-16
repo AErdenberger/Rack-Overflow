@@ -20,20 +20,19 @@ const PostUpdate = () => {
     const post = userPosts.filter(userPost => {
         return userPost._id === postId;
     })
-    // const newPost = useSelector(state => state.posts.new)
+    
+    // console.log(post[0].author, "post");
+    console.log(post, "postId");
 
-    // console.log(newPost, "new post");
-    // console.log(postId, "postId");
-    let author;
-    // if (newPost) {
-    //     setTitle(newPost.title);
-    //     setText(newPost.text)
-    //     author = newPost.author;
-    // } else {
-        setTitle(post[0].title);
+    const [text, setText] = useState("");
+    const [title, setTitle] = useState("");
+    const [tags, setTags] = useState(["test"]);
+
+    if(post.length > 1){
         setText(post[0].text);
-        author = post[0].author;
-    // }
+        setTitle(post[0].title);
+        setTags(["hello"]);
+    }
 
 
     useEffect(() => {
@@ -56,6 +55,10 @@ const PostUpdate = () => {
         history.push(path);
     }
 
+    let author;
+    if(post.length > 0){
+        author = post[0].author;
+    }
     
     return(
         <>
