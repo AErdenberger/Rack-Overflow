@@ -1,0 +1,33 @@
+import './SearchBar.css';
+// import {useHistory} from 'react-router-dom';
+
+
+
+
+const SearchBar = ({handleSearchChange, handleSearchClick, searchValue}) => {
+
+
+    return (
+        <>
+        <div>
+         
+        <label id='container-search'> 
+        <i className="fa-solid fa-magnifying-glass" id="icon-search" ></i>
+              <input 
+              type='text' 
+              placeholder='Search Rack Overflow' 
+              id='search-bar'
+              onClick={handleSearchClick}
+                onChange={handleSearchChange}
+                value={searchValue}
+              />
+            </label>
+            
+    
+        </div>
+        
+        </>
+    )
+}
+
+export default SearchBar;
