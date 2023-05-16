@@ -5,12 +5,9 @@ import PostBox from '../PostBox/PostBox';
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-
-
 const PostUpdate = () => {
     const dispatch = useDispatch();
     const { postId } = useParams();
-    // const errors = useSelector(state => state.errors.posts);
     const history = useHistory();
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
@@ -20,20 +17,12 @@ const PostUpdate = () => {
     const post = userPosts.filter(userPost => {
         return userPost._id === postId;
     })
-    
-    // console.log(post[0].author, "post");
-    console.log(post, "postId");
-
-    const [text, setText] = useState("");
-    const [title, setTitle] = useState("");
-    const [tags, setTags] = useState(["test"]);
 
     if(post.length > 1){
         setText(post[0].text);
         setTitle(post[0].title);
         setTags(["hello"]);
     }
-
 
     useEffect(() => {
         dispatch(fetchPosts());
