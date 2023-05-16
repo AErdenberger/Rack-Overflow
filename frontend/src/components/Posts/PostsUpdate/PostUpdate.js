@@ -27,7 +27,7 @@ const PostUpdate = () => {
     useEffect(() => {
         dispatch(fetchPosts());
         return () => dispatch(clearPostErrors());
-      }, [dispatch]);
+    }, [dispatch]);
 
     // const update = () => {
     //     dispatch(updatePost({_id, text, title, tags}))
