@@ -5,12 +5,13 @@ import session from './session';
 import errors from './errors';
 import posts from './posts';
 import comments from './comments.js';
-
+import tags from './tags'
 const rootReducer = combineReducers({
   session,
   posts,
   errors,
-  comments
+  comments,
+  tags
 });
 
 
