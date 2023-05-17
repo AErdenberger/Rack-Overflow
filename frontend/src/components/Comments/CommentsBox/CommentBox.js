@@ -1,22 +1,26 @@
-// import { useParams } from 'react-router-dom';
+import CommentButton from '../CommentButton/CommentButton';
+import { useSelector } from 'react-redux';
 import './CommentBox.css';
 
 function CommentBox ({ comment, author }){
-    // const { postId } = useParams();
-    // const { username } = author;
-    // console.log(comment);
     const text = comment.text;
-    console.log(comment);
-    // const username = comment.author;
-    // if(author) username = author.username;
+    const username = comment.author.username;
+    const currentUser = useSelector(state => state.session.user);
+    // console.log(comment.author._id);
+    // console.log(currentUser._id);
 
     return(
         <div className='comment'>
+            <div id='container-info-button'>
+                <div id='container-author-comment'>
+                    <label id='label-username'>{username} said:</label>
+                </div>
+                {comment.author._id === currentUser._id ? <div id='container-comment-button'>
+                    <CommentButton comment={comment} />
+                </div> : undefined}
+            </div>
             <div id='container-content-comment'>
                 <label id='label-text'>{text}</label>
-            </div>
-            <div id='container-author-comment'>
-                {/* <label id='label-username'>{username}</label> */}
             </div>
         </div>
     );
