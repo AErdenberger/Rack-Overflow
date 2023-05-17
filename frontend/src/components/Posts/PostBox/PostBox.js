@@ -1,22 +1,19 @@
 import "./PostBox.css"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost, updatePost } from "../../../store/posts";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 
 function PostBox ({ post: { _id, text, author, title, tags }}) {
+  const currentUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-  const { username } = author;
+  let username;
+  if(author) username = author.username;
   const history = useHistory();
-  // console.log(_id);
-  // const history = useHistory();
 
   const remove = () => {
     dispatch(deletePost(_id));
-    // let path = '/posts';
-    // history.push(path);
-  // console.log(_id);
   }
 
   const goUpdatePost = () => {
@@ -24,11 +21,27 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
     history.push(path);
   }
 
+  let returnButton;
+  if(currentUser){
+    if(currentUser._id === author._id){
+      returnButton = (
+        <>
+          <button onClick={remove}>Delete Post</button>
+          <button onClick={goUpdatePost}>Update Post</button>
+        </>
+      )
+    }
+  } else {
+    returnButton = (
+      undefined
+    )
+  }
+
   return (
     <div className="post">
 
       <div id="container-link-show-page">
-        <Link to={`posts/${_id}`}  className='posts-show-link'>
+        <Link to={`/posts/${_id}`}  className='posts-show-link'>
           {title}
         </Link>
       </div>
@@ -54,8 +67,7 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
         </div>
       </div>
       <div id="container-bottons-functional">
-        <button onClick={remove}>Delete Post</button>
-        <button onClick={goUpdatePost}>Update Post</button>
+        {returnButton}
       </div>
     </div>
   );
