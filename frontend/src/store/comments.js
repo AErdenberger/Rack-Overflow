@@ -6,6 +6,7 @@ const RECEIVE_COMMENT = "comments/RECEIVE_COMMENT";
 const RECEIVE_NEW_COMMENT = "comment/RECEIVE_NEW_COMMENT";
 const RECEIVE_COMMENT_ERRORS = "comment/RECEIVE_COMMENT_ERRORS";
 const CLEAR_COMMENT_ERRORS = "comment/CLEAR_COMMENT_ERRORS";
+const REMOVE_COMMENT = 'comment/REMOVE_COMMENT';
 
 const receiveComments = comments => ({
     type: RECEIVE_COMMENTS,
@@ -20,6 +21,11 @@ const receiveComment = comment => ({
 const receiveNewComment = comment => ({
     type: RECEIVE_NEW_COMMENT,
     comment
+});
+
+const removeComment = commentId => ({
+    type: REMOVE_COMMENT,
+    commentId
 });
 
 const receiveErrors = errors => ({
@@ -59,9 +65,9 @@ export const fetchComment = (commentId) => async dispatch => {
 };
 
 export const composeComment = data => async dispatch => {
-    // console.log(data, 'data');
+    // console.log(data.parentPost, 'data');
     try{
-        const res = await jwtFetch('/api/answers/:postId', {
+        const res = await jwtFetch(`/api/answers/${data.parentPost}`, {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -71,6 +77,20 @@ export const composeComment = data => async dispatch => {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
             return dispatch(receiveErrors(resBody.errors));
+        }
+    }
+};
+
+export const deleteComment = (commentId) => async dispatch => {
+    try{
+        await jwtFetch(`/api/answers/${commentId}`, {
+            method: 'DELETE'
+        })
+        dispatch(removeComment(commentId));
+    } catch (err) {
+        const resBody = await err.json();
+        if(resBody.statusCode === 400){
+            dispatch(receiveErrors(resBody.errors));
         }
     }
 };

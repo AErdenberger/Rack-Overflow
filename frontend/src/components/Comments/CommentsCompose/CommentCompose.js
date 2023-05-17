@@ -8,7 +8,7 @@ import CommentBox from '../CommentsBox/CommentBox';
 function CommentCompose(){
     const { postId } = useParams();
     const [text, setText] = useState('');
-    const [tags, setTags] = useState(['done']);
+    const [tags, setTags] = useState([]);
     const dispatch = useDispatch();
     const author = useSelector(state => state.session.user); //all user information
     const newComment = useSelector(state => state.comments.new);
@@ -44,7 +44,7 @@ function CommentCompose(){
     }, 1000);
 
     const update = e => setText(e.currentTarget.value);
-    const updateTags = e => setTags(e.currentTarget.value);
+    const updateTags = e => setTags([e.currentTarget.value]);
 
     return(
         <div id='container-create-comment-form'>
@@ -60,18 +60,12 @@ function CommentCompose(){
                     required
                 />
                 <div className='errors'>{errors?.text}</div>
-                <input type='submit' value='Submit' id='submit-button-comment' />
+                <input type='submit' value='Create comment' id='submit-button-comment' />
             </form>
-            <div className='comment-preview'>
+            {/* <div className='comment-preview'>
                 <label id='label-comment-preview'>Comment preview</label>
                 <div>
                     {text ? <CommentBox comment={{text, author}} /> : <label id='label-loading-comment'> Loading...</label>}
-                </div>
-            </div>
-            {/* <div className='previous-comment'>
-                <label id='label-comment-previous'>Previous Comment</label>
-                <div>
-                    {newComment ? <CommentBox comment={newComment} /> : <label id='label-no-previous-post'>No previous comment, go ahead and create one!</label>}
                 </div>
             </div> */}
         </div>
