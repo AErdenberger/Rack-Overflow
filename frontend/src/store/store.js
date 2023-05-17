@@ -6,12 +6,15 @@ import errors from './errors';
 import posts from './posts';
 import comments from './comments.js';
 import tags from './tags'
+import votes from './votes.js';
+
 const rootReducer = combineReducers({
   session,
   posts,
   errors,
   comments,
-  tags
+  tags,
+  votes
 });
 
 
