@@ -1,12 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const tagSchema = new Schema(
+const postVoteSchema = new Schema(
     {
-        tag: {
-            type: String,
+        vote: {
+            type: Number,
+            default: 0,
             required: true,
         },
+        author: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
+        postId:{
+            
+        }
     },
     {
         timestamps: true,

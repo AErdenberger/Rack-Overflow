@@ -11,7 +11,6 @@ const http = require('http');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const { mongoURI: db } = require('../config/keys.js');
-// const seeds = require('../seeders/seeds')
 
 const serverLogger = debug('backend:server');
 const dbLogger = debug('backend:mongodb');

@@ -10,29 +10,18 @@ function Comments () {
     const dispatch = useDispatch();
     const comments = useSelector(state => Object.values(state.comments.all));
 
-    // console.log(comments, 'comments')
-
-    let newComments = [];
-    comments.forEach((comment => {
-        for(const comment in comments){
-            if(comments[comment].parentPost === postId) {
-                newComments.push(comments[comment])
-            }
-        };
-    }));
-
     useEffect(() => {
-        dispatch(fetchComments());
+        dispatch(fetchComments(postId));
         return () => dispatch(clearCommentErrors());
     }, [dispatch]);
 
-    if(newComments.length === 0) return <label id='no-comments-label'>There are no Comments... yet.</label>
+    if(comments.length === 0) return <label id='no-comments-label'>There are no Comments... yet.</label>
 
     return(
         <div className='comments-container'>
             <div className='comments-index'>
                 <label id='label-all-comments'>All Comments</label>
-                {newComments.map(comment => (
+                {comments.map(comment => (
                     <div>
                         <CommentBox comment={comment} />
                     </div>
