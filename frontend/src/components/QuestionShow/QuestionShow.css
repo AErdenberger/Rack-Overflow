@@ -27,6 +27,17 @@
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
+.vote-div {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    justify-items: center;
+    gap: 10px;
+}
+
+.vote-component {
+    width: 100px;
+}
+
 .question-body {
     font-size: 10;
     font-weight: 200;
