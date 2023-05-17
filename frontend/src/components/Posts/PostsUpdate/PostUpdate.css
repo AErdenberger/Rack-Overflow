@@ -1,0 +1,51 @@
+.update-post {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    width: 400px;
+    margin-top: 30px;
+    margin-left: 38%;
+}
+
+#update-title {
+  border: 1px solid black;
+  border-radius: 10px;
+  text-indent: 4px;
+  font-size: 24px;
+  font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#update-text-content {
+    border: 1px solid black;
+    border-radius: 10px;
+    text-indent: 4px;
+    font-size: 24px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;    
+}
+
+#update-button-submit {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-left: 39%;
+    margin-top: 13px;
+    font-size: 24px;
+    background-color: #F56B00;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;    
+}
+
+#update-button-submit:hover {
+    font-size: 28px;
+    transition: 0.5s;    
+}
+
+.update-post-preview {
+    min-height: 150px;
+}
+
+#update-post-preview-header {
+    margin-left: 50px;
+    font-size: 24px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}

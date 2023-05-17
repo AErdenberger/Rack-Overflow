@@ -23,17 +23,19 @@ function App() {
   }, [dispatch]);
   return loaded && (
     <>
-      <NavBar />
-      <Switch>
-        <AuthRoute exact path="/" component={MainPage} />
-        {/* <AuthRoute exact path="/login" component={LoginForm} /> */}
-        {/* <AuthRoute exact path="/signup" component={SignupForm} /> */}
-        <ProtectedRoute exact path="/posts" component={Posts} />
-        <ProtectedRoute exact path="/profile" component={Profile} />
-        <ProtectedRoute exact path="/posts/new" component={PostCompose} />
-        <ProtectedRoute exact path="/posts/:postId/update" component={PostUpdate} />
-        <ProtectedRoute exact path="/posts/:postId" component={QuestionShow} />
-      </Switch>
+      <div className='OneBigDiv'>
+        <NavBar />
+        <Switch>
+          <AuthRoute exact path="/" component={MainPage} />
+          {/* <AuthRoute exact path="/login" component={LoginForm} /> */}
+          {/* <AuthRoute exact path="/signup" component={SignupForm} /> */}
+          <ProtectedRoute exact path="/posts" component={Posts} />
+          <ProtectedRoute exact path="/profile" component={Profile} />
+          <ProtectedRoute exact path="/posts/new" component={PostCompose} />
+          <ProtectedRoute exact path="/posts/:postId/update" component={PostUpdate} />
+          <ProtectedRoute exact path="/posts/:postId" component={QuestionShow} />
+        </Switch>
+      </div>
       <FooterBar />
     </>
   );

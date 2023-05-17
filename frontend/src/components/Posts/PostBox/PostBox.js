@@ -8,17 +8,12 @@ import { useHistory } from "react-router-dom";
 function PostBox ({ post: { _id, text, author, title, tags }}) {
   const currentUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-  const { username } = author;
+  let username;
+  if(author) username = author.username;
   const history = useHistory();
-  // console.log(_id);
-  // const history = useHistory();
-  // console.log(currentUser);
 
   const remove = () => {
     dispatch(deletePost(_id));
-    // let path = '/posts';
-    // history.push(path);
-  // console.log(_id);
   }
 
   const goUpdatePost = () => {
@@ -41,7 +36,6 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
       undefined
     )
   }
-  // returnButton = checkUserLoggedIn;
 
   return (
     <div className="post">

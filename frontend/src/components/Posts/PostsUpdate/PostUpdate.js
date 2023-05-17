@@ -4,34 +4,42 @@ import { clearPostErrors, updatePost, fetchPosts } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { fetchUserPosts, fetchPost } from '../../../store/posts';
 
 const PostUpdate = () => {
     const dispatch = useDispatch();
     const { postId } = useParams();
     const history = useHistory();
-    const [text, setText] = useState(post[0].text);
-    const [title, setTitle] = useState(post[0].title);
-    const [tags, setTags] = useState(post[0].tags);
-    
-    const userPosts = useSelector(state => state.posts.user);
-    const post = userPosts.filter(userPost => {
-        return userPost._id === postId;
-    })
+    const currentUser = useSelector(state => state.session.user);
+    const userPost = useSelector(state => state.posts.all[postId]);
 
-    if(post.length > 1){
-        setText(post[0].text);
-        setTitle(post[0].title);
-        setTags(["hello"]);
+    // let post;
+    // if (userPosts){
+    //     post = userPosts.filter(userPost => {
+    //         return userPost._id === postId;
+    //     })
+    // }
+
+    const author = currentUser.username;
+
+    const [text, setText] = useState('');
+    const [title, setTitle] = useState('');
+    const [tags, setTags] = useState('');
+
+    if (!text){
+        if(userPost){
+            setText(userPost.text);
+            setTitle(userPost.title);
+            setTags(userPost.tags);
+        }
     }
 
+
     useEffect(() => {
-        dispatch(fetchPosts());
+        dispatch(fetchPost(postId));
+        // dispatch(fetchUserPosts(currentUser._id));
         return () => dispatch(clearPostErrors());
     }, [dispatch]);
-
-    // const update = () => {
-    //     dispatch(updatePost({_id, text, title, tags}))
-    // }
 
     const updateTitle = e => setTitle(e.currentTarget.value);
     const updateText = e => setText(e.currentTarget.value);
@@ -44,33 +52,31 @@ const PostUpdate = () => {
         history.push(path);
     }
 
-    let author;
-    if(post.length > 0){
-        author = post[0].author;
-    }
     
     return(
         <>
-            <form onSubmit={handleSubmit}>
-                <input type='text'
-                    value={title}
-                    onChange={updateTitle}
-                    placeholder='Change title...'
-                    required
-                />
-                <input 
-                    type="textarea"
-                    value={text}
-                    onChange={updateText}
-                    placeholder="Change post..."
-                    required
-                />
-                {/* <div className="errors">{errors?.text}</div> */}
-                <input type="submit" value="Submit" />  
-            </form>
-            <div>
-                <h3>Post Preview</h3>
-                {text ? <PostBox post={{text, author}} /> : undefined}
+            <div id="container-update-post-form">
+                <form className="update-post" onSubmit={handleSubmit}>
+                    <input type='text' id='update-title'
+                        value={title}
+                        onChange={updateTitle}
+                        placeholder='Change title...'
+                        required
+                    />
+                    <input id='update-text-content'
+                        type="textarea"
+                        value={text}
+                        onChange={updateText}
+                        placeholder="Change post..."
+                        required
+                    />
+                    {/* <div className="errors">{errors?.text}</div> */}
+                    <input type="submit" value="Submit" id='update-button-submit' />  
+                </form>
+                <div className='update-post-preview'>
+                    <h3 id='update-post-preview-header'>Post Preview</h3>
+                    {text ? <PostBox post={{text, author}} /> : undefined}
+                </div>
             </div>
         </>
     )
