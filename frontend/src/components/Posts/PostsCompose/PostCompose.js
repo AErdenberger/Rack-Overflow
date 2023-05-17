@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, composePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import './PostCompose.css';
+import TagInput from '../../Tags/TagInput';
 // import ChatBot from '../../ChatBot/ChatBot';
 
 function PostCompose () {
   const [text, setText] = useState('');
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState(["hello"]);
+  const [selectedTags,setSelectedTags] = useState([]);
+
   const dispatch = useDispatch();
   const author = useSelector(state => state.session.user);
   const newPost = useSelector(state => state.posts.new);
@@ -65,10 +68,9 @@ function PostCompose () {
             required
           />
         </div>
-           <input 
-             
-           
-           
+           <TagInput 
+           selectedTags={selectedTags}
+            setSelectedTags={setSelectedTags}
            />
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" id='button-submit' />

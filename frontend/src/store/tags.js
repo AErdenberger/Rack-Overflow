@@ -21,17 +21,17 @@ const receiveErrors = (errors) => ({
     errors
 });
 
-export const getTags = ({state}) => {
-    return state?.Tags ? Object.values(state.Tags) : [];
+export const getTags = (state) => {
+    return state.tags ? Object.values(state.tags) : [];
 }
 
 export const getTag = ({state, tagId}) => {
-    return state?.Tags[tagId] ? state.Tags[tagId] : {};
+    return state?.tags[tagId] ? state.ags[tagId] : {};
 }
 
 export const fetchTags = () => async (dispatch) =>{
     try{
-        const res = await jwtFetch("/api/tags");
+        const res = await jwtFetch("/api/tags/getAllTags");
         const tags = await res.json();
         dispatch(receiveTags(tags)); 
     } catch (err) {
@@ -42,10 +42,10 @@ export const fetchTags = () => async (dispatch) =>{
     }
 };
 
-const tagReducer = (state, action) =>{
+const tagReducer = (state = {}, action) =>{
     switch(action.type) {
         case RECEIVE_TAGS:
-            return ({...state, tags: action.tags});
+            return ({...state,  ...action.tags});
         case RECEIVE_TAG:
             return ({...state, [action.tag.id]: action.tag});
         case RECEIVE_TAG_ERRORS:
