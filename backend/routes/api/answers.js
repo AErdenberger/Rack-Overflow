@@ -25,6 +25,7 @@ router.get("/:postId", async (req, res) => {
     try {
         const answers = await Answer.find({ parentPost: id })
             .populate("parentPost", "id post")
+            .populate("author", "_id username")
             .sort({ createdAt: -1 });
         // return res.json(answers);
         const answerObj = {};
