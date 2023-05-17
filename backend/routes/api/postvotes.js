@@ -12,7 +12,6 @@ const PostVote = mongoose.model("PostVote");
 async function voteTotal(postId) {
   try {
     let allPostVotes = await PostVote.find({ postId }).exec();
-    console.log(allPostVotes, 'allPostVotes');
     let totalVoteCount = 0;
 
     for (let i = 0; i < allPostVotes.length; i++) {
