@@ -1,9 +1,14 @@
 // import { useParams } from 'react-router-dom';
 import './CommentBox.css';
 
-function CommentBox ({ comment: { text, author, parentPost, _id }}){
+function CommentBox ({ comment, author }){
     // const { postId } = useParams();
-    const { username } = author;
+    // const { username } = author;
+    // console.log(comment);
+    const text = comment.text;
+    console.log(comment);
+    // const username = comment.author;
+    // if(author) username = author.username;
 
     return(
         <div className='comment'>
@@ -11,7 +16,7 @@ function CommentBox ({ comment: { text, author, parentPost, _id }}){
                 <label id='label-text'>{text}</label>
             </div>
             <div id='container-author-comment'>
-                <label id='label-username'>{username}</label>
+                {/* <label id='label-username'>{username}</label> */}
             </div>
         </div>
     );
