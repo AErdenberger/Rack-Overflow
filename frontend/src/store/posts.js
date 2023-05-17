@@ -11,7 +11,7 @@ const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
 
 const receivePosts = (posts) => ({
     type: RECEIVE_POSTS,
-    posts,
+    posts
 });
 
 const receivePost = post => ({
