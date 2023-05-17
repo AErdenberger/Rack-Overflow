@@ -10,6 +10,8 @@ require('./models/Post');
 require('./models/Answer');
 require('./models/Tag');
 require('./config/passport');
+require('./models/PostVote');
+require('./models/AnswerVote')
 
 
 
@@ -39,6 +41,8 @@ const postsRouter = require("./routes/api/posts");
 const csrfRouter = require('./routes/api/csrf');
 const answersRouter = require('./routes/api/answers');
 const tagsRouter = require('./routes/api/tags');
+const postvotesRouter = require("./routes/api/postvotes")
+const answervotesRouter = require("./routes/api/answervotes")
 
 app.use('/api/posts', postsRouter);
 // app.use('/api/posts/:id', postsRouter);
@@ -47,6 +51,8 @@ app.use('/api/csrf', csrfRouter);
 app.use('/api/tags', tagsRouter);
 app.use('/api/answers/:postId', answersRouter);
 app.use('/api/answers', answersRouter);
+app.use('/api/postvotes', postvotesRouter);
+app.use('/api/answervotes', answervotesRouter);
 
 // Serve static React build files statically in production
 

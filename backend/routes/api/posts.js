@@ -63,8 +63,8 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
         let ans = [];
         let reqTags = req.body.tags;
         const tagProcess = async (el) => {
+            // const tag = await Tag.findOne({ tag: el.tag }); COMMENT BACK IN ONCE CREATE POST SUPPORT TAG INPUT
             const tag = await Tag.findOne({ tag: 'Hypertension' });
-
             if (tag) {
                 ans = ans.concat(tag._id);
             } else {

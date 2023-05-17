@@ -8,13 +8,12 @@ const postVoteSchema = new Schema(
             default: 0,
             required: true,
         },
-        authorId: {
+        author: {
             type: Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User",
         },
         postId:{
-            type: Schema.Types.ObjectId,
-            ref: "Post"
+            
         }
     },
     {
@@ -26,4 +25,4 @@ const postVoteSchema = new Schema(
 
 // Export the model for use in other parts of the application
 // module.exports = Tag;
-module.exports = mongoose.model("PostVote", postVoteSchema);
+module.exports = mongoose.model("Tag", tagSchema);
