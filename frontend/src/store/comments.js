@@ -32,9 +32,9 @@ export const clearCommentErrors = errors => ({
     errors
 });
 
-export const fetchComments = () => async dispatch => {
+export const fetchComments = (postId) => async dispatch => {
     try{
-        const res = await jwtFetch('/api/answers');
+        const res = await jwtFetch(`/api/answers/${postId}`);
         const comments = await res.json();
         dispatch(receiveComments(comments));
     } catch (err) {
@@ -66,7 +66,6 @@ export const composeComment = data => async dispatch => {
             body: JSON.stringify(data)
         })
         const comment = await res.json();
-        console.log(comment, 'comment');
         dispatch(receiveNewComment(comment));
     } catch(err) {
         const resBody = await err.json();
@@ -95,10 +94,9 @@ const commentsReducer = (state = { all: {}, user: {}, new: undefined}, action) =
         case RECEIVE_COMMENTS:
             return {...state, all: action.comments, new: undefined};
         case RECEIVE_COMMENT:
-            return{...state, all: [action.comment._id] = action.comment };
+            return{...state, all: {...state.all, [action.comment._id]: action.comment } };
         case RECEIVE_NEW_COMMENT:
-            // return {...state, new: action.comment};
-            return {...state, all: { [action.comment._id]: action.comment }};
+            return {...state, all: {...state.all, [action.comment._id]: action.comment }};
         case RECEIVE_USER_LOGOUT:
             return {...state, user: {}, new: undefined };
         default:
