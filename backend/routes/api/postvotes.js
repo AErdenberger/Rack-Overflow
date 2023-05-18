@@ -12,13 +12,14 @@ const PostVote = mongoose.model("PostVote");
 async function voteTotal(postId) {
   try {
     let allPostVotes = await PostVote.find({ postId }).exec();
+    console.log(allPostVotes, "all of the votes")
     let totalVoteCount = 0;
 
     for (let i = 0; i < allPostVotes.length; i++) {
       totalVoteCount += allPostVotes[i].vote;
     }
 
-    return totalVoteCount;
+    return {voteTotal: totalVoteCount};
 
   } catch (error) {
     console.error(error);
@@ -34,7 +35,6 @@ router.get('/votecount/:postId', requireUser, async (req, res, next) => {
 });
 
 router.post('/:postId', requireUser, async (req, res, next) => {
-
   const { postId } = req.params
 
   let postVoteByUser = await PostVote.findOne({

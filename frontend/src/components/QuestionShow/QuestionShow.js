@@ -8,6 +8,7 @@ import Comments from '../Comments/Comments';
 import CommentCompose from '../Comments/CommentsCompose/CommentCompose';
 import './QuestionShow.css';
 import Vote from '../Vote/Vote';
+import { fetchPostVotes, createPostVote, fetchAnswerVotes, createAnswerVote } from '../../store/votes';
 
 
 
@@ -66,7 +67,7 @@ const QuestionShow = () => {
             <div className='question'>
                 <label id='label-title'>{post.title}</label>
                 <div className='vote-div'>
-                    <Vote className='vote-compoment'/>
+                    <Vote fetchVotes={fetchPostVotes} createVote={createPostVote} postId={postId} className='vote-compoment'/>
                     <div>    
                         <div>
                             <p className="question-body">{post.text}</p>

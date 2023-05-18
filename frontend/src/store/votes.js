@@ -36,7 +36,7 @@ export const createPostVote = (data, postId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/postvotes/${postId}`, {
             method: 'POST',
-            body: JSON.stringify(data)
+            body: JSON.stringify({vote: data})
         });
         const votes = await res.json();
         dispatch(receiveVotes(votes));
@@ -66,7 +66,7 @@ export const createAnswerVote = (data, answerId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/answervotes/${answerId}`, {
             method: 'POST',
-            body: JSON.stringify(data)
+            body: JSON.stringify({vote: data})
         });
         const votes = await res.json();
         dispatch(receiveVotes(votes));
