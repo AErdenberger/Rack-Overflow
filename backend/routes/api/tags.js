@@ -19,6 +19,16 @@ router.post("/", requireUser, validateTagInput, async (req, res, next) => {
     }
 });
 
+router.get("/getAllTags", requireUser, async (req, res, next) =>{
+    try{
+        const tags = await Tag.find();
+        return res.json(tags);
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
 router.get("/", async (req, res) => {
     try {
         // const tag = await Tag.find({tag: req.query.tag});
