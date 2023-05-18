@@ -19,6 +19,8 @@
 #label-text{
     /* background-color: greenyellow; */
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    display: flex;
+    width: 70%;
 }
 
 #container-content-comment{

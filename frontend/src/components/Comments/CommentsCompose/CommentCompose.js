@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { clearCommentErrors, composeComment } from '../../../store/comments';
 import './CommentCompose.css';
-import CommentBox from '../CommentsBox/CommentBox';
 
 function CommentCompose(){
     const { postId } = useParams();
@@ -24,24 +23,25 @@ function CommentCompose(){
         e.preventDefault();
         dispatch(composeComment({ parentPost, text, tags }));
         setText('');
+        setTags([]);
     };
 
-    const colors = ["tomato", "brown", "salmon", "cyan",
-        "green", "orange", "gold", "violet", "pink"
-    ]
+    // const colors = ["tomato", "brown", "salmon", "cyan",
+    //     "green", "orange", "gold", "violet", "pink"
+    // ]
 
-    const changeColor = e => {
-        const randomIndex = Math.floor(Math.random() * colors.length);
-        var color = colors[randomIndex];
-        var label = document.getElementById("label-loading-comment");
-        if(label){
-            label.style.color = color;
-        }
-    };
+    // const changeColor = e => {
+    //     const randomIndex = Math.floor(Math.random() * colors.length);
+    //     var color = colors[randomIndex];
+    //     var label = document.getElementById("label-loading-comment");
+    //     if(label){
+    //         label.style.color = color;
+    //     }
+    // };
 
-    setInterval(function(){
-        changeColor();
-    }, 1000);
+    // setInterval(function(){
+    //     changeColor();
+    // }, 1000);
 
     const update = e => setText(e.currentTarget.value);
     const updateTags = e => setTags([e.currentTarget.value]);
@@ -62,12 +62,6 @@ function CommentCompose(){
                 <div className='errors'>{errors?.text}</div>
                 <input type='submit' value='Create comment' id='submit-button-comment' />
             </form>
-            {/* <div className='comment-preview'>
-                <label id='label-comment-preview'>Comment preview</label>
-                <div>
-                    {text ? <CommentBox comment={{text, author}} /> : <label id='label-loading-comment'> Loading...</label>}
-                </div>
-            </div> */}
         </div>
     );
 };

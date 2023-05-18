@@ -21,11 +21,11 @@ function Comments () {
         <div className='comments-container'>
             <div className='comments-index'>
                 <label id='label-all-comments'>{comments.length} answers </label>
-                {comments.map(comment => (
+                {comments.length > 0 ? comments.map(comment => (
                     <div>
                         <CommentBox comment={comment} />
                     </div>
-                ))}
+                )) : undefined}
             </div>
         </div>
     );

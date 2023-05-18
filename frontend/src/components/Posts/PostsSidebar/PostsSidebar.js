@@ -20,7 +20,7 @@ const PostsSidebar = () => {
         <div className='posts-sidebar-container'>
             <div id='container-options'>
                 <button id='label-home' onClick={goHome}>
-                    <i className="fa-solid fa-house"></i> Home
+                    <i className="fa-solid fa-house" id='home-logo'></i> Home
                 </button>
                 <div id='container-popular-label'>
                     {window.location.pathname === '/posts' ? <button id='label-popular'>

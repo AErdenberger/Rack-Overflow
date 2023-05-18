@@ -5,9 +5,20 @@ button {
 
 }
 
+#button-comments:hover{
+  cursor: pointer;
+}
+
+#button-delete:hover{
+  cursor: pointer;
+}
+
+#button-update:hover{
+  cursor: pointer;
+}
+
 .post {
   border: 1px solid black;
-  /* border: 1px solid lightgrey; */
   border-radius: 8px;
   margin-bottom: 10px;
   min-height: 57px;
@@ -80,8 +91,6 @@ button {
 }
 
 .post-box-username {
-  /* display: flex;
-  justify-content: end; */
   margin-right: 50px;
   width: 50px;
 }

@@ -6,8 +6,6 @@ function CommentBox ({ comment, author }){
     const text = comment.text;
     const username = comment.author.username;
     const currentUser = useSelector(state => state.session.user);
-    // console.log(comment.author._id);
-    // console.log(currentUser._id);
 
     return(
         <div className='comment'>
