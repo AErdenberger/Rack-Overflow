@@ -18,11 +18,23 @@ const QuestionShow = () => {
     // const post = useSelector(state => state.posts.all.postId)
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
+    const vote = useSelector(state => state.votes.vote);
     const history = useHistory();
 
     useEffect(() => {
         dispatch(fetchPost(postId));
     }, [dispatch])
+
+    useEffect(() => {
+        dispatch(fetchPostVotes(postId));
+        dispatch(fetchPostVote(postId, currentUser._id))
+    }, [dispatch, fetchPostVotes, fetchPostVote, postId, currentUser._id]);
+
+    useEffect(() => {
+        const fetch = dispatch(fetchPostVote(postId, currentUser._id));
+        console.log(fetch, "fHHHHHHHHHHHHHHHHHHHHHHHHH");
+    }, [dispatch, fetchPostVote, postId, currentUser._id])
+    console.log(currentUser._id, "current user id")
 
     const remove = () => {
         dispatch(deletePost(postId));
@@ -67,7 +79,14 @@ const QuestionShow = () => {
             <div className='question'>
                 <label id='label-title'>{post.title}</label>
                 <div className='vote-div'>
-                    <Vote fetchVotes={fetchPostVotes} createVote={createPostVote} fetchVote={fetchPostVote} postId={postId} currentUser={currentUser} className='vote-compoment'/>
+                    <Vote 
+                    fetchVotes={fetchPostVotes}
+                     createVote={createPostVote}
+                      fetchVote={fetchPostVote}
+                       postId={postId}
+                        currentUser={currentUser}
+                         className='vote-compoment'
+                         />
                     <div>    
                         <div>
                             <p className="question-body">{post.text}</p>

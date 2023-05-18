@@ -10,9 +10,9 @@ const receiveVotes = votes => ({
     votes
 });
 
-const receiveVote = postId => ({
+const receiveVote = vote => ({
     type: RECEIVE_VOTE,
-    postId
+    vote
 })
 
 const receiveErrors = (errors) => ({
@@ -29,6 +29,7 @@ export const fetchPostVotes = (postId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/postvotes/votecount/${postId}`);
         const votes = await res.json();
+        console.log(votes, "YYYYYYYYYYYYYYY")
         dispatch(receiveVotes(votes)); 
     } catch (err) {
         const resBody = await err.json();
@@ -42,7 +43,6 @@ export const fetchPostVote = (postId, userId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/postvotes/${postId}/user/${userId}`);
         const vote = await res.json();
-        console.log(vote, "YYYYYYYYYYYYYY")
         dispatch(receiveVote(vote)); 
     } catch (err) {
         const resBody = await err.json();
@@ -112,10 +112,16 @@ export const votesErrorsReducer = (state = nullErrors, action) => {
 };
 
 
-const votesReducer = (state = 0, action) => {
+const votesReducer = (state = { voteTotal: 0, vote: {}}, action) => {
+    let newState = {...state}
     switch(action.type) {
+        
         case RECEIVE_VOTES:
-            const newState = action.votes;
+            console.log(action, "MMMMMMMMMMMMMMMM")
+            newState = {...newState, voteTotal: action.votes}
+            return newState;
+        case RECEIVE_VOTE:
+            newState = {...newState, ...{vote: action.vote}};
             return newState;
         default:
             return state;

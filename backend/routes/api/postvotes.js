@@ -17,7 +17,6 @@ async function voteTotal(postId) {
     for (let i = 0; i < allPostVotes.length; i++) {
       totalVoteCount += allPostVotes[i].vote;
     }
-
     return {voteTotal: totalVoteCount};
 
   } catch (error) {
@@ -31,13 +30,13 @@ router.get('/:postId/user/:userId', requireUser, async (req, res, next) => {
   return res.json(userVote);
 });
 
-  router.get('/votecount/:postId', requireUser, async (req, res, next) => {
+router.get('/votecount/:postId', requireUser, async (req, res, next) => {
 
-    const { postId } = req.params
+  const { postId } = req.params
+  const data = await voteTotal(postId);
+  return res.json(data);
 
-    return res.json(voteTotal(postId))
-
-  });
+});
 
 router.post('/:postId', requireUser, async (req, res, next) => {
   const { postId } = req.params
@@ -64,7 +63,8 @@ router.post('/:postId', requireUser, async (req, res, next) => {
 
     }
 
-  return res.json(await voteTotal(postId))
+  const data = await voteTotal(postId);
+  return res.json(data);
 });
 
 module.exports = router;
