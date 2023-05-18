@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 425px;
+    padding-top: 300px;
     padding-bottom: 15px;
     gap: 100px;
     justify-content: space-around;
@@ -56,10 +56,12 @@
     display: block;
     z-index: 0;
     position: absolute;
+    width: 1386px;
 }
 
 .JoggingImage {
     display: block;
     position: absolute;
     z-index: 0;
+    width: 1386px;
 }

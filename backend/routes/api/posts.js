@@ -61,10 +61,12 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", requireUser, validatePostInput, async (req, res, next) => {
     try {
         let ans = [];
-        let reqTags = req.body.tags;
+        let reqTags = req.body.selectedTags;
+        console.log(reqTags, 'reqTags')
         const tagProcess = async (el) => {
-            // const tag = await Tag.findOne({ tag: el.tag }); COMMENT BACK IN ONCE CREATE POST SUPPORT TAG INPUT
-            const tag = await Tag.findOne({ tag: 'Hypertension' });
+            console.log(el, 'elllllll')
+            const tag = await Tag.findOne({ tag: el.tag }); 
+            // const tag = await Tag.findOne({ tag: el});
             if (tag) {
                 ans = ans.concat(tag._id);
             } else {
@@ -75,7 +77,7 @@ router.post("/", requireUser, validatePostInput, async (req, res, next) => {
         };
 
         for(let el = 0; el < reqTags.length; el++){
-            await tagProcess(el);
+            await tagProcess(reqTags[el]);
         };
 
         const newPost = new Post({

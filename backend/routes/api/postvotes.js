@@ -25,14 +25,22 @@ async function voteTotal(postId) {
     console.error(error);
   }
 }
-
-router.get('/votecount/:postId', requireUser, async (req, res, next) => {
+router.get('/votecount/:postId/user', requireUser, async (req, res, next) => {
 
   const { postId } = req.params
+  const userVote = await PostVote.findById({authorId: req.user._id, postId: postId})
 
-  return res.json(voteTotal(postId))
+  return res.json(userVote)
 
 });
+
+  router.get('/votecount/:postId', requireUser, async (req, res, next) => {
+
+    const { postId } = req.params
+
+    return res.json(voteTotal(postId))
+
+  });
 
 router.post('/:postId', requireUser, async (req, res, next) => {
   const { postId } = req.params
