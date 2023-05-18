@@ -23,13 +23,18 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
     history.push(path);
   }
 
+  const goShowPost = () => {
+    let path = `/posts/${_id}`;
+    history.push(path);
+  };
+
   let returnButton;
   if(currentUser){
     if(currentUser._id === author._id){
       returnButton = (
         <>
-          <button onClick={remove}>Delete Post</button>
-          <button onClick={goUpdatePost}>Update Post</button>
+          <button onClick={remove} id="button-delete">Delete Post</button>
+          <button onClick={goUpdatePost} id="button-update">Update Post</button>
         </>
       )
     }
@@ -61,11 +66,8 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
         </div>
         <div className="post-box-ratings-comments-username">
           <div className="post-box-ratings-comments">
-            <button>
+            <button onClick={goShowPost} id="button-comments">
               Comments
-            </button>
-            <button>
-              Ratings
             </button>
           </div>
           <div className="post-box-username">

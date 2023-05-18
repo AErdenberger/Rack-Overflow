@@ -20,12 +20,12 @@ function Comments () {
     return(
         <div className='comments-container'>
             <div className='comments-index'>
-                <label id='label-all-comments'>All Comments</label>
-                {comments.map(comment => (
+                <label id='label-all-comments'>{comments.length} answers </label>
+                {comments.length > 0 ? comments.map(comment => (
                     <div>
                         <CommentBox comment={comment} />
                     </div>
-                ))}
+                )) : undefined}
             </div>
         </div>
     );

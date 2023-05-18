@@ -1,0 +1,21 @@
+#modal-background-update{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(25, 25, 25, .5);
+    z-index: 2;
+}
+
+#modal-foreground-update{
+    border: 1px solid black;
+    border-radius: 20px;
+    height: 200px;
+    width: 450px;
+    background-color: white;
+    z-index: 3;
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 225px);
+}

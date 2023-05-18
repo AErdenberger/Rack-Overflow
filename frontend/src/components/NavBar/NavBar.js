@@ -89,16 +89,6 @@ function NavBar () {
                   </div>
                 </button>
               </div>
-              <div id='dropdown'>
-                <button id='dropbtn'>
-                  <div id='container-info-logo'>
-                    <i className="fa-solid fa-circle-info" id='info'></i>
-                  </div>
-                </button>
-                <div id='dropdown-content'>
-                  <Link to={'/about'} id='link-about'>About Rack Overflow</Link>
-                </div>
-              </div>
             </div>
           </div>
       );
@@ -138,16 +128,6 @@ function NavBar () {
               <label>
                 <button onClick={() => setShowModalSignup(prev => !prev)} id='link-signup'>Sign up</button>
               </label>
-              {/* <div id='dropdown'>
-                <button id='dropbtn'>
-                  <div id='container-info-logo'>
-                    <i className="fa-solid fa-circle-info" id='info'></i>
-                  </div>
-                </button>
-                <div id='dropdown-content'>
-                  <Link to={'/about'} id='link-about'>About Rack Overflow</Link>
-                </div>
-              </div> */}
             </div>
           </div>
         </>

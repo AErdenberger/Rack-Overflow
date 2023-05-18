@@ -56,12 +56,13 @@
     display: block;
     z-index: 0;
     position: absolute;
-    width: 1386px;
+    overflow-x: hidden;
+    width: 98.5%;
 }
 
 .JoggingImage {
     display: block;
     position: absolute;
     z-index: 0;
-    width: 1386px;
+    width: 100%;
 }
