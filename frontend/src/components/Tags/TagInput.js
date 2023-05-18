@@ -25,7 +25,7 @@ const TagInput = ({selectedTags, setSelectedTags}) => {
       fetchData();
 
     }, []);
-
+    // CONTINUTE WORKING ON DROP DOWN MENU FOR TAGS TO RETURN PROPER TAG OBJECTS, was still getting object Object
     // Handle tag selection
     const handleTagSelect = (event) => {
        const newTag = event.target;
@@ -40,7 +40,7 @@ const TagInput = ({selectedTags, setSelectedTags}) => {
           <option value="">-- Select Tag --</option>
           {fetchedTags.map(tag => {
             {console.log(tag,'tag')}
-           return <option key={tag._id} value={tag}>{tag.tag}</option>
+           return <option key={tag._id} value={tag}>{tag.tag}</option> 
             })}
         </select>
         <ul>
