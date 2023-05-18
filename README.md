@@ -76,3 +76,21 @@ router.get(“/”, async (req, res) => {
       }
   });
   ```
+  
+  Changing color of the loading comments label
+  ```js
+  const colors = ["tomato", "brown", "salmon", "cyan",
+    "green", "orange", "gold", "violet", "pink"
+  ]
+  const changeColor = e => {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    const color = colors[randomIndex];
+    const label = document.getElementById("label-loading-post");
+    if(label){
+      label.style.color = color;
+    }
+  };
+  setInterval(function(){
+    changeColor();
+  }, 1500);
+  ```
