@@ -58,11 +58,10 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
       <div>
         <div className="post-box-tags-div">
            {tags.map( tag=>{ 
-                            return <TagShow
-                                tagName = {tag.tag}
-                            />
-                        })}
-          {/* <span>tag 1</span><span>tag 2</span><span>tag 3</span><span>tag 4</span><span>tag 5</span><span>tag 6</span> */}
+              return <TagShow
+                  tagName = {tag.tag}
+              />
+            })}
         </div>
         <div className="post-box-ratings-comments-username">
           <div className="post-box-ratings-comments">

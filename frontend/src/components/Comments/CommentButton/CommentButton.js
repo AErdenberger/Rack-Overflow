@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+// import { deleteComment } from '../../store/comments';
 import { deleteComment } from '../../../store/comments';
 import { useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';

@@ -11,7 +11,7 @@ function PostCompose () {
   const [title, setTitle] = useState('');
   // const [tags, setTags] = useState(["hello"]);
   const [selectedTags,setSelectedTags] = useState([]);
-
+  console.log(selectedTags, 'selectedTags from POSTCOMPOSE')
   const dispatch = useDispatch();
   const author = useSelector(state => state.session.user);
   const newPost = useSelector(state => state.posts.new);
@@ -47,7 +47,7 @@ function PostCompose () {
 
   const updateTitle = e => setTitle(e.currentTarget.value);
   const updateText = e => setText(e.currentTarget.value);
-
+  const updateTags = e => setSelectedTags([e.currentTarget.value]);
   return (
     <div id='container-create-post-form'>
       <form className="compose-post" onSubmit={handleSubmit}>
@@ -69,6 +69,7 @@ function PostCompose () {
           />
         </div>
            <TagInput 
+            onChange = {updateTags}
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
            />
@@ -78,7 +79,7 @@ function PostCompose () {
       <div className="post-preview">
         <label id='label-post-preview'>Post Preview</label>
         <div>
-          {text ? <PostBox post={{text, author}} /> : <label id='label-loading-post'> Loading...</label>}
+          {text ? <PostBox post={{text, author, tags: selectedTags}} /> : <label id='label-loading-post'> Loading...</label>}
         </div>
       </div>
       <div className="previous-post">
