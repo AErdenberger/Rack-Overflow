@@ -1,6 +1,7 @@
 import jwtFetch from "./jwt";
 
 const RECEIVE_VOTES = "votes/RECEIVE_VOTES";
+const RECEIVE_VOTE = "votes/RECEIVE_VOTE";
 const RECEIVE_VOTE_ERRORS = "votes/RECEIVE_VOTES_ERRORS";
 const CLEAR_VOTE_ERRORS = "votes/CLEAR_POST_ERRORS";
 
@@ -8,6 +9,11 @@ const receiveVotes = votes => ({
     type: RECEIVE_VOTES,
     votes
 });
+
+const receiveVote = postId => ({
+    type: RECEIVE_VOTE,
+    postId
+})
 
 const receiveErrors = (errors) => ({
     type: RECEIVE_VOTE_ERRORS,
@@ -31,6 +37,20 @@ export const fetchPostVotes = (postId) => async dispatch => {
         }
     }
 };
+
+export const fetchPostVote = (postId, userId) => async dispatch => {
+    try {
+        const res = await jwtFetch(`/api/postvotes/${postId}/user/${userId}`);
+        const vote = await res.json();
+        console.log(vote, "YYYYYYYYYYYYYY")
+        dispatch(receiveVote(vote)); 
+    } catch (err) {
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) {
+            dispatch(receiveErrors(resBody.errors));
+        }
+    }
+}
 
 export const createPostVote = (data, postId) => async dispatch => {
     try {

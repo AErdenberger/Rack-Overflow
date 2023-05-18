@@ -12,7 +12,6 @@ const PostVote = mongoose.model("PostVote");
 async function voteTotal(postId) {
   try {
     let allPostVotes = await PostVote.find({ postId }).exec();
-    console.log(allPostVotes, "all of the votes")
     let totalVoteCount = 0;
 
     for (let i = 0; i < allPostVotes.length; i++) {
@@ -25,13 +24,11 @@ async function voteTotal(postId) {
     console.error(error);
   }
 }
-router.get('/votecount/:postId/user', requireUser, async (req, res, next) => {
-
-  const { postId } = req.params
-  const userVote = await PostVote.findById({authorId: req.user._id, postId: postId})
-
-  return res.json(userVote)
-
+router.get('/:postId/user/:userId', requireUser, async (req, res, next) => {
+  const { postId, userId } = req.params
+  console.log(postId, userId, "XXXXXXXXXXX")
+  const userVote = await PostVote.findOne({authorId: userId, postId: postId});
+  return res.json(userVote);
 });
 
   router.get('/votecount/:postId', requireUser, async (req, res, next) => {
