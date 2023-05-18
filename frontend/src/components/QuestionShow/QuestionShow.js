@@ -15,7 +15,6 @@ import { fetchPostVotes, createPostVote, fetchPostVote, fetchAnswerVotes, create
 const QuestionShow = () => {
     const { postId } = useParams();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
-    // const post = useSelector(state => state.posts.all.postId)
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const vote = useSelector(state => state.votes.vote);
@@ -32,9 +31,7 @@ const QuestionShow = () => {
 
     useEffect(() => {
         const fetch = dispatch(fetchPostVote(postId, currentUser._id));
-        console.log(fetch, "fHHHHHHHHHHHHHHHHHHHHHHHHH");
     }, [dispatch, fetchPostVote, postId, currentUser._id])
-    console.log(currentUser._id, "current user id")
 
     const remove = () => {
         dispatch(deletePost(postId));
@@ -85,6 +82,7 @@ const QuestionShow = () => {
                       fetchVote={fetchPostVote}
                        postId={postId}
                         currentUser={currentUser}
+                        vote={vote}
                          className='vote-compoment'
                          />
                     <div>    
@@ -97,12 +95,6 @@ const QuestionShow = () => {
                             </div>
                             <div className="questions-ratings-comments-username">
                                 <div className="questions-ratings-comments">
-                                    {/* <button id='button-comments'>
-                                        Delete
-                                    </button>
-                                    <button id='button-ratings'>
-                                        Update
-                                    </button> */}
                                     {returnButton}
                                 </div>
                                 <div className="questions-username">
