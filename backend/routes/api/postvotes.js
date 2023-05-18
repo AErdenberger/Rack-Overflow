@@ -17,32 +17,28 @@ async function voteTotal(postId) {
     for (let i = 0; i < allPostVotes.length; i++) {
       totalVoteCount += allPostVotes[i].vote;
     }
-
-    return totalVoteCount;
+    return {voteTotal: totalVoteCount};
 
   } catch (error) {
     console.error(error);
   }
 }
-router.get('/votecount/:postId/user', requireUser, async (req, res, next) => {
+router.get('/:postId/user/:userId', requireUser, async (req, res, next) => {
+  const { postId, userId } = req.params
+  console.log(postId, userId, "XXXXXXXXXXX")
+  const userVote = await PostVote.findOne({authorId: userId, postId: postId});
+  return res.json(userVote);
+});
+
+router.get('/votecount/:postId', requireUser, async (req, res, next) => {
 
   const { postId } = req.params
-  const userVote = await PostVote.findById({authorId: req.user._id, postId: postId})
-
-  return res.json(userVote)
+  const data = await voteTotal(postId);
+  return res.json(data);
 
 });
 
-  router.get('/votecount/:postId', requireUser, async (req, res, next) => {
-
-    const { postId } = req.params
-
-    return res.json(voteTotal(postId))
-
-  });
-
 router.post('/:postId', requireUser, async (req, res, next) => {
-
   const { postId } = req.params
 
   let postVoteByUser = await PostVote.findOne({
@@ -67,7 +63,8 @@ router.post('/:postId', requireUser, async (req, res, next) => {
 
     }
 
-  return res.json(await voteTotal(postId))
+  const data = await voteTotal(postId);
+  return res.json(data);
 });
 
 module.exports = router;

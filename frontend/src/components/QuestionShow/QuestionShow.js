@@ -7,20 +7,31 @@ import PostsSidebar from '../Posts/PostsSidebar/PostsSidebar';
 import Comments from '../Comments/Comments';
 import CommentCompose from '../Comments/CommentsCompose/CommentCompose';
 import './QuestionShow.css';
+import Vote from '../Vote/Vote';
+import { fetchPostVotes, createPostVote, fetchPostVote, fetchAnswerVotes, createAnswerVote } from '../../store/votes';
 
 
 
 const QuestionShow = () => {
     const { postId } = useParams();
     const post = useSelector(state => Object.values(state.posts.all).find(post => post._id === postId));
-    // const post = useSelector(state => state.posts.all.postId)
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
+    const vote = useSelector(state => state.votes.vote);
     const history = useHistory();
 
     useEffect(() => {
         dispatch(fetchPost(postId));
     }, [dispatch])
+
+    useEffect(() => {
+        dispatch(fetchPostVotes(postId));
+        dispatch(fetchPostVote(postId, currentUser._id))
+    }, [dispatch, fetchPostVotes, fetchPostVote, postId, currentUser._id]);
+
+    useEffect(() => {
+        const fetch = dispatch(fetchPostVote(postId, currentUser._id));
+    }, [dispatch, fetchPostVote, postId, currentUser._id])
 
     const remove = () => {
         dispatch(deletePost(postId));
@@ -64,30 +75,38 @@ const QuestionShow = () => {
             </div>
             <div className='question'>
                 <label id='label-title'>{post.title}</label>
-                <div>
-                    <p className="question-body">{post.text}</p>
-                </div>
-                <div>
-                    <div className="question-tags-div">
-                        <span>tag 1</span><span>tag 2</span><span>tag 3</span><span>tag 4</span><span>tag 5</span><span>tag 6</span>
-                    </div>
-                    <div className="questions-ratings-comments-username">
-                        <div className="questions-ratings-comments">
-                            {/* <button id='button-comments'>
-                                Delete
-                            </button>
-                            <button id='button-ratings'>
-                                Update
-                            </button> */}
-                            {returnButton}
+                <div className='vote-div'>
+                    <Vote 
+                    fetchVotes={fetchPostVotes}
+                     createVote={createPostVote}
+                      fetchVote={fetchPostVote}
+                       postId={postId}
+                        currentUser={currentUser}
+                        vote={vote}
+                         className='vote-compoment'
+                         />
+                    <div>    
+                        <div>
+                            <p className="question-body">{post.text}</p>
                         </div>
-                        <div className="questions-username">
-                            <div><span>{String.fromCodePoint(0x2B24)}</span> {username}</div>
+                        <div>
+                            <div className="question-tags-div">
+                                <span>tag 1</span><span>tag 2</span><span>tag 3</span><span>tag 4</span><span>tag 5</span><span>tag 6</span>
+                            </div>
+                            <div className="questions-ratings-comments-username">
+                                <div className="questions-ratings-comments">
+                                    {returnButton}
+                                </div>
+                                <div className="questions-username">
+                                    <div><span>{String.fromCodePoint(0x2B24)}</span> {username}</div>
+                                </div>
+                            </div>
+                            <div>
+                    </div>
+                            
                         </div>
                     </div>
-                    <div>
-                        
-                    </div>
+
                 </div>
                 
                 <div id='container-comments'>
