@@ -1,0 +1,40 @@
+#container-update-comment-form{
+    padding: 10px;
+}
+
+.update-comment{
+    margin-top: 10px;
+    margin-left: 7px;
+}
+
+#update-text{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#update-tags{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    font-size: 16px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#update-button-comment{
+    border: 1px solid black;
+    border-radius: 7px;
+    color: white;
+    margin-left: 28%;
+    background-color: #F56B00;
+    font-size: 20px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    transition: 0.5s;
+}
+
+#update-button-comment:hover{
+    font-size: 23px;
+    transition: 0.5s;
+}

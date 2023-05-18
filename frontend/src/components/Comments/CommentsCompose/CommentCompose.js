@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { clearCommentErrors, composeComment } from '../../../store/comments';
 import './CommentCompose.css';
-import CommentBox from '../CommentsBox/CommentBox';
 
 function CommentCompose(){
     const { postId } = useParams();
@@ -24,6 +23,7 @@ function CommentCompose(){
         e.preventDefault();
         dispatch(composeComment({ parentPost, text, tags }));
         setText('');
+        setTags([]);
     };
 
     const colors = ["tomato", "brown", "salmon", "cyan",
@@ -62,12 +62,6 @@ function CommentCompose(){
                 <div className='errors'>{errors?.text}</div>
                 <input type='submit' value='Create comment' id='submit-button-comment' />
             </form>
-            {/* <div className='comment-preview'>
-                <label id='label-comment-preview'>Comment preview</label>
-                <div>
-                    {text ? <CommentBox comment={{text, author}} /> : <label id='label-loading-comment'> Loading...</label>}
-                </div>
-            </div> */}
         </div>
     );
 };

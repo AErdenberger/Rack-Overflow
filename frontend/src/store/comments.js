@@ -81,6 +81,23 @@ export const composeComment = data => async dispatch => {
     }
 };
 
+export const updateComment = data => async dispatch => {
+    console.log(data, 'data update')
+    try{
+        const res = await jwtFetch(`/api/answers/${data.commentId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        });
+        const comment = await res.json();
+        dispatch(receiveComment(comment));
+    } catch (err) {
+        const resBody = await err.json();
+        if(resBody.statusCode === 400) {
+            return dispatch(receiveErrors(resBody.errors));
+        }
+    }
+};
+
 export const deleteComment = (commentId) => async dispatch => {
     try{
         await jwtFetch(`/api/answers/${commentId}`, {
