@@ -26,22 +26,22 @@ function CommentCompose(){
         setTags([]);
     };
 
-    const colors = ["tomato", "brown", "salmon", "cyan",
-        "green", "orange", "gold", "violet", "pink"
-    ]
+    // const colors = ["tomato", "brown", "salmon", "cyan",
+    //     "green", "orange", "gold", "violet", "pink"
+    // ]
 
-    const changeColor = e => {
-        const randomIndex = Math.floor(Math.random() * colors.length);
-        var color = colors[randomIndex];
-        var label = document.getElementById("label-loading-comment");
-        if(label){
-            label.style.color = color;
-        }
-    };
+    // const changeColor = e => {
+    //     const randomIndex = Math.floor(Math.random() * colors.length);
+    //     var color = colors[randomIndex];
+    //     var label = document.getElementById("label-loading-comment");
+    //     if(label){
+    //         label.style.color = color;
+    //     }
+    // };
 
-    setInterval(function(){
-        changeColor();
-    }, 1000);
+    // setInterval(function(){
+    //     changeColor();
+    // }, 1000);
 
     const update = e => setText(e.currentTarget.value);
     const updateTags = e => setTags([e.currentTarget.value]);
