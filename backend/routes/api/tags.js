@@ -25,9 +25,20 @@ router.get("/getAllTags", requireUser, async (req, res, next) =>{
         return res.json(tags);
     }catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Could not access Tags" });
     }
 });
+
+
+router.get("/getTagName", async(req,res,next) =>{//FINDS TAG NAME TO DISPLAY ON POSTBOX, QUESTIONSHOW
+    try{
+        const tag = await Tag.findById(req.body.tagId);
+        return res.json(tag)
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Could not find this Tag name" });
+    }
+})
 
 router.get("/", async (req, res) => {
     try {

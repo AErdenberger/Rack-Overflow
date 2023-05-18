@@ -8,8 +8,7 @@ const TagInput = ({selectedTags, setSelectedTags}) => {
     const dispatch = useDispatch()
     const fetchedTags = useSelector(getTags); //brings tag options from the store
     // const [selectedTags, setSelectedTags] = useState([]);
-    console.log('fetchedTags', fetchedTags)
-    console.log('selectedTags', selectedTags)
+
     // Fetch tags from the MongoDB Atlas database to populate dropdown options to the store
     useEffect(() => {
     // const x =  dispatch(fetchTags())

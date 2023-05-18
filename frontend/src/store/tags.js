@@ -42,6 +42,19 @@ export const fetchTags = () => async (dispatch) =>{
     }
 };
 
+export const fetchTag = ({tagId})=> async (dispatch) =>{
+    try{
+        const res = await jwtFetch("/api/tags/getTagName");
+        const tag = await res.json();
+        dispatch(receiveTag(tagId));
+    } catch (err) {
+        const resBody = await err.json();
+        if(resBody.statusCode === 400){
+            dispatch(receiveErrors(resBody.errors));
+        }
+    }
+}
+
 const tagReducer = (state = {}, action) =>{
     switch(action.type) {
         case RECEIVE_TAGS:
