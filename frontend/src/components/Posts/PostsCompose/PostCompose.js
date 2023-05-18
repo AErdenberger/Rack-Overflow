@@ -9,7 +9,7 @@ import TagInput from '../../Tags/TagInput';
 function PostCompose () {
   const [text, setText] = useState('');
   const [title, setTitle] = useState('');
-  const [tags, setTags] = useState(["hello"]);
+  // const [tags, setTags] = useState(["hello"]);
   const [selectedTags,setSelectedTags] = useState([]);
 
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function PostCompose () {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(composePost({ title, text, tags })); 
+    dispatch(composePost({ title, text, selectedTags })); 
     setText('');
     setTitle('');
   };
@@ -69,7 +69,7 @@ function PostCompose () {
           />
         </div>
            <TagInput 
-           selectedTags={selectedTags}
+            selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
            />
         <div className="errors">{errors?.text}</div>
