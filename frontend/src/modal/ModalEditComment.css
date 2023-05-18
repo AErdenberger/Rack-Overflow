@@ -1,4 +1,4 @@
-.modal-background{
+#modal-background-update{
     height: 100vh;
     width: 100vw;
     position: absolute;
@@ -8,14 +8,14 @@
     z-index: 2;
 }
 
-.modal-foreground{
+#modal-foreground-update{
     border: 1px solid black;
     border-radius: 20px;
-    height: 500px;
-    width: 350px;
+    height: 200px;
+    width: 450px;
     background-color: white;
     z-index: 3;
     position: absolute;
-    top: calc(50% - 260px);
-    left: calc(50% - 175px);
+    top: calc(50% - 100px);
+    left: calc(50% - 225px);
 }

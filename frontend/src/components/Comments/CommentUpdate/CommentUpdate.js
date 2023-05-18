@@ -8,16 +8,21 @@ const CommentUpdate = ({comment}) => {
     const dispatch = useDispatch();
     const { postId } = useParams();
     const { commentId } = useParams();
+    const history = useHistory();
     const currentUser = useSelector(state => state.session.user);
-    // console.log(currentUser, 'update');
-    // console.log(postId, 'post');
 
-    // const author = currentUser.username;
+    const [text, setText] = useState('');
+    const [tags, setTags] = useState('');
 
-    const [text, setText] = useState(comment.text);
-    const [tags, setTags] = useState(comment.tags);
+    if (!text){
+        if(comment){
+            setText(comment.text);
+            setTags(comment.tags);
+        }
+    }
 
     useEffect(() => {
+        dispatch(fetchComments(postId))
         return () => dispatch(clearCommentErrors());
     }, [dispatch]);
 
@@ -28,23 +33,26 @@ const CommentUpdate = ({comment}) => {
         const commentToBeUpdated = { parentPost: postId, text, tags, currentUser, commentId: commentId }
         e.preventDefault();
         dispatch(updateComment(commentToBeUpdated));
+        history.goBack();
     };
 
     return (
         <div id='container-update-comment-form'>
             <form className='update-comment' onSubmit={handleSubmit}>
-                <input type='textarea' id='update-text'
-                    value={text}
-                    onChange={updateText}
-                    placeholder='Change text...'
-                    required
-                />
-                <input type='text' id='update-tags'
-                    value={tags}
-                    onChange={updateTags}
-                    placeholder='Change tags...'
-                    required
-                />
+                <div>
+                    <input type='textarea' id='update-text'
+                        value={text}
+                        onChange={updateText}
+                        placeholder='Change text...'
+                        required
+                    />
+                    <input type='text' id='update-tags'
+                        value={tags}
+                        onChange={updateTags}
+                        placeholder='Change tags...'
+                        required
+                    />
+                </div>
                 <input type='submit' value={'Update comment'} id='update-button-comment' />
             </form>
         </div>

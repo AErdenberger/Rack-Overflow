@@ -3,8 +3,8 @@ import './ModalEditComment.css';
 const ModalEditComment = ({closeModal, component}) => {
 
     return(
-        <div id="modal-background" onClick={closeModal}>
-            <div id="modal-foreground" onClick={e => e.stopPropagation()}>
+        <div id="modal-background-update" onClick={closeModal}>
+            <div id="modal-foreground-update" onClick={e => e.stopPropagation()}>
                 {component}
             </div>
         </div>

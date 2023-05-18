@@ -31,6 +31,12 @@
     transition: 0.5s;
 }
 
+#label-home:hover #home-logo{
+    color: white;
+    background-color: #F56B00;
+    transition: 0.5s;
+}
+
 #container-popular-label{
     margin-top: 10px;
 }

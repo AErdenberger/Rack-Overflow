@@ -1,7 +1,6 @@
-import ModalEditComment from "../../../modal/Modal";
+import ModalEditComment from "../../../modal/ModalEditComment";
 import CommentUpdate from "./CommentUpdate";
 import { useHistory, useParams } from 'react-router-dom';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const CommentUpdateModal = () => {
@@ -18,6 +17,7 @@ const CommentUpdateModal = () => {
         <>
             {showUpdateCommentModal && (
                 <ModalEditComment closeModal={changeRoute} component={<CommentUpdate comment={comment} />} />
+                // <ModalEditComment closeModal={changeRoute} component={<CommentUpdate comment={comment} />} />
             )}
         </>
     );
