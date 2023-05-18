@@ -4,9 +4,9 @@ import './CommentBox.css';
 
 function CommentBox ({ comment, author }){
     const text = comment.text;
+    console.log(comment, 'comment');
     const username = comment.author.username;
     const currentUser = useSelector(state => state.session.user);
-    // console.log(comment.author._id);
     // console.log(currentUser._id);
 
     return(

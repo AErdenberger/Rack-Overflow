@@ -1,16 +1,38 @@
+import { useState, useEffect } from 'react';
 import { deleteComment } from '../../../store/comments';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { fetchComments } from '../../../store/comments';
+import Modal from '../../../modal/Modal';
 import './CommentButton.css';
+import CommentUpdate from '../CommentUpdate/CommentUpdate';
 
 function CommentButton ({comment}) {
     const { postId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
+    const [showModalEdit, setShowModalEdit] = useState(false);
 
     const remove = () => {
         dispatch(deleteComment(comment._id));
         dispatch(fetchComments(postId));
+    }
+
+    useEffect(() => {
+        dispatch(fetchComments(postId));
+    }, [dispatch]);
+
+    const goToUpdate = () => {
+        let path = `/${postId}/answer/${comment._id}/update`;
+        history.push(path);
+        // setShowModalEdit(true);
+        // return (
+        //     <>
+        //         {showModalEdit && (
+        //             <Modal closeModal={() => setShowModalEdit(false)} component={<CommentUpdate comment={comment} />} />
+        //         )}
+        //     </>
+        // )
     }
 
     return(
@@ -21,9 +43,8 @@ function CommentButton ({comment}) {
                 </div>
             </button>
             <div id='dropdown-content'>
-                <button id='button-edit-comment'>Edit comment</button>
+                <button onClick={goToUpdate} id='button-edit-comment'>Edit comment</button>
                 <button onClick={remove} id='button-delete-comment'>Delete comment</button>
-                {/* <Link to={'/about'} id='link-about'>About Rack Overflow</Link> */}
             </div>
         </div>
     )
