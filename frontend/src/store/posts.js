@@ -199,9 +199,10 @@ const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => 
         const mappedUserPosts = state.user.map(userPost => {
           return userPost;
         })
+        // return { ...state, new: action.post, };
         return { ...state, new: action.post, user: mappedUserPosts};
       case RECEIVE_USER_LOGOUT:
-        return { ...state, user: {}, new: undefined }
+        return { ...state, user: [], new: undefined }
       default:
         return state;
     }
