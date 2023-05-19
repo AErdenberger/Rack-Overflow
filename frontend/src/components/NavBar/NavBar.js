@@ -104,16 +104,6 @@ function NavBar () {
                 <label id='name-webpage'>Rack Overflow</label>
               </Link>
             </div>
-            {/* <label id='container-search'> <i className="fa-solid fa-magnifying-glass" id="icon-search"></i>
-              <input type='text' placeholder='Search Rack Overflow' id='search-bar'
-                onChange={(e) => setValueSearch(e.target.value)}
-              />
-            </label> */}
-             <SearchBar
-              handleSearchChange={handleSearchChange}
-              handleSearchClick={handleSearchClick}
-              searchValue={searchValue}
-            />
             <div id='conteiner-buttons'>
               <label>
                 <button onClick={loginDemo} id='button-demo-user'><i className="fa-solid fa-user-secret"></i> Demo User</button>
