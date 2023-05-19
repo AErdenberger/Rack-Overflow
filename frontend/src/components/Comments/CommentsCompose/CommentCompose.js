@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { clearCommentErrors, composeComment } from '../../../store/comments';
+import TagInput from '../../Tags/TagInput';
 import './CommentCompose.css';
 
 function CommentCompose(){
     const { postId } = useParams();
     const [text, setText] = useState('');
     const [tags, setTags] = useState([]);
+    const [selectedTags,setSelectedTags] = useState([]);
     const dispatch = useDispatch();
     const author = useSelector(state => state.session.user); //all user information
     const newComment = useSelector(state => state.comments.new);
@@ -21,9 +23,11 @@ function CommentCompose(){
 
     const handleSubmit = e => {
         e.preventDefault();
+
         dispatch(composeComment({ parentPost, text, tags }));
         setText('');
         setTags([]);
+        setSelectedTags([])
     };
 
     // const colors = ["tomato", "brown", "salmon", "cyan",
@@ -45,7 +49,7 @@ function CommentCompose(){
 
     const update = e => setText(e.currentTarget.value);
     const updateTags = e => setTags([e.currentTarget.value]);
-
+    
     return(
         <div id='container-create-comment-form'>
             <form className='compose-comment' onSubmit={handleSubmit}>
@@ -54,11 +58,12 @@ function CommentCompose(){
                     placeholder='What are your recommendations?'
                     required
                 />
-                <input type='text' value={tags}
-                    onChange={updateTags} id='tags-field'
-                    placeholder='Write your tags here'
-                    required
+                <TagInput 
+                    onChange = {updateTags}
+                    selectedTags={selectedTags}
+                    setSelectedTags={setSelectedTags}
                 />
+                
                 <div className='errors'>{errors?.text}</div>
                 <input type='submit' value='Create comment' id='submit-button-comment' />
             </form>
