@@ -25,7 +25,6 @@ async function voteTotal(postId) {
 }
 router.get('/:postId/user/:userId', requireUser, async (req, res, next) => {
   const { postId, userId } = req.params
-  console.log(postId, userId, "XXXXXXXXXXX")
   const userVote = await PostVote.findOne({authorId: userId, postId: postId});
   return res.json(userVote);
 });

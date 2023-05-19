@@ -101,7 +101,7 @@ export const fetchTagSearch = (tag) => async (dispatch) => {
 
   const encodedTag = tag
     .split(",") 
-    .map((word) => encodeURIComponent(word.trim())) // Encode spaces in each word
+    .map((word) => encodeURIComponent(word.trim())) 
     .join(",");
   
     try {

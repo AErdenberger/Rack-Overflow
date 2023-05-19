@@ -7,7 +7,6 @@ import { fetchTag } from "../../store/tags";
 const TagShow = ({tagName}) =>{
 
     
-    console.log(tagName, 'tagName from TAGSHOW')
 
     return (
         <>

@@ -65,7 +65,6 @@ export const fetchComment = (commentId) => async dispatch => {
 };
 
 export const composeComment = data => async dispatch => {
-    // console.log(data.parentPost, 'data');
     try{
         const res = await jwtFetch(`/api/answers/${data.parentPost}`, {
             method: 'POST',
@@ -82,7 +81,6 @@ export const composeComment = data => async dispatch => {
 };
 
 export const updateComment = data => async dispatch => {
-    console.log(data, 'data update')
     try{
         const res = await jwtFetch(`/api/answers/${data.commentId}`, {
             method: 'PATCH',

@@ -10,7 +10,6 @@ const answerSchema = new Schema(
         parentPost: {
             type: Schema.Types.ObjectId,
             ref: "Post",
-            // required: true,
         },
         text: {
             type: String,
@@ -35,6 +34,4 @@ const answerSchema = new Schema(
 
 const Answer = mongoose.model("Answer", answerSchema);
 
-// Export the model for use in other parts of the application
 module.exports = Answer;
-// module.exports = mongoose.model("Answer", answerSchema);

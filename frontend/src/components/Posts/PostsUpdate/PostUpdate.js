@@ -1,10 +1,10 @@
 import './PostUpdate.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPostErrors, updatePost, fetchPosts } from '../../../store/posts';
+import { clearPostErrors, updatePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { fetchUserPosts, fetchPost } from '../../../store/posts';
+import {  fetchPost } from '../../../store/posts';
 
 const PostUpdate = () => {
     const dispatch = useDispatch();
@@ -12,14 +12,6 @@ const PostUpdate = () => {
     const history = useHistory();
     const currentUser = useSelector(state => state.session.user);
     const userPost = useSelector(state => state.posts.all[postId]);
-
-    // let post;
-    // if (userPosts){
-    //     post = userPosts.filter(userPost => {
-    //         return userPost._id === postId;
-    //     })
-    // }
-
     const author = currentUser.username;
 
     const [text, setText] = useState('');
@@ -37,7 +29,6 @@ const PostUpdate = () => {
 
     useEffect(() => {
         dispatch(fetchPost(postId));
-        // dispatch(fetchUserPosts(currentUser._id));
         return () => dispatch(clearPostErrors());
     }, [dispatch]);
 

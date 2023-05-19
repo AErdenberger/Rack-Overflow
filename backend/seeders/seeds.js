@@ -14,7 +14,6 @@ const NUM_SEED_TAGS = 3;
 
 
 
-// Create users
 const users = [];
 
 users.push(
@@ -65,7 +64,6 @@ const MEDICAL_TAGS = [
   "Lumbar Disc Disorder"
 ]
   
-// Create Tags
 
 let medicalTagObjects =[];
 for (let i = 0; i < MEDICAL_TAGS.length; i++) {
@@ -76,15 +74,12 @@ for (let i = 0; i < MEDICAL_TAGS.length; i++) {
   )
 }
 
-console.log('medicalTagObjects', medicalTagObjects)
 
-// Create posts
 const posts = [];
 
 for (let i = 0; i < NUM_SEED_POSTS; i++) {
   const tags = [];
-  // let tags =  faker.lorem.words(5)
-  // let tagsArray = tags.split(" ");
+
   for (let i = 0; i < NUM_SEED_TAGS; i++) {
     tags.push(
       medicalTagObjects[Math.floor(Math.random() * medicalTagObjects.length)]    );
@@ -107,7 +102,7 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
 
 
 
-// Create answers
+
 const answers = [];
 for (let i = 0; i < NUM_SEED_ANSWERS; i++) {
   answers.push(
@@ -120,17 +115,11 @@ for (let i = 0; i < NUM_SEED_ANSWERS; i++) {
   )
 }
 
-// for (let i = 0; i < NUM_TAGS; i++) {
-//   posts.push(
-//     new Tag ({
-//       text: faker.hacker.phrase(),   
-//     })
-//   )
-// }
 
 
 
-// Connect to database
+
+
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {

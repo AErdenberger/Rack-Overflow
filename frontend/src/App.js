@@ -5,8 +5,6 @@ import { AuthRoute, ProtectedRoute } from './components/Routes';
 import NavBar from './components/NavBar/NavBar';
 import FooterBar from './components/FooterBar/Footer';
 import MainPage from './components/MainPage/MainPage';
-// import LoginForm from './components/SessionForms/LoginForm';
-// import SignupForm from './components/SessionForms/SignupForm';
 import Posts from './components/Posts/Posts';
 import Profile from './components/Profile/Profile';
 import PostCompose from './components/Posts/PostsCompose/PostCompose';

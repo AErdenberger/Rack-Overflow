@@ -4,10 +4,7 @@ const mongoose = require("mongoose");
 const Answer = mongoose.model("Answer");
 const Post = mongoose.model("Post");
 const Tag = mongoose.model("Tag");
-// const User = mongoose.model('User');
-// const Post = mongoose.model('Post');
 const { requireUser } = require("../../config/passport");
-// const validatePostInput = require('../../validations/posts');
 const validateAnswerInput = require("../../validations/posts");
 
 // In development, allow developers to access the CSRF token to test the
@@ -20,14 +17,12 @@ router.get("/restore", (req, res) => {
 });
 
 router.get("/:postId", async (req, res) => {
-    console.log("I'm in Answers routes", req.params);
     const id = req.params.postId;
     try {
         const answers = await Answer.find({ parentPost: id })
             .populate("parentPost", "id post")
             .populate("author", "_id username")
             .sort({ createdAt: -1 });
-        // return res.json(answers);
         const answerObj = {};
         answers.forEach(answer => {
             answerObj[answer._id] = answer;
@@ -41,7 +36,6 @@ router.get("/:postId", async (req, res) => {
 
 router.post("/", requireUser, validateAnswerInput, async (req, res, next) => {
 
-    // const postId = req.params.id;
     const { parentPost, text, voteCount, tags } = req.body;
     const post = await Post.findById(parentPost);
     try {
@@ -52,10 +46,8 @@ router.post("/", requireUser, validateAnswerInput, async (req, res, next) => {
 
             if (tag) {
                 ans = ans.concat(tag);
-                console.log("iiiiffffff", ans);
             } else {
                 tag = new Tag({ tag: el });
-                console.log("eeeellllsssee", el);
                 await tag.save();
                 ans = ans.concat(tag);
             }
@@ -89,7 +81,6 @@ router.patch("/:id", requireUser, validateAnswerInput, async (req, res, next) =>
         const { text, voteCount, tags } = req.body;
         const answer = await Answer.findById(answerId);
         let ans = [];
-        // let reqTags = req.body.tags;
 
         const tagProcess = async (el) => {
             const tag = await Tag.find({ tag: el });
@@ -121,7 +112,6 @@ router.patch("/:id", requireUser, validateAnswerInput, async (req, res, next) =>
         answer.voteCount = voteCount;
         answer.tags = ans;
         await answer.save();
-        // await answer.populate('author', '_id username').execPopulate();
         answer.tags = ans;
         return res.json(answer);
     } catch (err) {
