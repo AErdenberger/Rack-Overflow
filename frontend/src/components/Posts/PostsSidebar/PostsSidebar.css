@@ -6,7 +6,7 @@
     background-color: white;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 5px;
-    height: 600px;
+    min-height: 5rem;
     width: 230px;
     margin-left: -50px;
     margin-top: 66px;
@@ -19,6 +19,7 @@
 
 #label-home{
     border: 1px solid black;
+    margin-bottom: 1rem;
     border-radius: 6px;
     background-color: #ededed;
     font-size: 20px;
@@ -68,7 +69,7 @@
 #create-post-button{
     border-style: none;
     border-radius: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 2rem;
     background-color: #F56B00;
     color: white;
     width: 90%;
