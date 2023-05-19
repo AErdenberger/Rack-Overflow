@@ -1,0 +1,43 @@
+.vote-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* #vote-arrow {
+    font-size: 3rem;
+    color: lightgrey;
+} */
+
+#upvote-arrow {
+    font-size: 3rem;
+    color: lightgrey;
+}
+
+#upvote-arrow-clicked {
+    font-size: 3rem;
+    color: rgb(86, 86, 216);
+}
+
+#upvote-arrow:hover {
+    color: rgb(86, 86, 216);
+}
+
+#downvote-arrow {
+    font-size: 3rem;
+    color: lightgrey;
+}
+
+#downvote-arrow-clicked {
+    font-size: 3rem;
+    color: rgb(86, 86, 216);
+}
+
+#downvote-arrow:hover {
+    color: rgb(86, 86, 216);
+}
+
+#vote-count {
+    font-size: 1.5rem;
+    color: grey;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
