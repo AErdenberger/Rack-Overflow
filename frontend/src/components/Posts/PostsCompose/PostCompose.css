@@ -33,6 +33,7 @@ input[type=textarea] {
 #text-content{
   border: 1px solid black;
   border-radius: 10px;
+  margin-bottom: 15px;
   text-indent: 4px;
   font-size: 24px;
   font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;

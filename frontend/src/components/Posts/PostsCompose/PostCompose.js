@@ -4,14 +4,11 @@ import { clearPostErrors, composePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import './PostCompose.css';
 import TagInput from '../../Tags/TagInput';
-// import ChatBot from '../../ChatBot/ChatBot';
 
 function PostCompose () {
   const [text, setText] = useState('');
   const [title, setTitle] = useState('');
-  // const [tags, setTags] = useState(["hello"]);
   const [selectedTags,setSelectedTags] = useState([]);
-  console.log(selectedTags, 'selectedTags from POSTCOMPOSE')
   const dispatch = useDispatch();
   const author = useSelector(state => state.session.user);
   const newPost = useSelector(state => state.posts.new);
@@ -26,6 +23,7 @@ function PostCompose () {
     dispatch(composePost({ title, text, selectedTags })); 
     setText('');
     setTitle('');
+    setSelectedTags([]);
   };
 
   const colors = ["tomato", "brown", "salmon", "cyan",
@@ -68,11 +66,13 @@ function PostCompose () {
             required
           />
         </div>
+        <div id='container-tags-dropmenu'>
            <TagInput 
             onChange = {updateTags}
             selectedTags={selectedTags}
             setSelectedTags={setSelectedTags}
            />
+        </div>
         <div className="errors">{errors?.text}</div>
         <input type="submit" value="Submit" id='button-submit' />
       </form>
