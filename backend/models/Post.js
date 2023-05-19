@@ -15,10 +15,6 @@ const postSchema = new Schema(
             type: String,
             required: true,
         },
-        voteCount: {
-            type: Number,
-            default: 0,
-        },
         tags: [
             {
                 type: Schema.Types.ObjectId,

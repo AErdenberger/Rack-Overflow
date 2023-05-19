@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePost, updatePost } from "../../../store/posts";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import TagShow from "../../Tags/TagShow";
 
 
 function PostBox ({ post: { _id, text, author, title, tags }}) {
   const currentUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
   let username;
   if(author) username = author.username;
   const history = useHistory();
@@ -55,7 +57,11 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
       </div>
       <div>
         <div className="post-box-tags-div">
-          <span>tag 1</span><span>tag 2</span><span>tag 3</span><span>tag 4</span><span>tag 5</span><span>tag 6</span>
+           {tags.map( tag=>{ 
+              return <TagShow
+                  tagName = {tag.tag}
+              />
+            })}
         </div>
         <div className="post-box-ratings-comments-username">
           <div className="post-box-ratings-comments">
