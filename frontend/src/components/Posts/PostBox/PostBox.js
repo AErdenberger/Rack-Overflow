@@ -44,6 +44,10 @@ function PostBox ({ post: { _id, text, author, title, tags }}) {
     )
   }
 
+  if(!tags){
+    return undefined;
+  }
+
   return (
     <div className="post">
 
