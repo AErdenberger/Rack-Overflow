@@ -29,5 +29,3 @@ const brown = {
     }
   }
   
-  // Return the list of unusual words
-  // console.log(unusualWords);
