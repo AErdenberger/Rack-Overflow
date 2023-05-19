@@ -116,3 +116,14 @@
 .TAGSHOW{
     background-color: aquamarine;
 }
+
+.questions-ratings-comments button{
+    border-radius: 3px;
+    color: gray;
+    border-style: none;
+}
+
+.questions-ratings-comments button:hover{
+    background-color: lightgrey;
+    transition: 0.5s;
+}

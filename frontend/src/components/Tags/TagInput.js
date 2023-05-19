@@ -34,20 +34,19 @@ const TagInput = ({selectedTags, setSelectedTags}) => {
   
     return (
       <div>
-        <label htmlFor="tagSelect">Select tags:</label>
+        <label htmlFor="tagSelect" id='label-select-tags'>Select tags:</label>
         <select id="tagSelect" onChange={handleTagSelect}>
-          <option value="">-- Select Tag --</option>
+          <option value="" id='option-select-tag'>-- Select Tag --</option>
           {fetchedTags.map(tag => {
             // {console.log(tag,'tag')}
-           return <option key={tag._id} value={JSON.stringify(tag)}>{tag.tag}</option> 
+           return <option key={tag._id} value={JSON.stringify(tag)} id='option'>{tag.tag}</option> 
             })}
         </select>
         <ul>
           {selectedTags.map(tag => (
-            <li key={tag}>{tag.tag}</li>
+            <li key={tag} id='li-selected-tag'>{tag.tag}</li>
           ))}
         </ul>
-        {/* {error && <p>Error fetching tags: {error.message}</p>} */}
       </div>
     );
   };
