@@ -18,7 +18,6 @@ function NavBar () {
 
   const [showModal, setShowModal] = useState(false);
   const [showModalSignup, setShowModalSignup] = useState(false);
-  // for searchBar
   const [searchValue, setSearchValue] = useState("");
 
   const logoutUser = e => {
@@ -53,9 +52,6 @@ function NavBar () {
 
     let query = e.target.value
     dispatch(fetchTagSearch(query))
-    // .then(() => {
-    // history.push('/posts/search');
-      // });
   }
 
   const getLinks = () => {

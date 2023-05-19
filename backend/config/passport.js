@@ -17,10 +17,8 @@ passport.use(new JwtStrategy(options, async (jwtPayload, done) => {
   try {
     const user = await User.findById(jwtPayload._id)
     if (user) {
-      // return the user to the frontend
       return done(null, user);
     }
-    // return false since there is no user
     return done(null, false);
   }
   catch(err) {

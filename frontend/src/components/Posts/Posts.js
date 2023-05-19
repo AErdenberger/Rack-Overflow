@@ -4,7 +4,6 @@ import { clearPostErrors, fetchPosts } from '../../store/posts';
 import PostBox from './PostBox/PostBox.js';
 import PostsSidebar from './PostsSidebar/PostsSidebar';
 import './Posts.css'
-// import { Link } from 'react-router-dom';
 
 function Posts () {
   const dispatch = useDispatch();
@@ -25,7 +24,6 @@ function Posts () {
       <div className='posts-index'>
         <h2>All Posts</h2>
         {posts.map(post => (
-          // console.log(post)
           <div key={post._id}>
             
               <PostBox  post={post} />

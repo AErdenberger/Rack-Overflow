@@ -36,7 +36,7 @@ app.use(
   })
 );
 
-const usersRouter = require("./routes/api/users"); // update the import file path
+const usersRouter = require("./routes/api/users"); 
 const postsRouter = require("./routes/api/posts");
 const csrfRouter = require('./routes/api/csrf');
 const answersRouter = require('./routes/api/answers');
@@ -45,7 +45,6 @@ const postvotesRouter = require("./routes/api/postvotes")
 const answervotesRouter = require("./routes/api/answervotes")
 
 app.use('/api/posts', postsRouter);
-// app.use('/api/posts/:id', postsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/tags', tagsRouter);

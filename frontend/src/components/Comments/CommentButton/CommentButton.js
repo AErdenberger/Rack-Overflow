@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
-// import { deleteComment } from '../../store/comments';
 import { deleteComment } from '../../../store/comments';
 import { useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { fetchComments } from '../../../store/comments';
-import Modal from '../../../modal/Modal';
 import './CommentButton.css';
-import CommentUpdate from '../CommentUpdate/CommentUpdate';
 
 function CommentButton ({comment}) {
     const { postId } = useParams();
@@ -26,14 +23,6 @@ function CommentButton ({comment}) {
     const goToUpdate = () => {
         let path = `/${postId}/answer/${comment._id}/update`;
         history.push(path);
-        // setShowModalEdit(true);
-        // return (
-        //     <>
-        //         {showModalEdit && (
-        //             <Modal closeModal={() => setShowModalEdit(false)} component={<CommentUpdate comment={comment} />} />
-        //         )}
-        //     </>
-        // )
     }
 
     return(

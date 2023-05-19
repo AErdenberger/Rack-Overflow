@@ -17,7 +17,6 @@ const CommentUpdateModal = () => {
         <>
             {showUpdateCommentModal && (
                 <ModalEditComment closeModal={changeRoute} component={<CommentUpdate comment={comment} />} />
-                // <ModalEditComment closeModal={changeRoute} component={<CommentUpdate comment={comment} />} />
             )}
         </>
     );

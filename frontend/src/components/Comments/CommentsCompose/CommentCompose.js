@@ -9,8 +9,7 @@ function CommentCompose(){
     const [text, setText] = useState('');
     const [tags, setTags] = useState([]);
     const dispatch = useDispatch();
-    const author = useSelector(state => state.session.user); //all user information
-    const newComment = useSelector(state => state.comments.new);
+
     const errors = useSelector(state => state.errors.comments);
 
     let parentPost = postId;
@@ -25,23 +24,6 @@ function CommentCompose(){
         setText('');
         setTags([]);
     };
-
-    // const colors = ["tomato", "brown", "salmon", "cyan",
-    //     "green", "orange", "gold", "violet", "pink"
-    // ]
-
-    // const changeColor = e => {
-    //     const randomIndex = Math.floor(Math.random() * colors.length);
-    //     var color = colors[randomIndex];
-    //     var label = document.getElementById("label-loading-comment");
-    //     if(label){
-    //         label.style.color = color;
-    //     }
-    // };
-
-    // setInterval(function(){
-    //     changeColor();
-    // }, 1000);
 
     const update = e => setText(e.currentTarget.value);
     const updateTags = e => setTags([e.currentTarget.value]);

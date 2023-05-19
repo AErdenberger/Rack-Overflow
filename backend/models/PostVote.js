@@ -22,8 +22,5 @@ const postVoteSchema = new Schema(
     }
 );
 
-// const Tag = mongoose.model("Tag", tagSchema);
 
-// Export the model for use in other parts of the application
-// module.exports = Tag;
 module.exports = mongoose.model("PostVote", postVoteSchema);

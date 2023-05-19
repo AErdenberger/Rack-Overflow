@@ -70,7 +70,6 @@ const QuestionShow = () => {
     if(!post) return null;
     const { username } = post.author;
     
-    console.log(post.tags, 'post.tag from QUESTIONSHOW')
     return(
         <div className='questions-container'>
             <div className='questions-sidebar'>

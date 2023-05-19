@@ -7,16 +7,12 @@ import './TagInput.css';
 const TagInput = ({selectedTags, setSelectedTags}) => {
     const dispatch = useDispatch()
     const fetchedTags = useSelector(getTags); //brings tag options from the store
-    // const [selectedTags, setSelectedTags] = useState([]);
 
-    // Fetch tags from the MongoDB Atlas database to populate dropdown options to the store
     useEffect(() => {
-    // const x =  dispatch(fetchTags())
-    //  console.log(x, 'fetchTags')
+
     const fetchData = async () => {
       try {
         const response = await dispatch(fetchTags());
-        // console.log(response, 'fetchTags');
       } catch (error) {
         console.error('Error fetching tags:', error);
       }
@@ -24,11 +20,9 @@ const TagInput = ({selectedTags, setSelectedTags}) => {
       fetchData();
 
     }, []);
-    // CONTINUTE WORKING ON DROP DOWN MENU FOR TAGS TO RETURN PROPER TAG OBJECTS, was still getting object Object
-    // Handle tag selection
+    
     const handleTagSelect = (event) => {
        const newTag = JSON.parse(event.target.value);
-       console.log(newTag)
       setSelectedTags(prevSelectedTags => [...prevSelectedTags, newTag]);
     };
   
@@ -38,7 +32,6 @@ const TagInput = ({selectedTags, setSelectedTags}) => {
         <select id="tagSelect" onChange={handleTagSelect}>
           <option value="" id='option-select-tag'>-- Select Tag --</option>
           {fetchedTags.map(tag => {
-            // {console.log(tag,'tag')}
            return <option key={tag._id} value={JSON.stringify(tag)} id='option'>{tag.tag}</option> 
             })}
         </select>

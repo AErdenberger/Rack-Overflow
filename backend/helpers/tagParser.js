@@ -5,7 +5,7 @@ const brown = {
     "the": 69971,
     "and": 43688,
     "of": 34822,
-    // ...
+    
   };
   
   // Tokenize the paragraph
@@ -29,5 +29,3 @@ const brown = {
     }
   }
   
-  // Return the list of unusual words
-  // console.log(unusualWords);

@@ -29,7 +29,6 @@ export const fetchPostVotes = (postId) => async dispatch => {
     try {
         const res = await jwtFetch(`/api/postvotes/votecount/${postId}`);
         const votes = await res.json();
-        console.log(votes, "YYYYYYYYYYYYYYY")
         dispatch(receiveVotes(votes)); 
     } catch (err) {
         const resBody = await err.json();
@@ -117,7 +116,6 @@ const votesReducer = (state = { voteTotal: 0, vote: {}}, action) => {
     switch(action.type) {
         
         case RECEIVE_VOTES:
-            console.log(action, "MMMMMMMMMMMMMMMM")
             newState = {...newState, voteTotal: action.votes}
             return newState;
         case RECEIVE_VOTE:
