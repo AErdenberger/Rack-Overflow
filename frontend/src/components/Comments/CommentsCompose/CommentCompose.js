@@ -58,11 +58,12 @@ function CommentCompose(){
                     placeholder='What are your recommendations?'
                     required
                 />
-                <TagInput 
+                {/* <TagInput 
                     onChange = {updateTags}
                     selectedTags={selectedTags}
                     setSelectedTags={setSelectedTags}
-                />
+                    //CREATES A COMMENT TAG
+                /> */} 
                 
                 <div className='errors'>{errors?.text}</div>
                 <input type='submit' value='Create comment' id='submit-button-comment' />
