@@ -36,11 +36,11 @@ function CommentCompose(){
                     placeholder='What are your recommendations?'
                     required
                 />
-                <input type='text' value={tags}
+                {/* <input type='text' value={tags}
                     onChange={updateTags} id='tags-field'
                     placeholder='Write your tags here'
                     required
-                />
+                /> */}
                 <div className='errors'>{errors?.text}</div>
                 <input type='submit' value='Create comment' id='submit-button-comment' />
             </form>
