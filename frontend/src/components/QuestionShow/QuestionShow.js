@@ -93,10 +93,15 @@ const QuestionShow = () => {
                             <p className="question-body">{post.text}</p>
                         </div>
                         <div>
-                            <div className="question-tags-div">
-                                
-                                <span>tag 1</span><span>tag 2</span><span>tag 3</span><span>tag 4</span><span>tag 5</span><span>tag 6</span>
-                            </div>
+                        <div className="question-tags-div">
+
+                            {post.tags.map( tag=>{ 
+                                return <TagShow
+                                    tagName = {tag.tag}
+                                />
+                            })}
+
+                        </div>
                             <div className="questions-ratings-comments-username">
                                 <div className="questions-ratings-comments">
                                     {returnButton}
