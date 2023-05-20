@@ -6,7 +6,7 @@ const Post = mongoose.model("Post");
 const Tag = mongoose.model("Tag");
 const { requireUser } = require("../../config/passport");
 const validateAnswerInput = require("../../validations/posts");
-
+const keys = require("../../config/keys");
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
     apiKey: keys.openAIKey,
