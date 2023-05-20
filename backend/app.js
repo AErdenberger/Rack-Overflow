@@ -48,7 +48,6 @@ app.use('/api/posts', postsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/tags', tagsRouter);
-app.use('/api/answers/:postId', answersRouter);
 app.use('/api/answers', answersRouter);
 app.use('/api/postvotes', postvotesRouter);
 app.use('/api/answervotes', answervotesRouter);
