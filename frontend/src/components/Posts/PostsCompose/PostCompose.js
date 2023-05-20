@@ -33,8 +33,8 @@ function PostCompose () {
     console.log('BECKY G', text)
     e.preventDefault();
     let newPost = await dispatch(composePost({ title, text, selectedTags })); 
-    // let answer = dispatch(await fetchAI(text))
-    // dispatch(composeComment({ parentPost:newPost, text: answer}));
+    let answer = dispatch(await fetchAI(text))
+    dispatch(composeComment({ parentPost:newPost, text: answer}));
     setText('');
     setTitle('');
     setSelectedTags([]);
