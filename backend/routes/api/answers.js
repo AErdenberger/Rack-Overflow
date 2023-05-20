@@ -7,6 +7,13 @@ const Tag = mongoose.model("Tag");
 const { requireUser } = require("../../config/passport");
 const validateAnswerInput = require("../../validations/posts");
 
+const { Configuration, OpenAIApi } = require("openai");
+const configuration = new Configuration({
+    apiKey: keys.openAIKey,
+});
+const openai = new OpenAIApi(configuration);
+
+
 // In development, allow developers to access the CSRF token to test the
 // server endpoints in Postman.
 router.get("/restore", (req, res) => {
@@ -15,23 +22,24 @@ router.get("/restore", (req, res) => {
         "CSRF-Token": csrfToken,
     });
 });
-
-router.get("/:postId", async (req, res) => {
-    const id = req.params.postId;
+router.post("/open-ai", async (req, res, next) => {
+    console.log('I am HERE');
     try {
-        const answers = await Answer.find({ parentPost: id })
-            .populate("parentPost", "id post")
-            .populate("author", "_id username")
-            .sort({ createdAt: -1 });
-        const answerObj = {};
-        answers.forEach(answer => {
-            answerObj[answer._id] = answer;
-        })
-        return res.json(answerObj);
+      const { prompt } = await req.body;
+      console.log("req.body", req.body);
+  
+      const completion = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: prompt,
+        temperature: 0.6,
+      });
+     console.log('COMPLETION', completion)
+      res.status(200).json({ result: completion.data.choices[0].text });
     } catch (err) {
-        return res.json([]);
+      console.error("An error occurred:", err);
+      res.status(500).json({ error: "Internal server error" });
     }
-});
+})
 
 
 router.post("/", requireUser, validateAnswerInput, async (req, res, next) => {
