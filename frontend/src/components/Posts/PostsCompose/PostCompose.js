@@ -18,6 +18,26 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
+    // const makeAIcomment = async (text) => {
+  //   dispatch(fetchAI(text))
+  //   const response = await jwtFetch("/api/posts/open-ai", {
+  //       method: "POST",
+  //       body: JSON.stringify(data),
+  //   });
+  //   const ans = await response.json()
+  //   console.log(ans);
+  // }
+  // const handleSubmit = async e => {
+  //   console.log('BECKY G', text)
+  //   e.preventDefault();
+  //   let newPost = await dispatch(composePost({ title, text, selectedTags })); 
+  //   // let answer = dispatch(await fetchAI(text))
+  //   // dispatch(composeComment({ parentPost:newPost, text: answer}));
+  //   setText('');
+  //   setTitle('');
+  //   setSelectedTags([]);
+  // };
+
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(composePost({ title, text, selectedTags })); 
