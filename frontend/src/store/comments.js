@@ -37,7 +37,8 @@ export const clearCommentErrors = errors => ({
     type: CLEAR_COMMENT_ERRORS,
     errors
 });
-export const fetchAI = (prompt) => async (dispatch) => {
+
+export const fetchAI = (prompt, currentUserId, postId) => async (dispatch) => {
     console.log('PROMPT', prompt)
     console.log(JSON.stringify(prompt))
 
@@ -53,8 +54,9 @@ export const fetchAI = (prompt) => async (dispatch) => {
     });
     
     const ans = await response.json();
-    console.log('ANSWERR', ans)
-    dispatch(receiveNewComment(ans));
+    console.log('ANSWERR', ans) // {result: Text string}
+     return ans;
+    // dispatch(receiveNewComment(ans.result));
 } catch (err) {
     const resBody = await err.json();
     if(resBody.statusCode === 400){
@@ -91,6 +93,8 @@ export const fetchComment = (commentId) => async dispatch => {
 };
 
 export const composeComment = data => async dispatch => {
+
+    console.log('data in COMPOSE COMMWNT', data)
     try{
         const res = await jwtFetch(`/api/answers/${data.parentPost}`, {
             method: 'POST',
@@ -98,6 +102,7 @@ export const composeComment = data => async dispatch => {
         })
         const comment = await res.json();
         dispatch(receiveNewComment(comment));
+        return comment;
     } catch(err) {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
@@ -151,11 +156,12 @@ export const commentErrorReducer = (state = nullErrors, action) => {
 };
 
 const commentsReducer = (state = { all: {}, user: {}, new: undefined}, action) => {
+    
     switch(action.type){
         case RECEIVE_COMMENTS:
             return {...state, all: action.comments, new: undefined};
         case RECEIVE_COMMENT:
-            return{...state, all: {...state.all, [action.comment._id]: action.comment } };
+            return {...state, all: {...state.all, [action.comment._id]: action.comment } };
         case RECEIVE_NEW_COMMENT:
             return {...state, all: {...state.all, [action.comment._id]: action.comment }};
         case RECEIVE_USER_LOGOUT:

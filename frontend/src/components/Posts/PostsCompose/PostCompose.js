@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, composePost } from '../../../store/posts';
+import { composeComment } from '../../../store/comments';
 import PostBox from '../PostBox/PostBox';
 import './PostCompose.css';
 import TagInput from '../../Tags/TagInput';
@@ -20,21 +21,26 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-    const makeAIcomment = async (text) => {
+    const makeAIcomment = async (text, newPost) => {
     let data = dispatch(fetchAI(text))
-    const response = await jwtFetch("/api/posts/open-ai", {
+    const response = await jwtFetch("/api/answers/open-ai", {
         method: "POST",
         body: JSON.stringify(data),
     });
     const ans = await response.json()
     console.log(ans);
+    dispatch(composeComment({ parentPost: newPost, text: ans}));
   }
   const handleSubmit = async e => {
     console.log('BECKY G', text)
+
     e.preventDefault();
     let newPost = await dispatch(composePost({ title, text, selectedTags })); 
-    let answer = dispatch(await fetchAI(text))
-    dispatch(composeComment({ parentPost:newPost, text: answer}));
+    console.log('NEW POST', newPost)
+    // let answer = await dispatch(fetchAI(text))
+    let answer = await makeAIcomment(makeAIcomment(text, newPost));
+    console.log('SWANNNSWER', answer)
+  
     setText('');
     setTitle('');
     setSelectedTags([]);

@@ -26,15 +26,15 @@ router.post("/open-ai", async (req, res, next) => {
     console.log('I am HERE');
     try {
       const { prompt } = await req.body;
-      console.log("req.body", req.body);
-  
       const completion = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: prompt,
         temperature: 0.6,
       });
-     console.log('COMPLETION', completion)
-      res.status(200).json({ result: completion.data.choices[0].text });
+  
+  res.status(200).json({ result: completion.data.choices[0].text });
+   
+    
     } catch (err) {
       console.error("An error occurred:", err);
       res.status(500).json({ error: "Internal server error" });
