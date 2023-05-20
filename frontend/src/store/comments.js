@@ -38,7 +38,7 @@ export const clearCommentErrors = errors => ({
     errors
 });
 
-export const fetchAI = (prompt, currentUserId, postId) => async (dispatch) => {
+export const fetchAI = (prompt, post) => async (dispatch) => {
     console.log('PROMPT', prompt)
     console.log(JSON.stringify(prompt))
 
@@ -94,7 +94,6 @@ export const fetchComment = (commentId) => async dispatch => {
 
 export const composeComment = data => async dispatch => {
 
-    console.log('data in COMPOSE COMMWNT', data)
     try{
         const res = await jwtFetch(`/api/answers/${data.parentPost}`, {
             method: 'POST',
