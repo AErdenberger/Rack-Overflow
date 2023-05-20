@@ -37,6 +37,32 @@ export const clearCommentErrors = errors => ({
     type: CLEAR_COMMENT_ERRORS,
     errors
 });
+export const fetchAI = (prompt) => async (dispatch) => {
+    console.log('PROMPT', prompt)
+    console.log(JSON.stringify(prompt))
+
+    try{
+    const response = await jwtFetch("/api/answers/open-ai", {
+        method: "POST",
+        headers: {
+            "Content-Type": 'application/json'
+        }, 
+        // body: JSON.stringify(prompt),
+        body: JSON.stringify({prompt})
+        // body: prompt
+    });
+    
+    const ans = await response.json();
+    console.log('ANSWERR', ans)
+    dispatch(receiveNewComment(ans));
+} catch (err) {
+    const resBody = await err.json();
+    if(resBody.statusCode === 400){
+        dispatch(receiveErrors(resBody.errors));
+    }
+}
+    
+};
 
 export const fetchComments = (postId) => async dispatch => {
     try{

@@ -4,6 +4,8 @@ import { clearPostErrors, composePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import './PostCompose.css';
 import TagInput from '../../Tags/TagInput';
+import {fetchAI} from '../../../store/comments';
+import jwtFetch from '../../../store/jwt';
 
 function PostCompose () {
   const [text, setText] = useState('');
@@ -18,33 +20,33 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-    // const makeAIcomment = async (text) => {
-  //   dispatch(fetchAI(text))
-  //   const response = await jwtFetch("/api/posts/open-ai", {
-  //       method: "POST",
-  //       body: JSON.stringify(data),
-  //   });
-  //   const ans = await response.json()
-  //   console.log(ans);
-  // }
-  // const handleSubmit = async e => {
-  //   console.log('BECKY G', text)
-  //   e.preventDefault();
-  //   let newPost = await dispatch(composePost({ title, text, selectedTags })); 
-  //   // let answer = dispatch(await fetchAI(text))
-  //   // dispatch(composeComment({ parentPost:newPost, text: answer}));
-  //   setText('');
-  //   setTitle('');
-  //   setSelectedTags([]);
-  // };
-
-  const handleSubmit = e => {
+    const makeAIcomment = async (text) => {
+    let data = dispatch(fetchAI(text))
+    const response = await jwtFetch("/api/posts/open-ai", {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+    const ans = await response.json()
+    console.log(ans);
+  }
+  const handleSubmit = async e => {
+    console.log('BECKY G', text)
     e.preventDefault();
-    dispatch(composePost({ title, text, selectedTags })); 
+    let newPost = await dispatch(composePost({ title, text, selectedTags })); 
+    // let answer = dispatch(await fetchAI(text))
+    // dispatch(composeComment({ parentPost:newPost, text: answer}));
     setText('');
     setTitle('');
     setSelectedTags([]);
   };
+
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   dispatch(composePost({ title, text, selectedTags })); 
+  //   setText('');
+  //   setTitle('');
+  //   setSelectedTags([]);
+  // };
 
   const colors = ["tomato", "brown", "salmon", "cyan",
     "green", "orange", "gold", "violet", "pink"
