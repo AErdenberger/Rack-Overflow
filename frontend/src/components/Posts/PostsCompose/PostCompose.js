@@ -4,6 +4,7 @@ import { clearPostErrors, composePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
 import './PostCompose.css';
 import TagInput from '../../Tags/TagInput';
+import { fetchAI, composeComment } from '../../../store/comments';
 
 function PostCompose () {
   const [text, setText] = useState('');
@@ -14,17 +15,43 @@ function PostCompose () {
   const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
 
+
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  const handleSubmit = e => {
+  const makeAIcomment = async (text, newPost) => {
+    let data = await dispatch(fetchAI(text));
+   console.log('DATAAAAAAAAA', data)
+    // const response = await jwtFetch("/api/answers/open-ai", {
+    //     method: "POST",
+    //     body: JSON.stringify(text),
+    // });
+    // const ans = await response.json();
+    // console.log('ANSSSWEER', ans);
+    // dispatch(composeComment({ parentPost: newPost.id, text: data, tags: null }));
+};
+const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(composePost({ title, text, selectedTags })); 
-    setText('');
-    setTitle('');
+    let newPost = await dispatch(composePost({ title, text, selectedTags }))
+    makeAIcomment(
+        text,
+        newPost
+        
+    );
+
+    setText("");
+    setTitle("");
     setSelectedTags([]);
-  };
+};
+
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   dispatch(composePost({ title, text, selectedTags })); 
+  //   setText('');
+  //   setTitle('');
+  //   setSelectedTags([]);
+  // };
 
   const colors = ["tomato", "brown", "salmon", "cyan",
     "green", "orange", "gold", "violet", "pink"
