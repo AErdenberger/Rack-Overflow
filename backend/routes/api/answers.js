@@ -5,7 +5,7 @@ const Answer = mongoose.model("Answer");
 const Post = mongoose.model("Post");
 const Tag = mongoose.model("Tag");
 const { requireUser } = require("../../config/passport");
-const validateAnswerInput = require("../../validations/posts");
+const validateAnswerInput = require("../../validations/answers");
 const keys = require('../../config/keys');
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -27,8 +27,16 @@ router.post("/open-ai", async (req, res, next) => {
         res.status(200).json({ result: completion.data.choices[0].text });
         //
     } catch (err) {
-        next(err);
-    }
+        console.error("Error in /open-ai:", err);
+
+    // Extract specific properties from the error object
+    const status = err.status || 500;
+    const message = err.message || "Internal Server Error";
+    const stack = err.stack || null;
+
+    // Respond with the error details
+    res.status(status).json({ error: message, stack });
+  }
 });
 // In development, allow developers to access the CSRF token to test the
 // server endpoints in Postman.
