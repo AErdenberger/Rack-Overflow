@@ -22,6 +22,24 @@ router.get("/restore", (req, res) => {
         "CSRF-Token": csrfToken,
     });
 });
+
+router.get("/:postId", async (req, res) => {
+    const id = req.params.postId;
+    try {
+        const answers = await Answer.find({ parentPost: id })
+            .populate("parentPost", "id post")
+            .populate("author", "_id username")
+            .sort({ createdAt: -1 });
+        const answerObj = {};
+        answers.forEach(answer => {
+            answerObj[answer._id] = answer;
+        })
+        return res.json(answerObj);
+    } catch (err) {
+        return res.json([]);
+    }
+});
+
 router.post("/open-ai", async (req, res, next) => {
     console.log('I am HERE');
     try {
