@@ -17,13 +17,13 @@ const openai = new OpenAIApi(configuration);
 router.post("/open-ai", async (req, res, next) => {
     console.log("PROMPT IN ROUTES", req.body)
     try {
-        // const { prompt } = req.body;
-        const prompt = {prompt: "Who is Becky G"}
-      
+        const  prompt  = req.body;
+        const maxTokens = 2049;
         const completion = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: prompt.prompt,
             temperature: 0.6,
+            max_tokens: maxTokens, 
         });
         res.status(200).json({ result: completion.data.choices[0].text });
         //
