@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, composePost } from '../../../store/posts';
 import PostBox from '../PostBox/PostBox';
+import jwtFetch from '../../../store/jwt'
 import './PostCompose.css';
 import TagInput from '../../Tags/TagInput';
 import { fetchAI, composeComment } from '../../../store/comments';
@@ -21,8 +22,7 @@ function PostCompose () {
   }, [dispatch]);
 
   const makeAIcomment = async (text, newPost) => {
-    let data = await dispatch(fetchAI(text));
-   console.log('DATAAAAAAAAA', data)
+    // let data = await dispatch(fetchAI(text));
     // const response = await jwtFetch("/api/answers/open-ai", {
     //     method: "POST",
     //     body: JSON.stringify(text),
@@ -33,40 +33,40 @@ function PostCompose () {
 
     console.log('HHHHAAAANNDDLE')
     try {
-        e.preventDefault();
-        const data = { prompt: inputText};
-        const response = await jwtFetch("/api/posts/open-ai", {
-            method: "POST",
-            body: JSON.stringify(data),
-        });
-        const ans = await response.json()
-        console.log(ans);
+        const data = { prompt: text};
+        console.log('DATTATTTAX', data)
+        // const response = await jwtFetch("/api/answers/open-ai", {
+        //     method: "POST",
+        //     body: JSON.stringify(data),
+        // });
+        // const ans = await response.json()
+        // console.log('ans in MAKEAICOMMENT', ans);
         
     } catch (err) {
         console.error(err);
     }
 };
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    let newPost = await dispatch(composePost({ title, text, selectedTags }))
-    makeAIcomment(
-        text,
-        newPost
+// const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     let newPost = await dispatch(composePost({ title, text, selectedTags }))
+//     // makeAIcomment(
+//     //     text,
+//     //     newPost
         
-    );
+//     // );
 
-    setText("");
-    setTitle("");
+//     setText("");
+//     setTitle("");
+//     setSelectedTags([]);
+// };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(composePost({ title, text, selectedTags })); 
+    setText('');
+    setTitle('');
     setSelectedTags([]);
-};
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   dispatch(composePost({ title, text, selectedTags })); 
-  //   setText('');
-  //   setTitle('');
-  //   setSelectedTags([]);
-  // };
+  };
 
   const colors = ["tomato", "brown", "salmon", "cyan",
     "green", "orange", "gold", "violet", "pink"
