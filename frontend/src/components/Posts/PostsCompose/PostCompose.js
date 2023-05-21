@@ -30,6 +30,21 @@ function PostCompose () {
     // const ans = await response.json();
     // console.log('ANSSSWEER', ans);
     // dispatch(composeComment({ parentPost: newPost.id, text: data, tags: null }));
+
+    console.log('HHHHAAAANNDDLE')
+    try {
+        e.preventDefault();
+        const data = { prompt: inputText};
+        const response = await jwtFetch("/api/posts/open-ai", {
+            method: "POST",
+            body: JSON.stringify(data),
+        });
+        const ans = await response.json()
+        console.log(ans);
+        
+    } catch (err) {
+        console.error(err);
+    }
 };
 const handleSubmit = async (e) => {
     e.preventDefault();
