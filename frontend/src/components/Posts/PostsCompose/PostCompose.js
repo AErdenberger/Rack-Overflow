@@ -21,9 +21,6 @@ function PostCompose() {
     }, [dispatch]);
 
     const makeAIcomment = async (text, newPost) => {
-        console.log("TEXT", text);
-        console.log("NEWPOST", newPost);
-        console.log("HHHHAAAANNDDLE");
         try {
             const data = { prompt: text };
             console.log("DATTATTTAX", data);
@@ -31,14 +28,18 @@ function PostCompose() {
                 method: "POST",
                 body: JSON.stringify(data),
             });
-            const ans = await response.json()
-            console.log('ans in MAKEAICOMMENT', ans);
-            const commentData = {parentPost: newPost._id, text: ans.result, voteCount:0, tags: []}
-            dispatch(composeComment(commentData))
+            const ans = await response.json();
+            const commentData = {
+                parentPost: newPost._id,
+                text: ans.result,
+                voteCount: 0,
+                tags: [],
+            };
+            dispatch(composeComment(commentData));
         } catch (err) {
-            console.error('ERROR STATUS', err.status);
-            console.error('ERROR DATA', err.data);
-            console.error('ERROR MESSAGE', err.message);
+            console.error("ERROR STATUS", err.status);
+            console.error("ERROR DATA", err.data);
+            console.error("ERROR MESSAGE", err.message);
         }
     };
 
@@ -47,8 +48,6 @@ function PostCompose() {
         let newPost = await dispatch(
             composePost({ title, text, selectedTags })
         );
-
-        console.log("NEWPOEST", newPost);
         await makeAIcomment(text, newPost);
         setText("");
         setTitle("");
