@@ -33,6 +33,8 @@ function PostCompose() {
             });
             const ans = await response.json()
             console.log('ans in MAKEAICOMMENT', ans);
+            const commentData = {parentPost: newPost._id, text: ans.result, voteCount:0, tags: []}
+            dispatch(composeComment(commentData))
         } catch (err) {
             console.error('ERROR STATUS', err.status);
             console.error('ERROR DATA', err.data);
