@@ -27,14 +27,16 @@ function PostCompose() {
         try {
             const data = { prompt: text };
             console.log("DATTATTTAX", data);
-            const response = await jwtFetch("/api/answers/open-ai", {
+            const response = await jwtFetch("/api/posts/open-ai", {
                 method: "POST",
                 body: JSON.stringify(data),
             });
             const ans = await response.json()
             console.log('ans in MAKEAICOMMENT', ans);
         } catch (err) {
-            console.error(err);
+            console.error('ERROR STATUS', err.status);
+            console.error('ERROR DATA', err.data);
+            console.error('ERROR MESSAGE', err.message);
         }
     };
 
