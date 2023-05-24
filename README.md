@@ -22,7 +22,7 @@ Some example questions:
 * `Nodejs`- Code environment
 * `AmazonS3` - Storage for images used on the website such as our site's logo, favicon, and other images used on the site
 * `Render` - Public website deployment
-* `Github` - Code hosting and synchronous work space
+* `OpenAI` - AI responses to posts made by users
 
 ## The Team
 
