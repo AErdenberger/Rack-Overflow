@@ -5,7 +5,7 @@ const Answer = mongoose.model("Answer");
 const Post = mongoose.model("Post");
 const Tag = mongoose.model("Tag");
 const { requireUser } = require("../../config/passport");
-const validateAnswerInput = require("../../validations/posts");
+const validateAnswerInput = require("../../validations/answers");
 
 // In development, allow developers to access the CSRF token to test the
 // server endpoints in Postman.

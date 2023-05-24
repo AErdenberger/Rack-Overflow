@@ -124,6 +124,7 @@ export const composePost = data => async dispatch => {
     });
     const post = await res.json();
     dispatch(receiveNewPost(post));
+    return post;
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
