@@ -243,7 +243,7 @@ for (let i = 0; i < NUM_SEED_ANSWERS; i++) {
     new Answer ({
       text: faker.hacker.phrase(),
       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
-      parentPost: posts[Math.floor(Math.random() * NUM_SEED_POSTS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
       voteCount: Math.floor(Math.random()*10)
     })
   )
