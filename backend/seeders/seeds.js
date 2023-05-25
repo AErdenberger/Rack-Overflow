@@ -44,24 +44,24 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 }
 
 const MEDICAL_TAGS = [
-  "Hemochromatosis",
+  "Hemochromatosis", //0
   "Diabetes Type II",
   "Hypertension",
   "Left Knee Injury",
   "B-cell Leukemia",
-  "Schizophrenia",
+  "Schizophrenia", //5
   "COPD",
   "Obesity",
   "Arteriosclerosis",
   "Atherosclerosis",
-  "Major Depression",
+  "Major Depression", //10
   "Heart Disease",
   "Asthma",
   "Arthritis",
   "Glomerulonephritis",
-  "Cirrhosis",
+  "Cirrhosis", //15
   "Autistic Spectrum",
-  "Lumbar Disc Disorder"
+  "Lumbar Disc Disorder" //17
 ]
   
 
@@ -75,29 +75,163 @@ for (let i = 0; i < MEDICAL_TAGS.length; i++) {
 }
 
 
-const posts = [];
+const posts = [
+  new Post ({
+    text: "Hello I am brand new to working out and was wondering where is a good place to get started?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Newbie Here!",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[]
+  }),
+  new Post ({
+    text: "Hi there, I have Hemochromatosis and was wondering how this will effect the workout regimine I have been working on",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Hemochromatosis in the gym?",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[0]]
+  }),
+  new Post ({
+    text: "Recently I got an injury in my left knee and I was wondering what upper body workouts I could do that wouldn't be too much of a strain on my asthma either",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Recent Injury",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[3], MEDICAL_TAGS[12]]
+  }),
+  new Post ({
+    text: "I want to turn my life around, I have been overweight my whole life and I hate the way I look in the mirror. I want to go to the gym and lose weight, where should I start, especially for someone my sized?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Time to Change my Life!",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[7]]
+  }),
+  new Post ({
+    text: "I struggle with staying motivated at the gym, a lot of my mental illnesses hold me back. Are there any ways I can motivate myself to keep going even if my brain tricks me into thinking I'm not making any progress?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Depression and Staying Motivated",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[10], MEDICAL_TAGS[16]]
+  }),
+  new Post ({
+    text: "I have Arteriosclerosis. Are there specific exercises or training methods that can improve my cardiovascular health?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Workouts to help Cardiovascular Health?",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[8]]
+  }),
+  new Post ({
+    text: "I have B-cell Leukemia, but I want to stay physically active. Any advice on exercises that can be beneficial for my condition?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Can Working Out Help Me with This?",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[4]]
+  }),
+  new Post ({
+    text: "I have Arthritis and want to stay active. What are some low-impact exercises or modifications I can incorporate into my routine?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Staying Active Despite My Joints",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[13]]
+  }),
+  new Post ({
+    text: "Can I engage in intense workouts if I have Hypertension? How can I exercise safely with this condition?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Exercising Safely",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[2]]
+  }),
+  new Post ({
+    text: "I want to build muscle and strength. Should I focus on heavy weights and low reps or lighter weights and high reps?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Heavy or Light?",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[]
+  }),
+  new Post ({
+    text: "Can individuals with Atherosclerosis still participate in athletic events? How can I train effectively while considering this condition?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Can I Still Participate?",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[9]]
+  }),
+  new Post ({
+    text: "I have COPD, but I want to incorporate exercise into my routine. What are some suitable exercises or precautions I should consider?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "What Can I Still Do?",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[6]]
+  }),
+  new Post ({
+    text: "I am training for a marathon, how quickly should I ramp up the distance I practice as I get closer to the event?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Marathon Training?",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[]
+  }),
+  new Post ({
+    text: "My son is on the autism spectrum, he has shown some interest in wanting to exercise. Are there any helpful tools or resources out there to help him with exercising?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Help With My Son's Disability",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[16]]
+  }),
+  new Post ({
+    text: "Concerned about proper nutrition for my workouts. What are some pre- and post-workout meal ideas to optimize performance?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Nutrition and Exercise",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[7]]
+  }),
+  new Post ({
+    text: "Interested in incorporating yoga into my fitness routine. What are the physical and mental benefits of practicing yoga, and how hard will it be if I have just recovered from an injury?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Incorporating Yoga",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[3]]
+  }),
+  new Post ({
+    text: "My psychologist has recommended that I exercise more. Is it safe for individuals with Schizophrenia to participate in certain sports or physical activities? Any recommendations for exercise routines?",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Exercising With Mental Disabilities",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[MEDICAL_TAGS[5]]
+  }),
+  new Post ({
+    text: "My college has a lot of recreational sports I was wondering if folks have recommendations for someone who isn't super active",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Recreational Sports Participation",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[]
+  }),
+  new Post ({
+    text: "My college has a lot of recreational sports I was wondering if folks have recommendations for someone who isn't super active",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    title: "Recreational Sports Participation",
+    voteCount: Math.floor(Math.random()*10),
+    tags:[]
+  })
+];
 
-for (let i = 0; i < NUM_SEED_POSTS; i++) {
-  const tags = [];
+// for (let i = 0; i < NUM_SEED_POSTS; i++) {
+//   const tags = [];
 
-  for (let i = 0; i < NUM_SEED_TAGS; i++) {
-    tags.push(
-      medicalTagObjects[Math.floor(Math.random() * medicalTagObjects.length)]    );
-}
+//   for (let i = 0; i < NUM_SEED_TAGS; i++) {
+//     tags.push(
+//       medicalTagObjects[Math.floor(Math.random() * medicalTagObjects.length)]    );
+// }
 
  
-  posts.push(
-    new Post ({
-      text: faker.hacker.phrase(),
-      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
-      title: faker.hacker.phrase(10),
-      voteCount: Math.floor(Math.random()*10),
-      tags:tags
+  // posts.push(
+  //   new Post ({
+  //     text: faker.hacker.phrase(),
+  //     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+  //     title: faker.hacker.phrase(10),
+  //     voteCount: Math.floor(Math.random()*10),
+  //     tags:tags
       
 
-    })
-  )
-}
+  //   })
+  // )
+// }
 
 
 
