@@ -15,7 +15,6 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 router.post("/open-ai", async (req, res, next) => {
-    console.log("PROMPT IN ROUTES", req.body)
     try {
         const  prompt  = req.body;
         const maxTokens = 2049;

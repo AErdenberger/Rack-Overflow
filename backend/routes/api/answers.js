@@ -37,6 +37,7 @@ router.get("/:postId", async (req, res) => {
 router.post("/", requireUser, validateAnswerInput, async (req, res, next) => {
 
     const { parentPost, text, voteCount, tags } = req.body;
+  
     const post = await Post.findById(parentPost);
     try {
         let ans = [];
@@ -56,10 +57,22 @@ router.post("/", requireUser, validateAnswerInput, async (req, res, next) => {
         await reqTags.forEach(async (el) => {
             await tagProcess(el);
         });
+        // set the authorId to ChatBot if necessary
+        let authorId;
+        if (post.author_id === req.user._id) {
+            const user = await User.findOne({
+                $or: [{ email: 'chat@bot.com'}, { username: 'ChatBot'}]
+              });
+            authorId = user._id
+
+        } else {
+            authorId = req.user._id;
+        }
+
         
         const newAnswer = new Answer({
             text: req.body.text,
-            author: req.user._id,
+            author: authorId,
             parentPost: post.id,
             tags: ans,
         });
