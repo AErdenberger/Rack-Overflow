@@ -34,6 +34,48 @@ router.get("/:postId", async (req, res) => {
     }
 });
 
+
+/// The next two function are so that the ChatBot authorshipe
+/// is shown for the first comment
+async function getComments(parentPost) {
+    try {
+        const comments = await Answer.find({ parentPost: parentPost });
+        return comments;
+    } catch (err) {
+        console.error("Error:", err);
+        throw err;
+    }
+}
+
+async function processComments(parentPost, req, post, ans, res) {
+    try {
+        const result = await getComments(parentPost);
+        console.log("Comments:", result);
+      
+        let authorId;
+        if (result.length < 1) {
+            const user = await User.findOne({
+                $or: [{ email: "chat@bot.com" }, { username: "ChatBot" }],
+            });
+            authorId = user._id;
+        } else {
+            authorId = req.user._id;
+        }
+        const newAnswer = new Answer({
+            text: req.body.text,
+            author: authorId,
+            parentPost: post.id,
+            tags: ans,
+        });
+        let answer = await newAnswer.save();
+        answer = await answer.populate("author", "_id username");
+        answer.tags = ans;
+        answer = await newAnswer.save();
+        return await res.json(answer);
+    } catch (err) {
+       console.log(err)
+    }
+}
 router.post("/", requireUser, validateAnswerInput, async (req, res, next) => {
     const { parentPost, text, voteCount, tags } = req.body;
 
@@ -56,67 +98,10 @@ router.post("/", requireUser, validateAnswerInput, async (req, res, next) => {
         await reqTags.forEach(async (el) => {
             await tagProcess(el);
         });
-
-        // Answer.find({ parentPost: parentPost }).then((comments) => {
-        //     return comments;
-        //   })
-        //   .catch((err) => {
-        //     console.error('Error:', err);
-        //   });
-
-        //     let authorId;
-        //     console.log('firstComment', x)
-
-        // const commentsPromise = Answer.find({ parentPost: parentPost }).exec();
-        // let x = commentsPromise
-        //     .then((comments) => {
-        //         console.log("Comments:", comments);
-        //     })
-        //     .catch((err) => {
-        //         console.error("Error:", err);
-        //     });
-            
-        //     console.log( 'XXXXXXX', x)
-        async function getComments(parentPost) {
-            try {
-              const comments = await Answer.find({ parentPost: parentPost });
-              return comments;
-            } catch (err) {
-              console.error('Error:', err);
-              throw err;
-            }
-          }
-
-          async function processComments() {
-            try {
-              const result = await getComments(parentPost);
-              console.log('Comments:', result);
-              // Use 'result' in your conditional statement or function call
-              if (result.length > 1) {
-                // Perform some action based on the comments
-              
-        authorId = req.user._id
-        const newAnswer = new Answer({
-            text: req.body.text,
-            author: authorId,
-            parentPost: post.id,
-            tags: ans,
-        });
-
-        let answer = await newAnswer.save();
-        answer = await answer.populate("author", "_id username");
-        answer.tags = ans;
-        answer = await newAnswer.save();
-        return await res.json(answer);
-    } else {
-        // No comments found
-      }
+        // process authorship and return the response
+        processComments(parentPost, req, post, ans, res);
     } catch (err) {
-      console.error('Error:', err);
-    }
-  }
-    } catch (err) {
-        next(err);
+        console.log(err);
     }
 });
 
@@ -151,11 +136,9 @@ router.patch(
                 return res.status(404).json({ message: "Answer not found" });
             }
             if (!answer.author.equals(req.user._id)) {
-                return res
-                    .status(403)
-                    .json({
-                        message: "You are not authorized to edit this answer",
-                    });
+                return res.status(403).json({
+                    message: "You are not authorized to edit this answer",
+                });
             }
             await answer.save();
             answer.text = text;
