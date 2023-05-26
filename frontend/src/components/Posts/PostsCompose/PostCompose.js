@@ -23,7 +23,6 @@ function PostCompose() {
     const makeAIcomment = async (text, newPost) => {
         try {
             const data = { prompt: text };
-            console.log("DATTATTTAX", data);
             const response = await jwtFetch("/api/posts/open-ai", {
                 method: "POST",
                 body: JSON.stringify(data),
