@@ -238,16 +238,68 @@ const posts = [
 
 
 const answers = [];
-for (let i = 0; i < NUM_SEED_ANSWERS; i++) {
   answers.push(
     new Answer ({
-      text: faker.hacker.phrase(),
+      text: "That's interesting, have you tried...?",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "I have something similar, I usually do this...",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "I am in the same boat, I would be interested to see what others say!",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "I spoke to a professional recently about this, and they had this to say...",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "Just found this post! I actually know a lot about this, let me help out!",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "I don't exactly have that problem but I have something similar, have you tried...?",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "I have been experimenting with a couple things that I researched on the internet, how do you feel about trying...",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "I was at the gym the other day and a buddy of mine recommended this...",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "I was speaking to a personal trainer and they had this to say...",
+      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
+      voteCount: Math.floor(Math.random()*10)
+    }),
+    new Answer ({
+      text: "You should downvote me because I'm a hater!",
       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
       parentPost: posts[Math.floor(Math.random() * posts.length)]._id,
       voteCount: Math.floor(Math.random()*10)
     })
   )
-}
 
 
 
