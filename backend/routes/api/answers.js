@@ -50,10 +50,12 @@ async function getComments(parentPost) {
 async function processComments(parentPost, req, post, ans, res) {
     try {
         const result = await getComments(parentPost);
-        console.log("Comments:", result);
+        const post = await Post.findById(parentPost);
+        console.log("Comments:", post);
       
         let authorId;
-        if (result.length < 1) {
+        if (result.length < 1 && post.chatFlag) {
+            post.chatFlag = false;
             const user = await User.findOne({
                 $or: [{ email: "chat@bot.com" }, { username: "ChatBot" }],
             });
