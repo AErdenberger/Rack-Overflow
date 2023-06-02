@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import PostBox from '../Posts/PostBox/PostBox';
-import PostCompose from '../Posts/PostsCompose/PostCompose';
 import './Profile.css';
 
 function Profile () {
@@ -25,7 +24,33 @@ function Profile () {
   }
 
   if (userPosts.length === 0) {
-    return <div>{currentUser.username} has no Posts</div>;
+    return (
+      <div id='container-content-profile'>
+        <div id='to-transform'>
+          <div id='user-info'>
+            <div id='container-user-info'>
+              <div id='container-picture'>
+
+              </div>
+              <div id='container-user-name'>
+                {/* <label>Username: </label> */}
+                <label id='current-user-username'>{currentUser.username}</label>
+              </div>
+              <div id='container-user-email'>
+                {/* <label>email: </label> */}
+                <label id='current-user-email'>{currentUser.email}</label>
+              </div>
+              <div id='container-button-create-post'>
+                <button onClick={goCreatePost} id='button-create-post'>Create new post</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id='container-user-posts-2'>
+          <label id='label-profile'>{currentUser.username} haven't create any post</label>
+        </div>
+      </div>
+    );
   } else {
     return (
       <div id='container-content-profile'>
