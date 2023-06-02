@@ -21,6 +21,10 @@ const postSchema = new Schema(
                 ref: "Tag",
             },
         ],
+        chatFlag: {
+            type: Boolean,
+            default: true,
+        }
     },
     {
         timestamps: true,
