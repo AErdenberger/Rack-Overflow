@@ -9,7 +9,7 @@ function CommentCompose(){
     const [text, setText] = useState('');
     const [tags, setTags] = useState([]);
     const dispatch = useDispatch();
-
+    const currentUser = useSelector(state => state.session.user.username);
     const errors = useSelector(state => state.errors.comments);
 
     let parentPost = postId;
@@ -20,7 +20,7 @@ function CommentCompose(){
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(composeComment({ parentPost, text, tags }));
+        dispatch(composeComment({ author: currentUser, parentPost, text, tags }));
         setText('');
         setTags([]);
     };

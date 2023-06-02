@@ -46,12 +46,6 @@ const CommentUpdate = ({comment}) => {
                         placeholder='Change text...'
                         required
                     />
-                    <input type='text' id='update-tags'
-                        value={tags}
-                        onChange={updateTags}
-                        placeholder='Change tags...'
-                        required
-                    />
                 </div>
                 <input type='submit' value={'Update comment'} id='update-button-comment' />
             </form>

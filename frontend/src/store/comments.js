@@ -37,9 +37,8 @@ export const clearCommentErrors = errors => ({
     type: CLEAR_COMMENT_ERRORS,
     errors
 });
+
 export const fetchAI = (prompt, post) => async (dispatch) => {
-    console.log('FETAI 1 PROMPT', prompt)
-    console.log('FETAI 2', JSON.stringify(prompt))
 
     try{
     const response = await jwtFetch("/api/answers/open-ai", {
@@ -51,8 +50,6 @@ export const fetchAI = (prompt, post) => async (dispatch) => {
     });
     
     const ans = await response.json();
-    console.log('ANSWERR', ans) 
-    console.log('ANSWERR RESULT', ans.result)
     
     // {result: Text string}
     // let data = {parentPost:post, text: ans.result, tags:null }
