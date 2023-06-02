@@ -124,6 +124,7 @@ export const composePost = data => async dispatch => {
     });
     const post = await res.json();
     dispatch(receiveNewPost(post));
+    return post;
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -199,9 +200,10 @@ const postsReducer = (state = { all: {}, user: [], new: undefined }, action) => 
         const mappedUserPosts = state.user.map(userPost => {
           return userPost;
         })
+        // return { ...state, new: action.post, };
         return { ...state, new: action.post, user: mappedUserPosts};
       case RECEIVE_USER_LOGOUT:
-        return { ...state, user: {}, new: undefined }
+        return { ...state, user: [], new: undefined }
       default:
         return state;
     }

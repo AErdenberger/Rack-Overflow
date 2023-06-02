@@ -1,6 +1,7 @@
 #container-content-profile{
     display: flex;
     justify-content: center;
+    margin-top: 50px;
 }
 
 #user-info{
@@ -96,12 +97,23 @@
     width: 50vw;
 }
 
+#container-user-posts-2{
+    margin-top: 70px;
+    width: 50vw;
+}
+
 #container-post-text{
     margin-bottom: 25px;
     margin-left: 40%;
 }
 
 #all-posts-text{
+    font-size: 25px;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+#label-profile{
+    margin-left: 30%;
     font-size: 25px;
     font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
