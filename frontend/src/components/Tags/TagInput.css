@@ -1,24 +1,36 @@
+#tags-div {
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
 #label-select-tags{
     margin-right: 10px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
 #tagSelectet{
     font-size: 15px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
-#li-selected-tag{
+.li-selected-tag{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    gap: 10px;
     font-size: 15px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    margin-bottom: 7px;
 }
 
 #option-select-tag{
     font-size: 15px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
 #option{
     font-size: 15px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+}
+
+.remove-tag-button {
+    border: none;
+    border-radius: 3px;
+    background-color: lightgrey;
+    padding: 3px 5px;
+    cursor: pointer;
+    font-weight: 600;
 }
