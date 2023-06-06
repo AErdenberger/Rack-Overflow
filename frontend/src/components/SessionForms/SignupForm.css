@@ -1,11 +1,12 @@
 .session-form-signup{
     margin-left: 9.5%;
     margin-top: 9%;
+    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
 }
 
 #signup-title{
     font-size: 35px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    /* font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; */
 }
 
 #container-email-signup{
@@ -16,7 +17,7 @@
     border: 0.5px solid black;
     border-radius: 20px;
     font-size: 25px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    /* font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; */
     text-indent: 11px;
 }
 
@@ -24,7 +25,7 @@
     border: 0.5px solid black;
     border-radius: 20px;
     font-size: 25px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    /* font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; */
     text-indent: 11px;
 }
 
@@ -32,7 +33,7 @@
     border: 0.5px solid black;
     border-radius: 20px;
     font-size: 25px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    /* font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; */
     text-indent: 11px;
 }
 
@@ -40,7 +41,7 @@
     border: 0.5px solid black;
     border-radius: 20px;
     font-size: 25px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    /* font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; */
     text-indent: 11px;
 }
 
@@ -55,10 +56,16 @@
     background-color: #F56B00;
     color: white;
     font-size: 25px;
-    font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+    /* font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; */
     transition: 0.5s;
 }
 
 #submit-signup:hover{
     font-size: 28px;
+}
+
+.signup-errors {
+    /* display: flex; */
+    /* flex-direction: column; */
+    color: red;
 }

@@ -10,6 +10,9 @@ function SignupForm () {
   const [password2, setPassword2] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [usernameTouched, setUsernameTouched] = useState(false);
+  const [passwordTouched, setPasswordTouched] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -19,16 +22,25 @@ function SignupForm () {
 
   const update = field => {
     let setState;
-
+  
     switch (field) {
       case 'email':
-        setState = setEmail;
+        setState = value => {
+          setEmailTouched(true);
+          setEmail(value);
+        };
         break;
       case 'username':
-        setState = setUsername;
+        setState = value => {
+          setUsernameTouched(true);
+          setUsername(value);
+        };
         break;
       case 'password':
-        setState = setPassword;
+        setState = value => {
+          setPasswordTouched(true);
+          setPassword(value);
+        };
         break;
       case 'password2':
         setState = setPassword2;
@@ -51,6 +63,18 @@ function SignupForm () {
     dispatch(signup(user)); 
   }
 
+  const testValidEmail = (email) => {
+    const emailRegEx = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
+    const isValidEmail = emailRegEx.test(email);
+    return isValidEmail;
+  }
+
+  const testPasswordLength = (password) => {
+    if (password.length >= 6 && password.length <= 30) {
+      return true
+    }
+  }
+
   return (
     <form className="session-form-signup" onSubmit={handleSubmit}>
       <label id='signup-title'>Sign Up</label>
@@ -60,31 +84,51 @@ function SignupForm () {
             account and agree to our User Agreement.
           </label>
       </div>
-      <div className="errors">{errors?.email}</div>
-      <div id='container-email-signup'>
-        <input type="text" id='email-signup'
-          value={email}
-          onChange={update('email')}
-          placeholder="Email"
-        />
+      <div className="signup-errors">
+        {errors?.email}
+        {emailTouched && email.trim() === '' && 'Email is required'}
+        {emailTouched && !testValidEmail(email) && 'Must conform to valid email format'}
       </div>
-      <div className="errors">{errors?.username}</div>
+      <input
+        type="text"
+        id="email-signup"
+        value={email}
+        onChange={update('email')}
+        onBlur={() => setEmailTouched(true)}
+        placeholder="Email"
+      />
+      <div className="signup-errors">
+        {errors?.username}
+        {usernameTouched && username.trim() === '' && 'Username is required'}
+        </div>
       <div id='container-username-signup'>
         <input type="text" id='username'
           value={username}
           onChange={update('username')}
+          onBlur={() => setUsernameTouched(true)}
           placeholder="Username"
         />
       </div>
-      <div className="errors">{errors?.password}</div>
+      <div className="signup-errors">
+        <div>
+          {errors?.password}
+        </div>
+        <div>
+          {passwordTouched && password.trim() === '' && 'Password is required'}
+        </div>
+        <div>
+          {passwordTouched && !testPasswordLength(password) && 'Must be between 6 and 30 characters'}
+        </div>
+      </div>
       <div id='container-password-signup'>
         <input type="password" id='password-signup'
           value={password}
           onChange={update('password')}
+          onBlur={() => setPasswordTouched(true)}
           placeholder="Password"
         />
       </div>
-      <div className="errors">
+      <div className="signup-errors">
         {password !== password2 && 'Confirm Password field must match'}
       </div>
       <div id='container-confirm-pass'>
@@ -98,7 +142,7 @@ function SignupForm () {
         <input
           type="submit" id='submit-signup'
           value="Sign Up"
-          disabled={!email || !username || !password || password !== password2}
+          disabled={!email || !testValidEmail(email) || !username || !password || password !== password2}
         />
       </div>
     </form>
