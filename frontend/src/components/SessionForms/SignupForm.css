@@ -9,9 +9,17 @@
     /* font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; */
 }
 
-#container-email-signup{
-    margin-top: 10px;
+#container-text-info {
+    margin-bottom: 10px;
 }
+
+#container-email-signup,
+#container-username-signup,
+#container-password-signup,
+#container-confirm-pass {
+    margin-bottom: 15px;
+}
+
 
 #email-signup{
     border: 0.5px solid black;
@@ -48,6 +56,7 @@
 #container-submit-signup{
     margin-top: 35px;
     margin-left: 80px;
+    margin-bottom: 20px;
 }
 
 #submit-signup{
@@ -58,6 +67,7 @@
     font-size: 25px;
     /* font-family: "Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; */
     transition: 0.5s;
+    cursor: pointer;
 }
 
 #submit-signup:hover{
@@ -65,7 +75,10 @@
 }
 
 .signup-errors {
-    /* display: flex; */
-    /* flex-direction: column; */
+    /* display: flex;
+    flex-direction: column; */
+    position: relative;
+    bottom: 5px;
     color: red;
+    /* margin-bottom: 5px; */
 }

@@ -85,22 +85,34 @@ function SignupForm () {
           </label>
       </div>
       <div className="signup-errors">
-        {errors?.email}
-        {emailTouched && email.trim() === '' && 'Email is required'}
-        {emailTouched && !testValidEmail(email) && 'Must conform to valid email format'}
-      </div>
-      <input
-        type="text"
-        id="email-signup"
-        value={email}
-        onChange={update('email')}
-        onBlur={() => setEmailTouched(true)}
-        placeholder="Email"
-      />
-      <div className="signup-errors">
-        {errors?.username}
-        {usernameTouched && username.trim() === '' && 'Username is required'}
+        <div>
+          {errors?.email}
         </div>
+        <div>
+          {emailTouched && email.trim() === '' && 'Email is required'}
+        </div>
+        <div>
+          {emailTouched && !testValidEmail(email) && 'Must conform to valid email format'}
+        </div>
+      </div>
+      <div id='container-email-signup'>
+        <input
+          type="text"
+          id="email-signup"
+          value={email}
+          onChange={update('email')}
+          onBlur={() => setEmailTouched(true)}
+          placeholder="Email"
+        />
+      </div>
+      <div className="signup-errors">
+        <div>
+          {errors?.username}
+        </div>
+        <div>
+          {usernameTouched && username.trim() === '' && 'Username is required'}
+        </div>
+      </div>
       <div id='container-username-signup'>
         <input type="text" id='username'
           value={username}
@@ -129,7 +141,9 @@ function SignupForm () {
         />
       </div>
       <div className="signup-errors">
-        {password !== password2 && 'Confirm Password field must match'}
+        <div>
+          {password !== password2 && 'Confirm Password field must match'}
+        </div>
       </div>
       <div id='container-confirm-pass'>
         <input type="password" id='confirm-password'
