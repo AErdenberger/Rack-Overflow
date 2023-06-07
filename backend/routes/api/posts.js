@@ -175,7 +175,8 @@ router.get("/", async (req, res) => {
       try {
           if (queryString) {
               const tags = queryString.split(","); 
-              // converts tags to regular expressions
+              // converts tags to regular expressions, the i is to ignore case
+              // this will find multiple tags seperated by a comma
               const regexTags = tags.map(tag => new RegExp(tag, 'i'));
               const tagObjects = await Tag.find({ tag: { $in: regexTags } }); 
               const tagIds = tagObjects.map((tag) => tag._id); 
