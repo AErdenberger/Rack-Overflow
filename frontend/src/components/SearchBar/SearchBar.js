@@ -14,7 +14,7 @@ const SearchBar = ({handleSearchChange, handleSearchClick, searchValue}) => {
         <i className="fa-solid fa-magnifying-glass" id="icon-search" ></i>
               <input 
               type='text' 
-              placeholder='Search Rack Overflow' 
+              placeholder='Search By Tag' 
               id='search-bar'
               onClick={handleSearchClick}
                 onChange={handleSearchChange}
