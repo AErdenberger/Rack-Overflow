@@ -174,15 +174,15 @@ router.get("/", async (req, res) => {
      
       try {
           if (queryString) {
-
               const tags = queryString.split(","); 
-            
-              const tagObjects = await Tag.find({ tag: { $in: tags } }); 
-            
+              // converts tags to regular expressions, the i is to ignore case
+              // this will find multiple tags seperated by a comma
+              const regexTags = tags.map(tag => new RegExp(tag, 'i'));
+              const tagObjects = await Tag.find({ tag: { $in: regexTags } }); 
               const tagIds = tagObjects.map((tag) => tag._id); 
 
               if(tags.length !== tagObjects.length){
-                console.log('There are no Posts with those combined tags')
+                //There are no Posts with those combined tags'
                 return res.json([]);
               }
             

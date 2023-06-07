@@ -45,6 +45,8 @@ function NavBar () {
   const handleSearchChange = (e) => {
     e.preventDefault();
     setSearchValue(e.target.value)
+    let query = e.target.value
+    dispatch(fetchTagSearch(query))
   }
   
   const handleSearchClick = (e) => {
